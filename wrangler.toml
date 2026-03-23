@@ -1,11 +1,12 @@
-name = "cloudflare-account-manager"
+name = "cf-account-manager"
 compatibility_date = "2024-01-01"
-pages_build_output_dir = ".next"
+compatibility_flags = ["nodejs_compat"]
+pages_build_output_dir = ".vercel/output/static"
 
 [[d1_databases]]
 binding = "DB"
 database_name = "cf-manager-db"
-database_id = "placeholder-database-id"
+database_id = "85026e2f-6c18-4857-b419-0d2bc3bdec79"
 
 [vars]
 ENVIRONMENT = "production"
