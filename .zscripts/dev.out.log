@@ -1,8 +1,8 @@
 ==========================================
-[2026-03-23 16:47:56] Starting: bun install
+[2026-03-23 18:09:09] Starting: bun install
 ==========================================
 [BUN] Installing dependencies...
-[0.09ms] ".env"
+[0.08ms] ".env"
 bun install v1.3.10 (30e609e0)
 
 + @tailwindcss/postcss@4.1.18
@@ -81,14 +81,14 @@ bun install v1.3.10 (30e609e0)
 + zod@4.3.5
 + zustand@5.0.10
 
-827 packages installed [7.60s]
+827 packages installed [3.38s]
 ==========================================
-[2026-03-23 16:48:04] Completed: bun install
-[LOG] Step: bun install | Duration: 8s
+[2026-03-23 18:09:12] Completed: bun install
+[LOG] Step: bun install | Duration: 3s
 ==========================================
 
 ==========================================
-[2026-03-23 16:48:04] Starting: bun run db:push
+[2026-03-23 18:09:12] Starting: bun run db:push
 ==========================================
 [BUN] Setting up database...
 $ prisma db push
@@ -98,39 +98,29 @@ Datasource "db": SQLite database "custom.db" at "file:/home/z/my-project/db/cust
 
 SQLite database custom.db created at file:/home/z/my-project/db/custom.db
 
-🚀  Your database is now in sync with your Prisma schema. Done in 18ms
+🚀  Your database is now in sync with your Prisma schema. Done in 19ms
 
 Running generate... (Use --skip-generate to skip the generators)
 [2K[1A[2K[GRunning generate... - Prisma Client
-[2K[1A[2K[G✔ Generated Prisma Client (v6.19.2) to ./node_modules/@prisma/client in 70ms
-┌─────────────────────────────────────────────────────────┐
-│  Update available 6.19.2 -> 7.5.0                       │
-│                                                         │
-│  This is a major update - please follow the guide at    │
-│  https://pris.ly/d/major-version-upgrade                │
-│                                                         │
-│  Run the following to update                            │
-│    npm i --save-dev prisma@latest                       │
-│    npm i @prisma/client@latest                          │
-└─────────────────────────────────────────────────────────┘
+[2K[1A[2K[G✔ Generated Prisma Client (v6.19.2) to ./node_modules/@prisma/client in 71ms
 
 ==========================================
-[2026-03-23 16:48:05] Completed: bun run db:push
-[LOG] Step: bun run db:push | Duration: 1s
+[2026-03-23 18:09:14] Completed: bun run db:push
+[LOG] Step: bun run db:push | Duration: 2s
 ==========================================
 
 ==========================================
-[2026-03-23 16:48:05] Starting: Starting Next.js dev server
+[2026-03-23 18:09:14] Starting: Starting Next.js dev server
 ==========================================
 [BUN] Starting development server...
 ==========================================
 $ next dev -p 3000 2>&1 | tee dev.log
-[2026-03-23 16:48:05] Completed: Starting Next.js dev server
+[2026-03-23 18:09:14] Completed: Starting Next.js dev server
 [LOG] Step: Starting Next.js dev server | Duration: 0s
 ==========================================
 
 ==========================================
-[2026-03-23 16:48:05] Starting: Waiting for Next.js dev server
+[2026-03-23 18:09:14] Starting: Waiting for Next.js dev server
 ==========================================
 Waiting for Next.js dev server to be ready on localhost:3000...
 Attempt 1/60: Next.js dev server not ready yet, waiting...
@@ -155,1578 +145,228 @@ https://nextjs.org/telemetry
 
   	- jsx was set to react-jsx (next.js uses the React automatic runtime)
 
-✓ Ready in 931ms
- GET / 200 in 2.7s (compile: 2.6s, render: 129ms)
+✓ Ready in 908ms
+ GET / 200 in 2.8s (compile: 2.7s, render: 133ms)
 Next.js dev server is ready!
 ==========================================
- GET / 200 in 2.0s (compile: 1817ms, render: 208ms)
-[2026-03-23 16:48:09] Completed: Waiting for Next.js dev server
+ GET / 200 in 2.8s (compile: 2.6s, render: 182ms)
+[2026-03-23 18:09:18] Completed: Waiting for Next.js dev server
 [LOG] Step: Waiting for Next.js dev server | Duration: 4s
 ==========================================
 
 ==========================================
-[2026-03-23 16:48:09] Starting: Health check
+[2026-03-23 18:09:18] Starting: Health check
 ==========================================
 [BUN] Performing health check...
- GET / 200 in 27ms (compile: 1834µs, render: 26ms)
+ GET / 200 in 46ms (compile: 2ms, render: 43ms)
 [BUN] Health check passed
 ==========================================
-[2026-03-23 16:48:09] Completed: Health check
+[2026-03-23 18:09:18] Completed: Health check
 [LOG] Step: Health check | Duration: 0s
 ==========================================
 
 ==========================================
-[2026-03-23 16:48:09] Starting: Starting mini-services
+[2026-03-23 18:09:18] Starting: Starting mini-services
 ==========================================
 Found mini-services directory, scanning for sub-services...
 Mini-services startup completed. Started 0 service(s).
 ==========================================
-[2026-03-23 16:48:09] Completed: Starting mini-services
+[2026-03-23 18:09:18] Completed: Starting mini-services
 [LOG] Step: Starting mini-services | Duration: 0s
 ==========================================
 
-Next.js dev server is running in background (PID: 880).
-Use 'kill 880' to stop it.
+Next.js dev server is running in background (PID: 2437).
+Use 'kill 2437' to stop it.
 ⚠ Cross origin request detected from preview-chat-5cc08a2b-e2fa-4f32-960a-7f413d85f193.space.z.ai to /_next/* resource. In a future major version of Next.js, you will need to explicitly configure "allowedDevOrigins" in next.config to allow this.
 Read more: https://nextjs.org/docs/app/api-reference/config/next-config-js/allowedDevOrigins
- GET / 200 in 63ms (compile: 37ms, render: 25ms)
- GET / 200 in 37ms (compile: 13ms, render: 24ms)
- GET / 200 in 12ms (compile: 1788µs, render: 11ms)
- GET / 200 in 11ms (compile: 1748µs, render: 9ms)
- GET / 200 in 16ms (compile: 1967µs, render: 14ms)
- GET / 200 in 20ms (compile: 3ms, render: 17ms)
- GET / 200 in 18ms (compile: 2ms, render: 15ms)
- GET / 200 in 19ms (compile: 2ms, render: 16ms)
- GET / 200 in 55ms (compile: 39ms, render: 17ms)
- GET / 200 in 11ms (compile: 1598µs, render: 10ms)
- GET / 200 in 12ms (compile: 1403µs, render: 10ms)
- GET / 200 in 12ms (compile: 1492µs, render: 10ms)
- GET / 200 in 15ms (compile: 1595µs, render: 13ms)
- GET / 200 in 11ms (compile: 1273µs, render: 9ms)
- GET / 200 in 12ms (compile: 1483µs, render: 10ms)
- GET / 200 in 12ms (compile: 1291µs, render: 10ms)
- GET / 200 in 23ms (compile: 1729µs, render: 22ms)
- GET / 200 in 12ms (compile: 1367µs, render: 11ms)
- GET / 200 in 21ms (compile: 3ms, render: 18ms)
- GET / 200 in 18ms (compile: 2ms, render: 16ms)
- GET / 200 in 16ms (compile: 1697µs, render: 15ms)
- GET / 200 in 13ms (compile: 1448µs, render: 11ms)
- GET / 200 in 14ms (compile: 1474µs, render: 12ms)
- GET / 200 in 15ms (compile: 1384µs, render: 14ms)
- GET / 200 in 14ms (compile: 1736µs, render: 12ms)
- GET / 200 in 13ms (compile: 1482µs, render: 11ms)
- GET / 200 in 13ms (compile: 1403µs, render: 12ms)
- GET / 200 in 12ms (compile: 1688µs, render: 10ms)
- GET / 200 in 16ms (compile: 2ms, render: 14ms)
- GET / 200 in 55ms (compile: 28ms, render: 27ms)
- GET / 200 in 12ms (compile: 1568µs, render: 10ms)
- GET / 200 in 10ms (compile: 1381µs, render: 9ms)
- GET / 200 in 16ms (compile: 1683µs, render: 14ms)
+ GET / 200 in 81ms (compile: 43ms, render: 37ms)
  GET / 200 in 17ms (compile: 2ms, render: 15ms)
- GET / 200 in 15ms (compile: 1438µs, render: 14ms)
- GET / 200 in 16ms (compile: 1963µs, render: 14ms)
- GET / 200 in 19ms (compile: 2ms, render: 17ms)
- GET / 200 in 12ms (compile: 1440µs, render: 11ms)
- GET / 200 in 11ms (compile: 1293µs, render: 10ms)
- GET / 200 in 15ms (compile: 1503µs, render: 13ms)
- GET / 200 in 13ms (compile: 1541µs, render: 11ms)
- GET / 200 in 12ms (compile: 1458µs, render: 11ms)
- GET / 200 in 16ms (compile: 1498µs, render: 14ms)
- GET / 200 in 13ms (compile: 1807µs, render: 11ms)
- GET / 200 in 11ms (compile: 1568µs, render: 9ms)
- GET / 200 in 19ms (compile: 1452µs, render: 17ms)
- GET / 200 in 12ms (compile: 1666µs, render: 10ms)
- GET / 200 in 10ms (compile: 1423µs, render: 9ms)
- GET / 200 in 10ms (compile: 1393µs, render: 9ms)
- GET / 200 in 12ms (compile: 1465µs, render: 10ms)
- GET / 200 in 11ms (compile: 1455µs, render: 10ms)
- GET / 200 in 13ms (compile: 1332µs, render: 12ms)
- GET / 200 in 13ms (compile: 1556µs, render: 12ms)
- GET / 200 in 10ms (compile: 1377µs, render: 8ms)
- GET / 200 in 10ms (compile: 1341µs, render: 9ms)
- GET / 200 in 12ms (compile: 1520µs, render: 11ms)
- GET / 200 in 11ms (compile: 1372µs, render: 9ms)
- GET / 200 in 11ms (compile: 1430µs, render: 10ms)
-✓ Compiled in 524ms
- GET / 200 in 64ms (compile: 37ms, render: 26ms)
+ GET / 200 in 18ms (compile: 3ms, render: 16ms)
+ GET / 200 in 13ms (compile: 1761µs, render: 12ms)
+ GET / 200 in 19ms (compile: 3ms, render: 16ms)
+ GET / 200 in 12ms (compile: 1696µs, render: 10ms)
+ GET / 200 in 16ms (compile: 1939µs, render: 14ms)
+ GET / 200 in 20ms (compile: 2ms, render: 18ms)
+ GET / 200 in 13ms (compile: 1651µs, render: 12ms)
+ GET / 200 in 16ms (compile: 1582µs, render: 15ms)
+ GET / 200 in 20ms (compile: 2ms, render: 18ms)
+ GET / 200 in 13ms (compile: 1426µs, render: 11ms)
+ GET / 200 in 14ms (compile: 1950µs, render: 13ms)
+ GET / 200 in 17ms (compile: 1616µs, render: 15ms)
+ GET / 200 in 14ms (compile: 3ms, render: 11ms)
+ GET / 200 in 14ms (compile: 1669µs, render: 12ms)
+ GET / 200 in 19ms (compile: 1740µs, render: 17ms)
+ GET / 200 in 19ms (compile: 1953µs, render: 17ms)
+ GET / 200 in 15ms (compile: 2ms, render: 13ms)
+ GET / 200 in 12ms (compile: 1778µs, render: 10ms)
+ GET / 200 in 12ms (compile: 2ms, render: 10ms)
+ GET / 200 in 15ms (compile: 1791µs, render: 13ms)
+ GET / 200 in 17ms (compile: 2ms, render: 15ms)
+ GET / 200 in 17ms (compile: 1975µs, render: 15ms)
+ GET / 200 in 25ms (compile: 3ms, render: 22ms)
+ GET / 200 in 12ms (compile: 1370µs, render: 11ms)
+ GET / 200 in 11ms (compile: 1532µs, render: 10ms)
+ GET / 200 in 17ms (compile: 1945µs, render: 15ms)
+ GET / 200 in 17ms (compile: 1892µs, render: 15ms)
+ GET / 200 in 17ms (compile: 1913µs, render: 15ms)
+ GET / 200 in 24ms (compile: 2ms, render: 22ms)
+ GET / 200 in 12ms (compile: 1509µs, render: 11ms)
+ GET / 200 in 12ms (compile: 1597µs, render: 10ms)
+ GET / 200 in 13ms (compile: 1870µs, render: 11ms)
+ GET / 200 in 13ms (compile: 1622µs, render: 12ms)
+ GET / 200 in 13ms (compile: 2ms, render: 11ms)
+ GET / 200 in 16ms (compile: 1372µs, render: 14ms)
+ GET / 200 in 13ms (compile: 1657µs, render: 11ms)
+ GET / 200 in 11ms (compile: 1536µs, render: 10ms)
+ GET / 200 in 11ms (compile: 1635µs, render: 9ms)
+ GET / 200 in 12ms (compile: 1435µs, render: 11ms)
+ GET / 200 in 12ms (compile: 1431µs, render: 10ms)
+ GET / 200 in 25ms (compile: 1336µs, render: 24ms)
+ GET / 200 in 11ms (compile: 1322µs, render: 10ms)
+ GET / 200 in 58ms (compile: 37ms, render: 21ms)
+ GET / 200 in 49ms (compile: 2ms, render: 47ms)
+ GET / 200 in 13ms (compile: 1598µs, render: 11ms)
+ GET / 200 in 10ms (compile: 1329µs, render: 9ms)
+ GET / 200 in 15ms (compile: 1805µs, render: 14ms)
+ GET / 200 in 17ms (compile: 1904µs, render: 15ms)
+ GET / 200 in 11ms (compile: 1628µs, render: 9ms)
+ GET / 200 in 15ms (compile: 1439µs, render: 14ms)
+ GET / 200 in 20ms (compile: 2ms, render: 18ms)
+ GET / 200 in 11ms (compile: 1402µs, render: 10ms)
+ GET / 200 in 12ms (compile: 1280µs, render: 10ms)
+ GET / 200 in 14ms (compile: 1571µs, render: 13ms)
+ GET / 200 in 11ms (compile: 1414µs, render: 10ms)
+ GET / 200 in 11ms (compile: 1257µs, render: 10ms)
+ GET / 200 in 17ms (compile: 1362µs, render: 15ms)
+ GET / 200 in 11ms (compile: 1314µs, render: 10ms)
+ GET / 200 in 11ms (compile: 1309µs, render: 9ms)
+ GET / 200 in 12ms (compile: 1403µs, render: 10ms)
+ GET / 200 in 16ms (compile: 1558µs, render: 14ms)
+ GET / 200 in 17ms (compile: 1891µs, render: 15ms)
+ GET / 200 in 16ms (compile: 1952µs, render: 15ms)
+ GET / 200 in 16ms (compile: 6ms, render: 11ms)
+ GET / 200 in 11ms (compile: 1491µs, render: 9ms)
+ GET / 200 in 12ms (compile: 1471µs, render: 10ms)
+ GET / 200 in 16ms (compile: 2ms, render: 14ms)
+ GET / 200 in 16ms (compile: 2ms, render: 14ms)
+ GET / 200 in 23ms (compile: 3ms, render: 20ms)
+ GET / 200 in 11ms (compile: 1454µs, render: 10ms)
+ GET / 200 in 13ms (compile: 4ms, render: 9ms)
+ GET / 200 in 12ms (compile: 1734µs, render: 10ms)
+ GET / 200 in 11ms (compile: 1484µs, render: 10ms)
+ GET / 200 in 12ms (compile: 1520µs, render: 10ms)
+ GET / 200 in 29ms (compile: 1702µs, render: 27ms)
+ GET / 200 in 12ms (compile: 1767µs, render: 10ms)
+ GET / 200 in 11ms (compile: 1577µs, render: 9ms)
+ GET / 200 in 13ms (compile: 1476µs, render: 11ms)
+ GET / 200 in 10ms (compile: 1344µs, render: 9ms)
+ GET / 200 in 89ms (compile: 66ms, render: 23ms)
+ GET / 200 in 37ms (compile: 3ms, render: 34ms)
+ GET / 200 in 14ms (compile: 1790µs, render: 12ms)
+ GET / 200 in 12ms (compile: 1514µs, render: 10ms)
+ GET / 200 in 17ms (compile: 2ms, render: 15ms)
+ GET / 200 in 22ms (compile: 2ms, render: 20ms)
+ GET / 200 in 14ms (compile: 2ms, render: 11ms)
+ GET / 200 in 17ms (compile: 2ms, render: 15ms)
+ GET / 200 in 20ms (compile: 2ms, render: 18ms)
+ GET / 200 in 12ms (compile: 1728µs, render: 10ms)
+ GET / 200 in 13ms (compile: 1935µs, render: 11ms)
+ GET / 200 in 15ms (compile: 1707µs, render: 14ms)
+ GET / 200 in 13ms (compile: 1797µs, render: 11ms)
+ GET / 200 in 13ms (compile: 1738µs, render: 11ms)
+ GET / 200 in 19ms (compile: 3ms, render: 16ms)
+ GET / 200 in 13ms (compile: 1768µs, render: 11ms)
+ GET / 200 in 13ms (compile: 1765µs, render: 11ms)
+ GET / 200 in 13ms (compile: 1675µs, render: 11ms)
+ GET / 200 in 16ms (compile: 2ms, render: 14ms)
+ GET / 200 in 17ms (compile: 2ms, render: 15ms)
+ GET / 200 in 18ms (compile: 2ms, render: 16ms)
+ GET / 200 in 21ms (compile: 2ms, render: 19ms)
+ GET / 200 in 12ms (compile: 1679µs, render: 11ms)
+ GET / 200 in 12ms (compile: 1804µs, render: 10ms)
+ GET / 200 in 16ms (compile: 1776µs, render: 14ms)
+ GET / 200 in 19ms (compile: 2ms, render: 16ms)
+ GET / 200 in 17ms (compile: 2ms, render: 15ms)
+ GET / 200 in 26ms (compile: 2ms, render: 24ms)
+ GET / 200 in 13ms (compile: 1926µs, render: 11ms)
+ GET / 200 in 13ms (compile: 1983µs, render: 11ms)
+ GET / 200 in 12ms (compile: 2ms, render: 10ms)
+ GET / 200 in 12ms (compile: 1795µs, render: 10ms)
+ GET / 200 in 12ms (compile: 1764µs, render: 10ms)
+ GET / 200 in 17ms (compile: 1732µs, render: 15ms)
+ GET / 200 in 12ms (compile: 1726µs, render: 10ms)
+ GET / 200 in 12ms (compile: 1679µs, render: 10ms)
+ GET / 200 in 53ms (compile: 1956µs, render: 51ms)
+ GET / 200 in 12ms (compile: 1558µs, render: 11ms)
+ GET / 200 in 12ms (compile: 1540µs, render: 10ms)
+ GET / 200 in 11ms (compile: 1620µs, render: 9ms)
+ GET / 200 in 11ms (compile: 1989µs, render: 9ms)
+ GET / 200 in 10ms (compile: 1307µs, render: 8ms)
+ GET / 200 in 10ms (compile: 1356µs, render: 9ms)
+ GET / 200 in 19ms (compile: 1716µs, render: 17ms)
+ GET / 200 in 11ms (compile: 1448µs, render: 9ms)
+ GET / 200 in 11ms (compile: 1399µs, render: 9ms)
+ GET / 200 in 10ms (compile: 1473µs, render: 9ms)
+ GET / 200 in 10ms (compile: 1340µs, render: 9ms)
+ GET / 200 in 12ms (compile: 1371µs, render: 10ms)
+ GET / 200 in 10ms (compile: 1388µs, render: 9ms)
+ GET / 200 in 15ms (compile: 1893µs, render: 13ms)
+ GET / 200 in 15ms (compile: 1940µs, render: 13ms)
+ GET / 200 in 16ms (compile: 2ms, render: 14ms)
+ GET / 200 in 18ms (compile: 1732µs, render: 17ms)
+ GET / 200 in 14ms (compile: 1792µs, render: 12ms)
+ GET / 200 in 15ms (compile: 1694µs, render: 13ms)
+ GET / 200 in 20ms (compile: 1936µs, render: 18ms)
+ GET / 200 in 10ms (compile: 1168µs, render: 9ms)
+ GET / 200 in 10ms (compile: 1354µs, render: 8ms)
+ GET / 200 in 9ms (compile: 1316µs, render: 8ms)
+ GET / 200 in 10ms (compile: 1240µs, render: 9ms)
+ GET / 200 in 10ms (compile: 1234µs, render: 9ms)
+ GET / 200 in 17ms (compile: 4ms, render: 14ms)
+ GET / 200 in 14ms (compile: 1754µs, render: 13ms)
+ GET / 200 in 16ms (compile: 1935µs, render: 14ms)
+ GET / 200 in 16ms (compile: 1998µs, render: 14ms)
+ GET / 200 in 16ms (compile: 2ms, render: 14ms)
+ GET / 200 in 16ms (compile: 1924µs, render: 14ms)
+ GET / 200 in 23ms (compile: 1947µs, render: 21ms)
+ GET / 200 in 11ms (compile: 1522µs, render: 9ms)
+ GET / 200 in 11ms (compile: 1417µs, render: 9ms)
+ GET / 200 in 10ms (compile: 1388µs, render: 9ms)
+ GET / 200 in 10ms (compile: 1218µs, render: 9ms)
+ GET / 200 in 10ms (compile: 1351µs, render: 8ms)
+ GET / 200 in 10ms (compile: 1383µs, render: 9ms)
+ GET / 200 in 10ms (compile: 1399µs, render: 9ms)
+ GET / 200 in 10ms (compile: 1327µs, render: 9ms)
+ GET / 200 in 11ms (compile: 1816µs, render: 9ms)
+ GET / 200 in 10ms (compile: 1642µs, render: 9ms)
+ GET / 200 in 12ms (compile: 1677µs, render: 10ms)
+ GET / 200 in 21ms (compile: 1714µs, render: 20ms)
+ GET / 200 in 11ms (compile: 1532µs, render: 10ms)
+ GET / 200 in 10ms (compile: 1429µs, render: 9ms)
+ GET / 200 in 10ms (compile: 1856µs, render: 8ms)
+ GET / 200 in 10ms (compile: 1996µs, render: 8ms)
+ GET / 200 in 9ms (compile: 1219µs, render: 8ms)
+ GET / 200 in 10ms (compile: 1291µs, render: 9ms)
+ GET / 200 in 9ms (compile: 1147µs, render: 8ms)
+ GET / 200 in 11ms (compile: 1370µs, render: 10ms)
+ GET / 200 in 10ms (compile: 1370µs, render: 9ms)
+ GET / 200 in 9ms (compile: 1120µs, render: 8ms)
+ GET / 200 in 9ms (compile: 1217µs, render: 8ms)
+ GET / 200 in 10ms (compile: 1231µs, render: 9ms)
+ GET / 200 in 11ms (compile: 1618µs, render: 10ms)
+ GET / 200 in 16ms (compile: 1472µs, render: 14ms)
+ GET / 200 in 10ms (compile: 1339µs, render: 8ms)
+ GET / 200 in 10ms (compile: 1275µs, render: 9ms)
+ GET / 200 in 10ms (compile: 1197µs, render: 9ms)
+ GET / 200 in 11ms (compile: 1328µs, render: 9ms)
+ GET / 200 in 10ms (compile: 1359µs, render: 9ms)
+✓ Compiled in 434ms
 ⚠ Fast Refresh had to perform a full reload when ./src/app/page.tsx changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
- GET / 200 in 131ms (compile: 1904µs, render: 129ms)
-prisma:query SELECT `main`.`cloudflare_accounts`.`id`, `main`.`cloudflare_accounts`.`name`, `main`.`cloudflare_accounts`.`email`, `main`.`cloudflare_accounts`.`accountId`, `main`.`cloudflare_accounts`.`apiToken`, `main`.`cloudflare_accounts`.`isActive`, `main`.`cloudflare_accounts`.`isDefault`, `main`.`cloudflare_accounts`.`lastSync`, `main`.`cloudflare_accounts`.`createdAt`, `main`.`cloudflare_accounts`.`updatedAt`, COALESCE(`aggr_selection_0_Worker`.`_aggr_count_workers`, 0) AS `_aggr_count_workers`, COALESCE(`aggr_selection_1_D1Database`.`_aggr_count_databases`, 0) AS `_aggr_count_databases`, COALESCE(`aggr_selection_2_KVNamespace`.`_aggr_count_kvNamespaces`, 0) AS `_aggr_count_kvNamespaces`, COALESCE(`aggr_selection_3_R2Bucket`.`_aggr_count_r2Buckets`, 0) AS `_aggr_count_r2Buckets` FROM `main`.`cloudflare_accounts` LEFT JOIN (SELECT `main`.`workers`.`accountId`, COUNT(*) AS `_aggr_count_workers` FROM `main`.`workers` WHERE 1=1 GROUP BY `main`.`workers`.`accountId`) AS `aggr_selection_0_Worker` ON (`main`.`cloudflare_accounts`.`id` = `aggr_selection_0_Worker`.`accountId`) LEFT JOIN (SELECT `main`.`d1_databases`.`accountId`, COUNT(*) AS `_aggr_count_databases` FROM `main`.`d1_databases` WHERE 1=1 GROUP BY `main`.`d1_databases`.`accountId`) AS `aggr_selection_1_D1Database` ON (`main`.`cloudflare_accounts`.`id` = `aggr_selection_1_D1Database`.`accountId`) LEFT JOIN (SELECT `main`.`kv_namespaces`.`accountId`, COUNT(*) AS `_aggr_count_kvNamespaces` FROM `main`.`kv_namespaces` WHERE 1=1 GROUP BY `main`.`kv_namespaces`.`accountId`) AS `aggr_selection_2_KVNamespace` ON (`main`.`cloudflare_accounts`.`id` = `aggr_selection_2_KVNamespace`.`accountId`) LEFT JOIN (SELECT `main`.`r2_buckets`.`accountId`, COUNT(*) AS `_aggr_count_r2Buckets` FROM `main`.`r2_buckets` WHERE 1=1 GROUP BY `main`.`r2_buckets`.`accountId`) AS `aggr_selection_3_R2Bucket` ON (`main`.`cloudflare_accounts`.`id` = `aggr_selection_3_R2Bucket`.`accountId`) WHERE 1=1 ORDER BY `main`.`cloudflare_accounts`.`createdAt` DESC LIMIT ? OFFSET ?
- GET /api/accounts 200 in 353ms (compile: 319ms, render: 34ms)
-✓ Compiled in 111ms
- GET / 200 in 62ms (compile: 40ms, render: 21ms)
- GET / 200 in 108ms (compile: 3ms, render: 105ms)
-prisma:query SELECT 1
-prisma:query SELECT `main`.`cloudflare_accounts`.`id`, `main`.`cloudflare_accounts`.`name`, `main`.`cloudflare_accounts`.`email`, `main`.`cloudflare_accounts`.`accountId`, `main`.`cloudflare_accounts`.`apiToken`, `main`.`cloudflare_accounts`.`isActive`, `main`.`cloudflare_accounts`.`isDefault`, `main`.`cloudflare_accounts`.`lastSync`, `main`.`cloudflare_accounts`.`createdAt`, `main`.`cloudflare_accounts`.`updatedAt`, COALESCE(`aggr_selection_0_Worker`.`_aggr_count_workers`, 0) AS `_aggr_count_workers`, COALESCE(`aggr_selection_1_D1Database`.`_aggr_count_databases`, 0) AS `_aggr_count_databases`, COALESCE(`aggr_selection_2_KVNamespace`.`_aggr_count_kvNamespaces`, 0) AS `_aggr_count_kvNamespaces`, COALESCE(`aggr_selection_3_R2Bucket`.`_aggr_count_r2Buckets`, 0) AS `_aggr_count_r2Buckets` FROM `main`.`cloudflare_accounts` LEFT JOIN (SELECT `main`.`workers`.`accountId`, COUNT(*) AS `_aggr_count_workers` FROM `main`.`workers` WHERE 1=1 GROUP BY `main`.`workers`.`accountId`) AS `aggr_selection_0_Worker` ON (`main`.`cloudflare_accounts`.`id` = `aggr_selection_0_Worker`.`accountId`) LEFT JOIN (SELECT `main`.`d1_databases`.`accountId`, COUNT(*) AS `_aggr_count_databases` FROM `main`.`d1_databases` WHERE 1=1 GROUP BY `main`.`d1_databases`.`accountId`) AS `aggr_selection_1_D1Database` ON (`main`.`cloudflare_accounts`.`id` = `aggr_selection_1_D1Database`.`accountId`) LEFT JOIN (SELECT `main`.`kv_namespaces`.`accountId`, COUNT(*) AS `_aggr_count_kvNamespaces` FROM `main`.`kv_namespaces` WHERE 1=1 GROUP BY `main`.`kv_namespaces`.`accountId`) AS `aggr_selection_2_KVNamespace` ON (`main`.`cloudflare_accounts`.`id` = `aggr_selection_2_KVNamespace`.`accountId`) LEFT JOIN (SELECT `main`.`r2_buckets`.`accountId`, COUNT(*) AS `_aggr_count_r2Buckets` FROM `main`.`r2_buckets` WHERE 1=1 GROUP BY `main`.`r2_buckets`.`accountId`) AS `aggr_selection_3_R2Bucket` ON (`main`.`cloudflare_accounts`.`id` = `aggr_selection_3_R2Bucket`.`accountId`) WHERE 1=1 ORDER BY `main`.`cloudflare_accounts`.`createdAt` DESC LIMIT ? OFFSET ?
- GET /api/accounts 200 in 10ms (compile: 2ms, render: 8ms)
-prisma:query SELECT 1
-prisma:query INSERT INTO `main`.`cloudflare_accounts` (`id`, `name`, `email`, `accountId`, `apiToken`, `isActive`, `isDefault`, `createdAt`, `updatedAt`) VALUES (?,?,?,?,?,?,?,?,?) RETURNING `id` AS `id`, `name` AS `name`, `email` AS `email`, `accountId` AS `accountId`, `apiToken` AS `apiToken`, `isActive` AS `isActive`, `isDefault` AS `isDefault`, `lastSync` AS `lastSync`, `createdAt` AS `createdAt`, `updatedAt` AS `updatedAt`
- POST /api/accounts 200 in 14ms (compile: 3ms, render: 11ms)
-prisma:query SELECT `main`.`cloudflare_accounts`.`id`, `main`.`cloudflare_accounts`.`name`, `main`.`cloudflare_accounts`.`email`, `main`.`cloudflare_accounts`.`accountId`, `main`.`cloudflare_accounts`.`apiToken`, `main`.`cloudflare_accounts`.`isActive`, `main`.`cloudflare_accounts`.`isDefault`, `main`.`cloudflare_accounts`.`lastSync`, `main`.`cloudflare_accounts`.`createdAt`, `main`.`cloudflare_accounts`.`updatedAt`, COALESCE(`aggr_selection_0_Worker`.`_aggr_count_workers`, 0) AS `_aggr_count_workers`, COALESCE(`aggr_selection_1_D1Database`.`_aggr_count_databases`, 0) AS `_aggr_count_databases`, COALESCE(`aggr_selection_2_KVNamespace`.`_aggr_count_kvNamespaces`, 0) AS `_aggr_count_kvNamespaces`, COALESCE(`aggr_selection_3_R2Bucket`.`_aggr_count_r2Buckets`, 0) AS `_aggr_count_r2Buckets` FROM `main`.`cloudflare_accounts` LEFT JOIN (SELECT `main`.`workers`.`accountId`, COUNT(*) AS `_aggr_count_workers` FROM `main`.`workers` WHERE 1=1 GROUP BY `main`.`workers`.`accountId`) AS `aggr_selection_0_Worker` ON (`main`.`cloudflare_accounts`.`id` = `aggr_selection_0_Worker`.`accountId`) LEFT JOIN (SELECT `main`.`d1_databases`.`accountId`, COUNT(*) AS `_aggr_count_databases` FROM `main`.`d1_databases` WHERE 1=1 GROUP BY `main`.`d1_databases`.`accountId`) AS `aggr_selection_1_D1Database` ON (`main`.`cloudflare_accounts`.`id` = `aggr_selection_1_D1Database`.`accountId`) LEFT JOIN (SELECT `main`.`kv_namespaces`.`accountId`, COUNT(*) AS `_aggr_count_kvNamespaces` FROM `main`.`kv_namespaces` WHERE 1=1 GROUP BY `main`.`kv_namespaces`.`accountId`) AS `aggr_selection_2_KVNamespace` ON (`main`.`cloudflare_accounts`.`id` = `aggr_selection_2_KVNamespace`.`accountId`) LEFT JOIN (SELECT `main`.`r2_buckets`.`accountId`, COUNT(*) AS `_aggr_count_r2Buckets` FROM `main`.`r2_buckets` WHERE 1=1 GROUP BY `main`.`r2_buckets`.`accountId`) AS `aggr_selection_3_R2Bucket` ON (`main`.`cloudflare_accounts`.`id` = `aggr_selection_3_R2Bucket`.`accountId`) WHERE 1=1 ORDER BY `main`.`cloudflare_accounts`.`createdAt` DESC LIMIT ? OFFSET ?
- GET /api/accounts 200 in 9ms (compile: 2ms, render: 6ms)
-prisma:query SELECT `main`.`cloudflare_accounts`.`id`, `main`.`cloudflare_accounts`.`name`, `main`.`cloudflare_accounts`.`email`, `main`.`cloudflare_accounts`.`accountId`, `main`.`cloudflare_accounts`.`apiToken`, `main`.`cloudflare_accounts`.`isActive`, `main`.`cloudflare_accounts`.`isDefault`, `main`.`cloudflare_accounts`.`lastSync`, `main`.`cloudflare_accounts`.`createdAt`, `main`.`cloudflare_accounts`.`updatedAt` FROM `main`.`cloudflare_accounts` WHERE (`main`.`cloudflare_accounts`.`id` = ? AND 1=1) LIMIT ? OFFSET ?
-prisma:query SELECT `main`.`workers`.`id`, `main`.`workers`.`accountId`, `main`.`workers`.`workerId`, `main`.`workers`.`name`, `main`.`workers`.`script`, `main`.`workers`.`createdAt`, `main`.`workers`.`updatedAt` FROM `main`.`workers` WHERE `main`.`workers`.`accountId` IN (?) LIMIT ? OFFSET ?
-prisma:query SELECT `main`.`d1_databases`.`id`, `main`.`d1_databases`.`accountId`, `main`.`d1_databases`.`databaseId`, `main`.`d1_databases`.`name`, `main`.`d1_databases`.`version`, `main`.`d1_databases`.`createdAt`, `main`.`d1_databases`.`updatedAt` FROM `main`.`d1_databases` WHERE `main`.`d1_databases`.`accountId` IN (?) LIMIT ? OFFSET ?
-prisma:query SELECT `main`.`kv_namespaces`.`id`, `main`.`kv_namespaces`.`accountId`, `main`.`kv_namespaces`.`namespaceId`, `main`.`kv_namespaces`.`title`, `main`.`kv_namespaces`.`createdAt`, `main`.`kv_namespaces`.`updatedAt` FROM `main`.`kv_namespaces` WHERE `main`.`kv_namespaces`.`accountId` IN (?) LIMIT ? OFFSET ?
-prisma:query SELECT `main`.`r2_buckets`.`id`, `main`.`r2_buckets`.`accountId`, `main`.`r2_buckets`.`bucketName`, `main`.`r2_buckets`.`creationDate`, `main`.`r2_buckets`.`createdAt`, `main`.`r2_buckets`.`updatedAt` FROM `main`.`r2_buckets` WHERE `main`.`r2_buckets`.`accountId` IN (?) LIMIT ? OFFSET ?
- GET /api/accounts/cmn3g679t0000m9p1s42jgd5g 200 in 755ms (compile: 742ms, render: 13ms)
-prisma:query SELECT `main`.`cloudflare_accounts`.`id`, `main`.`cloudflare_accounts`.`name`, `main`.`cloudflare_accounts`.`email`, `main`.`cloudflare_accounts`.`accountId`, `main`.`cloudflare_accounts`.`apiToken`, `main`.`cloudflare_accounts`.`isActive`, `main`.`cloudflare_accounts`.`isDefault`, `main`.`cloudflare_accounts`.`lastSync`, `main`.`cloudflare_accounts`.`createdAt`, `main`.`cloudflare_accounts`.`updatedAt` FROM `main`.`cloudflare_accounts` WHERE (`main`.`cloudflare_accounts`.`id` = ? AND 1=1) LIMIT ? OFFSET ?
-Error testing account: Error [PrismaClientValidationError]: 
-Invalid `__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$db$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["db"].worker.upsert()` invocation in
-/home/z/my-project/.next/dev/server/chunks/[root-of-the-server]__7f4fbd74._.js:235:147
-
-  232 ]);
-  233 // Sync workers
-  234 for (const worker of workers){
-→ 235     await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$db$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["db"].worker.upsert({
-            where: {
-              accountId_workerId: {
-                accountId: "cmn3g679t0000m9p1s42jgd5g",
-                workerId: "api"
-              }
-            },
-            update: {
-              name: undefined,
-              script: undefined
-            },
-            create: {
-              accountId: "cmn3g679t0000m9p1s42jgd5g",
-              workerId: "api",
-              script: undefined,
-          +   name: String
-            }
-          })
-
-Argument `name` is missing.
-    at <unknown> (src/app/api/accounts/[id]/test/route.ts:48:23)
-    at async POST (src/app/api/accounts/[id]/test/route.ts:48:7)
-  46 |     // Sync workers
-  47 |     for (const worker of workers) {
-> 48 |       await db.worker.upsert({
-     |                       ^
-  49 |         where: {
-  50 |           accountId_workerId: {
-  51 |             accountId: account.id, {
-  clientVersion: '6.19.2'
-}
- POST /api/accounts/cmn3g679t0000m9p1s42jgd5g/test 500 in 2.2s (compile: 810ms, render: 1440ms)
-prisma:query SELECT 1
-prisma:query SELECT `main`.`cloudflare_accounts`.`id`, `main`.`cloudflare_accounts`.`name`, `main`.`cloudflare_accounts`.`email`, `main`.`cloudflare_accounts`.`accountId`, `main`.`cloudflare_accounts`.`apiToken`, `main`.`cloudflare_accounts`.`isActive`, `main`.`cloudflare_accounts`.`isDefault`, `main`.`cloudflare_accounts`.`lastSync`, `main`.`cloudflare_accounts`.`createdAt`, `main`.`cloudflare_accounts`.`updatedAt` FROM `main`.`cloudflare_accounts` WHERE (`main`.`cloudflare_accounts`.`id` = ? AND 1=1) LIMIT ? OFFSET ?
-Error testing account: Error [PrismaClientValidationError]: 
-Invalid `__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$db$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["db"].worker.upsert()` invocation in
-/home/z/my-project/.next/dev/server/chunks/[root-of-the-server]__7f4fbd74._.js:235:147
-
-  232 ]);
-  233 // Sync workers
-  234 for (const worker of workers){
-→ 235     await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$db$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["db"].worker.upsert({
-            where: {
-              accountId_workerId: {
-                accountId: "cmn3g679t0000m9p1s42jgd5g",
-                workerId: "api"
-              }
-            },
-            update: {
-              name: undefined,
-              script: undefined
-            },
-            create: {
-              accountId: "cmn3g679t0000m9p1s42jgd5g",
-              workerId: "api",
-              script: undefined,
-          +   name: String
-            }
-          })
-
-Argument `name` is missing.
-    at <unknown> (src/app/api/accounts/[id]/test/route.ts:48:23)
-    at async POST (src/app/api/accounts/[id]/test/route.ts:48:7)
-  46 |     // Sync workers
-  47 |     for (const worker of workers) {
-> 48 |       await db.worker.upsert({
-     |                       ^
-  49 |         where: {
-  50 |           accountId_workerId: {
-  51 |             accountId: account.id, {
-  clientVersion: '6.19.2'
-}
- POST /api/accounts/cmn3g679t0000m9p1s42jgd5g/test 500 in 1600ms (compile: 36ms, render: 1563ms)
-prisma:query SELECT 1
-prisma:query SELECT `main`.`cloudflare_accounts`.`id`, `main`.`cloudflare_accounts`.`name`, `main`.`cloudflare_accounts`.`email`, `main`.`cloudflare_accounts`.`accountId`, `main`.`cloudflare_accounts`.`apiToken`, `main`.`cloudflare_accounts`.`isActive`, `main`.`cloudflare_accounts`.`isDefault`, `main`.`cloudflare_accounts`.`lastSync`, `main`.`cloudflare_accounts`.`createdAt`, `main`.`cloudflare_accounts`.`updatedAt` FROM `main`.`cloudflare_accounts` WHERE (`main`.`cloudflare_accounts`.`id` = ? AND 1=1) LIMIT ? OFFSET ?
-Error testing account: Error [PrismaClientValidationError]: 
-Invalid `__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$db$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["db"].worker.upsert()` invocation in
-/home/z/my-project/.next/dev/server/chunks/[root-of-the-server]__7f4fbd74._.js:235:147
-
-  232 ]);
-  233 // Sync workers
-  234 for (const worker of workers){
-→ 235     await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$db$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["db"].worker.upsert({
-            where: {
-              accountId_workerId: {
-                accountId: "cmn3g679t0000m9p1s42jgd5g",
-                workerId: "api"
-              }
-            },
-            update: {
-              name: undefined,
-              script: undefined
-            },
-            create: {
-              accountId: "cmn3g679t0000m9p1s42jgd5g",
-              workerId: "api",
-              script: undefined,
-          +   name: String
-            }
-          })
-
-Argument `name` is missing.
-    at <unknown> (src/app/api/accounts/[id]/test/route.ts:48:23)
-    at async POST (src/app/api/accounts/[id]/test/route.ts:48:7)
-  46 |     // Sync workers
-  47 |     for (const worker of workers) {
-> 48 |       await db.worker.upsert({
-     |                       ^
-  49 |         where: {
-  50 |           accountId_workerId: {
-  51 |             accountId: account.id, {
-  clientVersion: '6.19.2'
-}
- POST /api/accounts/cmn3g679t0000m9p1s42jgd5g/test 500 in 958ms (compile: 30ms, render: 928ms)
- GET / 200 in 54ms (compile: 5ms, render: 49ms)
-prisma:query SELECT 1
-prisma:query SELECT `main`.`cloudflare_accounts`.`id`, `main`.`cloudflare_accounts`.`name`, `main`.`cloudflare_accounts`.`email`, `main`.`cloudflare_accounts`.`accountId`, `main`.`cloudflare_accounts`.`apiToken`, `main`.`cloudflare_accounts`.`isActive`, `main`.`cloudflare_accounts`.`isDefault`, `main`.`cloudflare_accounts`.`lastSync`, `main`.`cloudflare_accounts`.`createdAt`, `main`.`cloudflare_accounts`.`updatedAt`, COALESCE(`aggr_selection_0_Worker`.`_aggr_count_workers`, 0) AS `_aggr_count_workers`, COALESCE(`aggr_selection_1_D1Database`.`_aggr_count_databases`, 0) AS `_aggr_count_databases`, COALESCE(`aggr_selection_2_KVNamespace`.`_aggr_count_kvNamespaces`, 0) AS `_aggr_count_kvNamespaces`, COALESCE(`aggr_selection_3_R2Bucket`.`_aggr_count_r2Buckets`, 0) AS `_aggr_count_r2Buckets` FROM `main`.`cloudflare_accounts` LEFT JOIN (SELECT `main`.`workers`.`accountId`, COUNT(*) AS `_aggr_count_workers` FROM `main`.`workers` WHERE 1=1 GROUP BY `main`.`workers`.`accountId`) AS `aggr_selection_0_Worker` ON (`main`.`cloudflare_accounts`.`id` = `aggr_selection_0_Worker`.`accountId`) LEFT JOIN (SELECT `main`.`d1_databases`.`accountId`, COUNT(*) AS `_aggr_count_databases` FROM `main`.`d1_databases` WHERE 1=1 GROUP BY `main`.`d1_databases`.`accountId`) AS `aggr_selection_1_D1Database` ON (`main`.`cloudflare_accounts`.`id` = `aggr_selection_1_D1Database`.`accountId`) LEFT JOIN (SELECT `main`.`kv_namespaces`.`accountId`, COUNT(*) AS `_aggr_count_kvNamespaces` FROM `main`.`kv_namespaces` WHERE 1=1 GROUP BY `main`.`kv_namespaces`.`accountId`) AS `aggr_selection_2_KVNamespace` ON (`main`.`cloudflare_accounts`.`id` = `aggr_selection_2_KVNamespace`.`accountId`) LEFT JOIN (SELECT `main`.`r2_buckets`.`accountId`, COUNT(*) AS `_aggr_count_r2Buckets` FROM `main`.`r2_buckets` WHERE 1=1 GROUP BY `main`.`r2_buckets`.`accountId`) AS `aggr_selection_3_R2Bucket` ON (`main`.`cloudflare_accounts`.`id` = `aggr_selection_3_R2Bucket`.`accountId`) WHERE 1=1 ORDER BY `main`.`cloudflare_accounts`.`createdAt` DESC LIMIT ? OFFSET ?
- GET /api/accounts 200 in 11ms (compile: 3ms, render: 8ms)
-prisma:query SELECT `main`.`cloudflare_accounts`.`id`, `main`.`cloudflare_accounts`.`name`, `main`.`cloudflare_accounts`.`email`, `main`.`cloudflare_accounts`.`accountId`, `main`.`cloudflare_accounts`.`apiToken`, `main`.`cloudflare_accounts`.`isActive`, `main`.`cloudflare_accounts`.`isDefault`, `main`.`cloudflare_accounts`.`lastSync`, `main`.`cloudflare_accounts`.`createdAt`, `main`.`cloudflare_accounts`.`updatedAt` FROM `main`.`cloudflare_accounts` WHERE (`main`.`cloudflare_accounts`.`id` = ? AND 1=1) LIMIT ? OFFSET ?
-prisma:query SELECT `main`.`workers`.`id`, `main`.`workers`.`accountId`, `main`.`workers`.`workerId`, `main`.`workers`.`name`, `main`.`workers`.`script`, `main`.`workers`.`createdAt`, `main`.`workers`.`updatedAt` FROM `main`.`workers` WHERE `main`.`workers`.`accountId` IN (?) LIMIT ? OFFSET ?
-prisma:query SELECT `main`.`d1_databases`.`id`, `main`.`d1_databases`.`accountId`, `main`.`d1_databases`.`databaseId`, `main`.`d1_databases`.`name`, `main`.`d1_databases`.`version`, `main`.`d1_databases`.`createdAt`, `main`.`d1_databases`.`updatedAt` FROM `main`.`d1_databases` WHERE `main`.`d1_databases`.`accountId` IN (?) LIMIT ? OFFSET ?
-prisma:query SELECT `main`.`kv_namespaces`.`id`, `main`.`kv_namespaces`.`accountId`, `main`.`kv_namespaces`.`namespaceId`, `main`.`kv_namespaces`.`title`, `main`.`kv_namespaces`.`createdAt`, `main`.`kv_namespaces`.`updatedAt` FROM `main`.`kv_namespaces` WHERE `main`.`kv_namespaces`.`accountId` IN (?) LIMIT ? OFFSET ?
-prisma:query SELECT `main`.`r2_buckets`.`id`, `main`.`r2_buckets`.`accountId`, `main`.`r2_buckets`.`bucketName`, `main`.`r2_buckets`.`creationDate`, `main`.`r2_buckets`.`createdAt`, `main`.`r2_buckets`.`updatedAt` FROM `main`.`r2_buckets` WHERE `main`.`r2_buckets`.`accountId` IN (?) LIMIT ? OFFSET ?
- GET /api/accounts/cmn3g679t0000m9p1s42jgd5g 200 in 42ms (compile: 28ms, render: 14ms)
-prisma:query SELECT `main`.`cloudflare_accounts`.`id`, `main`.`cloudflare_accounts`.`name`, `main`.`cloudflare_accounts`.`email`, `main`.`cloudflare_accounts`.`accountId`, `main`.`cloudflare_accounts`.`apiToken`, `main`.`cloudflare_accounts`.`isActive`, `main`.`cloudflare_accounts`.`isDefault`, `main`.`cloudflare_accounts`.`lastSync`, `main`.`cloudflare_accounts`.`createdAt`, `main`.`cloudflare_accounts`.`updatedAt`, COALESCE(`aggr_selection_0_Worker`.`_aggr_count_workers`, 0) AS `_aggr_count_workers`, COALESCE(`aggr_selection_1_D1Database`.`_aggr_count_databases`, 0) AS `_aggr_count_databases`, COALESCE(`aggr_selection_2_KVNamespace`.`_aggr_count_kvNamespaces`, 0) AS `_aggr_count_kvNamespaces`, COALESCE(`aggr_selection_3_R2Bucket`.`_aggr_count_r2Buckets`, 0) AS `_aggr_count_r2Buckets` FROM `main`.`cloudflare_accounts` LEFT JOIN (SELECT `main`.`workers`.`accountId`, COUNT(*) AS `_aggr_count_workers` FROM `main`.`workers` WHERE 1=1 GROUP BY `main`.`workers`.`accountId`) AS `aggr_selection_0_Worker` ON (`main`.`cloudflare_accounts`.`id` = `aggr_selection_0_Worker`.`accountId`) LEFT JOIN (SELECT `main`.`d1_databases`.`accountId`, COUNT(*) AS `_aggr_count_databases` FROM `main`.`d1_databases` WHERE 1=1 GROUP BY `main`.`d1_databases`.`accountId`) AS `aggr_selection_1_D1Database` ON (`main`.`cloudflare_accounts`.`id` = `aggr_selection_1_D1Database`.`accountId`) LEFT JOIN (SELECT `main`.`kv_namespaces`.`accountId`, COUNT(*) AS `_aggr_count_kvNamespaces` FROM `main`.`kv_namespaces` WHERE 1=1 GROUP BY `main`.`kv_namespaces`.`accountId`) AS `aggr_selection_2_KVNamespace` ON (`main`.`cloudflare_accounts`.`id` = `aggr_selection_2_KVNamespace`.`accountId`) LEFT JOIN (SELECT `main`.`r2_buckets`.`accountId`, COUNT(*) AS `_aggr_count_r2Buckets` FROM `main`.`r2_buckets` WHERE 1=1 GROUP BY `main`.`r2_buckets`.`accountId`) AS `aggr_selection_3_R2Bucket` ON (`main`.`cloudflare_accounts`.`id` = `aggr_selection_3_R2Bucket`.`accountId`) WHERE 1=1 ORDER BY `main`.`cloudflare_accounts`.`createdAt` DESC LIMIT ? OFFSET ?
- GET /api/accounts 200 in 9ms (compile: 3ms, render: 7ms)
- GET / 200 in 36ms (compile: 2ms, render: 34ms)
-prisma:query SELECT 1
-prisma:query SELECT `main`.`cloudflare_accounts`.`id`, `main`.`cloudflare_accounts`.`name`, `main`.`cloudflare_accounts`.`email`, `main`.`cloudflare_accounts`.`accountId`, `main`.`cloudflare_accounts`.`apiToken`, `main`.`cloudflare_accounts`.`isActive`, `main`.`cloudflare_accounts`.`isDefault`, `main`.`cloudflare_accounts`.`lastSync`, `main`.`cloudflare_accounts`.`createdAt`, `main`.`cloudflare_accounts`.`updatedAt`, COALESCE(`aggr_selection_0_Worker`.`_aggr_count_workers`, 0) AS `_aggr_count_workers`, COALESCE(`aggr_selection_1_D1Database`.`_aggr_count_databases`, 0) AS `_aggr_count_databases`, COALESCE(`aggr_selection_2_KVNamespace`.`_aggr_count_kvNamespaces`, 0) AS `_aggr_count_kvNamespaces`, COALESCE(`aggr_selection_3_R2Bucket`.`_aggr_count_r2Buckets`, 0) AS `_aggr_count_r2Buckets` FROM `main`.`cloudflare_accounts` LEFT JOIN (SELECT `main`.`workers`.`accountId`, COUNT(*) AS `_aggr_count_workers` FROM `main`.`workers` WHERE 1=1 GROUP BY `main`.`workers`.`accountId`) AS `aggr_selection_0_Worker` ON (`main`.`cloudflare_accounts`.`id` = `aggr_selection_0_Worker`.`accountId`) LEFT JOIN (SELECT `main`.`d1_databases`.`accountId`, COUNT(*) AS `_aggr_count_databases` FROM `main`.`d1_databases` WHERE 1=1 GROUP BY `main`.`d1_databases`.`accountId`) AS `aggr_selection_1_D1Database` ON (`main`.`cloudflare_accounts`.`id` = `aggr_selection_1_D1Database`.`accountId`) LEFT JOIN (SELECT `main`.`kv_namespaces`.`accountId`, COUNT(*) AS `_aggr_count_kvNamespaces` FROM `main`.`kv_namespaces` WHERE 1=1 GROUP BY `main`.`kv_namespaces`.`accountId`) AS `aggr_selection_2_KVNamespace` ON (`main`.`cloudflare_accounts`.`id` = `aggr_selection_2_KVNamespace`.`accountId`) LEFT JOIN (SELECT `main`.`r2_buckets`.`accountId`, COUNT(*) AS `_aggr_count_r2Buckets` FROM `main`.`r2_buckets` WHERE 1=1 GROUP BY `main`.`r2_buckets`.`accountId`) AS `aggr_selection_3_R2Bucket` ON (`main`.`cloudflare_accounts`.`id` = `aggr_selection_3_R2Bucket`.`accountId`) WHERE 1=1 ORDER BY `main`.`cloudflare_accounts`.`createdAt` DESC LIMIT ? OFFSET ?
- GET /api/accounts 200 in 9ms (compile: 2ms, render: 7ms)
-prisma:query SELECT `main`.`cloudflare_accounts`.`id`, `main`.`cloudflare_accounts`.`name`, `main`.`cloudflare_accounts`.`email`, `main`.`cloudflare_accounts`.`accountId`, `main`.`cloudflare_accounts`.`apiToken`, `main`.`cloudflare_accounts`.`isActive`, `main`.`cloudflare_accounts`.`isDefault`, `main`.`cloudflare_accounts`.`lastSync`, `main`.`cloudflare_accounts`.`createdAt`, `main`.`cloudflare_accounts`.`updatedAt`, COALESCE(`aggr_selection_0_Worker`.`_aggr_count_workers`, 0) AS `_aggr_count_workers`, COALESCE(`aggr_selection_1_D1Database`.`_aggr_count_databases`, 0) AS `_aggr_count_databases`, COALESCE(`aggr_selection_2_KVNamespace`.`_aggr_count_kvNamespaces`, 0) AS `_aggr_count_kvNamespaces`, COALESCE(`aggr_selection_3_R2Bucket`.`_aggr_count_r2Buckets`, 0) AS `_aggr_count_r2Buckets` FROM `main`.`cloudflare_accounts` LEFT JOIN (SELECT `main`.`workers`.`accountId`, COUNT(*) AS `_aggr_count_workers` FROM `main`.`workers` WHERE 1=1 GROUP BY `main`.`workers`.`accountId`) AS `aggr_selection_0_Worker` ON (`main`.`cloudflare_accounts`.`id` = `aggr_selection_0_Worker`.`accountId`) LEFT JOIN (SELECT `main`.`d1_databases`.`accountId`, COUNT(*) AS `_aggr_count_databases` FROM `main`.`d1_databases` WHERE 1=1 GROUP BY `main`.`d1_databases`.`accountId`) AS `aggr_selection_1_D1Database` ON (`main`.`cloudflare_accounts`.`id` = `aggr_selection_1_D1Database`.`accountId`) LEFT JOIN (SELECT `main`.`kv_namespaces`.`accountId`, COUNT(*) AS `_aggr_count_kvNamespaces` FROM `main`.`kv_namespaces` WHERE 1=1 GROUP BY `main`.`kv_namespaces`.`accountId`) AS `aggr_selection_2_KVNamespace` ON (`main`.`cloudflare_accounts`.`id` = `aggr_selection_2_KVNamespace`.`accountId`) LEFT JOIN (SELECT `main`.`r2_buckets`.`accountId`, COUNT(*) AS `_aggr_count_r2Buckets` FROM `main`.`r2_buckets` WHERE 1=1 GROUP BY `main`.`r2_buckets`.`accountId`) AS `aggr_selection_3_R2Bucket` ON (`main`.`cloudflare_accounts`.`id` = `aggr_selection_3_R2Bucket`.`accountId`) WHERE 1=1 ORDER BY `main`.`cloudflare_accounts`.`createdAt` DESC LIMIT ? OFFSET ?
- GET /api/accounts 200 in 8ms (compile: 1626µs, render: 6ms)
-prisma:query SELECT `main`.`cloudflare_accounts`.`id`, `main`.`cloudflare_accounts`.`name`, `main`.`cloudflare_accounts`.`email`, `main`.`cloudflare_accounts`.`accountId`, `main`.`cloudflare_accounts`.`apiToken`, `main`.`cloudflare_accounts`.`isActive`, `main`.`cloudflare_accounts`.`isDefault`, `main`.`cloudflare_accounts`.`lastSync`, `main`.`cloudflare_accounts`.`createdAt`, `main`.`cloudflare_accounts`.`updatedAt` FROM `main`.`cloudflare_accounts` WHERE (`main`.`cloudflare_accounts`.`id` = ? AND 1=1) LIMIT ? OFFSET ?
-prisma:query SELECT `main`.`workers`.`id`, `main`.`workers`.`accountId`, `main`.`workers`.`workerId`, `main`.`workers`.`name`, `main`.`workers`.`script`, `main`.`workers`.`createdAt`, `main`.`workers`.`updatedAt` FROM `main`.`workers` WHERE `main`.`workers`.`accountId` IN (?) LIMIT ? OFFSET ?
-prisma:query SELECT `main`.`d1_databases`.`id`, `main`.`d1_databases`.`accountId`, `main`.`d1_databases`.`databaseId`, `main`.`d1_databases`.`name`, `main`.`d1_databases`.`version`, `main`.`d1_databases`.`createdAt`, `main`.`d1_databases`.`updatedAt` FROM `main`.`d1_databases` WHERE `main`.`d1_databases`.`accountId` IN (?) LIMIT ? OFFSET ?
-prisma:query SELECT `main`.`kv_namespaces`.`id`, `main`.`kv_namespaces`.`accountId`, `main`.`kv_namespaces`.`namespaceId`, `main`.`kv_namespaces`.`title`, `main`.`kv_namespaces`.`createdAt`, `main`.`kv_namespaces`.`updatedAt` FROM `main`.`kv_namespaces` WHERE `main`.`kv_namespaces`.`accountId` IN (?) LIMIT ? OFFSET ?
-prisma:query SELECT `main`.`r2_buckets`.`id`, `main`.`r2_buckets`.`accountId`, `main`.`r2_buckets`.`bucketName`, `main`.`r2_buckets`.`creationDate`, `main`.`r2_buckets`.`createdAt`, `main`.`r2_buckets`.`updatedAt` FROM `main`.`r2_buckets` WHERE `main`.`r2_buckets`.`accountId` IN (?) LIMIT ? OFFSET ?
- GET /api/accounts/cmn3g679t0000m9p1s42jgd5g 200 in 36ms (compile: 26ms, render: 10ms)
- GET /api/accounts 200 in 11ms (compile: 4ms, render: 7ms)
-prisma:query SELECT `main`.`cloudflare_accounts`.`id`, `main`.`cloudflare_accounts`.`name`, `main`.`cloudflare_accounts`.`email`, `main`.`cloudflare_accounts`.`accountId`, `main`.`cloudflare_accounts`.`apiToken`, `main`.`cloudflare_accounts`.`isActive`, `main`.`cloudflare_accounts`.`isDefault`, `main`.`cloudflare_accounts`.`lastSync`, `main`.`cloudflare_accounts`.`createdAt`, `main`.`cloudflare_accounts`.`updatedAt`, COALESCE(`aggr_selection_0_Worker`.`_aggr_count_workers`, 0) AS `_aggr_count_workers`, COALESCE(`aggr_selection_1_D1Database`.`_aggr_count_databases`, 0) AS `_aggr_count_databases`, COALESCE(`aggr_selection_2_KVNamespace`.`_aggr_count_kvNamespaces`, 0) AS `_aggr_count_kvNamespaces`, COALESCE(`aggr_selection_3_R2Bucket`.`_aggr_count_r2Buckets`, 0) AS `_aggr_count_r2Buckets` FROM `main`.`cloudflare_accounts` LEFT JOIN (SELECT `main`.`workers`.`accountId`, COUNT(*) AS `_aggr_count_workers` FROM `main`.`workers` WHERE 1=1 GROUP BY `main`.`workers`.`accountId`) AS `aggr_selection_0_Worker` ON (`main`.`cloudflare_accounts`.`id` = `aggr_selection_0_Worker`.`accountId`) LEFT JOIN (SELECT `main`.`d1_databases`.`accountId`, COUNT(*) AS `_aggr_count_databases` FROM `main`.`d1_databases` WHERE 1=1 GROUP BY `main`.`d1_databases`.`accountId`) AS `aggr_selection_1_D1Database` ON (`main`.`cloudflare_accounts`.`id` = `aggr_selection_1_D1Database`.`accountId`) LEFT JOIN (SELECT `main`.`kv_namespaces`.`accountId`, COUNT(*) AS `_aggr_count_kvNamespaces` FROM `main`.`kv_namespaces` WHERE 1=1 GROUP BY `main`.`kv_namespaces`.`accountId`) AS `aggr_selection_2_KVNamespace` ON (`main`.`cloudflare_accounts`.`id` = `aggr_selection_2_KVNamespace`.`accountId`) LEFT JOIN (SELECT `main`.`r2_buckets`.`accountId`, COUNT(*) AS `_aggr_count_r2Buckets` FROM `main`.`r2_buckets` WHERE 1=1 GROUP BY `main`.`r2_buckets`.`accountId`) AS `aggr_selection_3_R2Bucket` ON (`main`.`cloudflare_accounts`.`id` = `aggr_selection_3_R2Bucket`.`accountId`) WHERE 1=1 ORDER BY `main`.`cloudflare_accounts`.`createdAt` DESC LIMIT ? OFFSET ?
-prisma:query SELECT `main`.`cloudflare_accounts`.`id`, `main`.`cloudflare_accounts`.`name`, `main`.`cloudflare_accounts`.`email`, `main`.`cloudflare_accounts`.`accountId`, `main`.`cloudflare_accounts`.`apiToken`, `main`.`cloudflare_accounts`.`isActive`, `main`.`cloudflare_accounts`.`isDefault`, `main`.`cloudflare_accounts`.`lastSync`, `main`.`cloudflare_accounts`.`createdAt`, `main`.`cloudflare_accounts`.`updatedAt` FROM `main`.`cloudflare_accounts` WHERE (`main`.`cloudflare_accounts`.`id` = ? AND 1=1) LIMIT ? OFFSET ?
-prisma:query SELECT `main`.`workers`.`id`, `main`.`workers`.`accountId`, `main`.`workers`.`workerId`, `main`.`workers`.`name`, `main`.`workers`.`script`, `main`.`workers`.`createdAt`, `main`.`workers`.`updatedAt` FROM `main`.`workers` WHERE `main`.`workers`.`accountId` IN (?) LIMIT ? OFFSET ?
-prisma:query SELECT `main`.`d1_databases`.`id`, `main`.`d1_databases`.`accountId`, `main`.`d1_databases`.`databaseId`, `main`.`d1_databases`.`name`, `main`.`d1_databases`.`version`, `main`.`d1_databases`.`createdAt`, `main`.`d1_databases`.`updatedAt` FROM `main`.`d1_databases` WHERE `main`.`d1_databases`.`accountId` IN (?) LIMIT ? OFFSET ?
-prisma:query SELECT `main`.`kv_namespaces`.`id`, `main`.`kv_namespaces`.`accountId`, `main`.`kv_namespaces`.`namespaceId`, `main`.`kv_namespaces`.`title`, `main`.`kv_namespaces`.`createdAt`, `main`.`kv_namespaces`.`updatedAt` FROM `main`.`kv_namespaces` WHERE `main`.`kv_namespaces`.`accountId` IN (?) LIMIT ? OFFSET ?
-prisma:query SELECT `main`.`r2_buckets`.`id`, `main`.`r2_buckets`.`accountId`, `main`.`r2_buckets`.`bucketName`, `main`.`r2_buckets`.`creationDate`, `main`.`r2_buckets`.`createdAt`, `main`.`r2_buckets`.`updatedAt` FROM `main`.`r2_buckets` WHERE `main`.`r2_buckets`.`accountId` IN (?) LIMIT ? OFFSET ?
- GET /api/accounts/cmn3g679t0000m9p1s42jgd5g 200 in 43ms (compile: 28ms, render: 15ms)
-prisma:query SELECT `main`.`cloudflare_accounts`.`id`, `main`.`cloudflare_accounts`.`name`, `main`.`cloudflare_accounts`.`email`, `main`.`cloudflare_accounts`.`accountId`, `main`.`cloudflare_accounts`.`apiToken`, `main`.`cloudflare_accounts`.`isActive`, `main`.`cloudflare_accounts`.`isDefault`, `main`.`cloudflare_accounts`.`lastSync`, `main`.`cloudflare_accounts`.`createdAt`, `main`.`cloudflare_accounts`.`updatedAt` FROM `main`.`cloudflare_accounts` WHERE (`main`.`cloudflare_accounts`.`id` = ? AND 1=1) LIMIT ? OFFSET ?
-Error testing account: Error [PrismaClientValidationError]: 
-Invalid `__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$db$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["db"].worker.upsert()` invocation in
-/home/z/my-project/.next/dev/server/chunks/[root-of-the-server]__7f4fbd74._.js:235:147
-
-  232 ]);
-  233 // Sync workers
-  234 for (const worker of workers){
-→ 235     await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$db$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["db"].worker.upsert({
-            where: {
-              accountId_workerId: {
-                accountId: "cmn3g679t0000m9p1s42jgd5g",
-                workerId: "api"
-              }
-            },
-            update: {
-              name: undefined,
-              script: undefined
-            },
-            create: {
-              accountId: "cmn3g679t0000m9p1s42jgd5g",
-              workerId: "api",
-              script: undefined,
-          +   name: String
-            }
-          })
-
-Argument `name` is missing.
-    at <unknown> (src/app/api/accounts/[id]/test/route.ts:48:23)
-    at async POST (src/app/api/accounts/[id]/test/route.ts:48:7)
-  46 |     // Sync workers
-  47 |     for (const worker of workers) {
-> 48 |       await db.worker.upsert({
-     |                       ^
-  49 |         where: {
-  50 |           accountId_workerId: {
-  51 |             accountId: account.id, {
-  clientVersion: '6.19.2'
-}
- POST /api/accounts/cmn3g679t0000m9p1s42jgd5g/test 500 in 1158ms (compile: 27ms, render: 1131ms)
- GET / 200 in 31ms (compile: 4ms, render: 27ms)
-prisma:query SELECT 1
-prisma:query SELECT `main`.`cloudflare_accounts`.`id`, `main`.`cloudflare_accounts`.`name`, `main`.`cloudflare_accounts`.`email`, `main`.`cloudflare_accounts`.`accountId`, `main`.`cloudflare_accounts`.`apiToken`, `main`.`cloudflare_accounts`.`isActive`, `main`.`cloudflare_accounts`.`isDefault`, `main`.`cloudflare_accounts`.`lastSync`, `main`.`cloudflare_accounts`.`createdAt`, `main`.`cloudflare_accounts`.`updatedAt`, COALESCE(`aggr_selection_0_Worker`.`_aggr_count_workers`, 0) AS `_aggr_count_workers`, COALESCE(`aggr_selection_1_D1Database`.`_aggr_count_databases`, 0) AS `_aggr_count_databases`, COALESCE(`aggr_selection_2_KVNamespace`.`_aggr_count_kvNamespaces`, 0) AS `_aggr_count_kvNamespaces`, COALESCE(`aggr_selection_3_R2Bucket`.`_aggr_count_r2Buckets`, 0) AS `_aggr_count_r2Buckets` FROM `main`.`cloudflare_accounts` LEFT JOIN (SELECT `main`.`workers`.`accountId`, COUNT(*) AS `_aggr_count_workers` FROM `main`.`workers` WHERE 1=1 GROUP BY `main`.`workers`.`accountId`) AS `aggr_selection_0_Worker` ON (`main`.`cloudflare_accounts`.`id` = `aggr_selection_0_Worker`.`accountId`) LEFT JOIN (SELECT `main`.`d1_databases`.`accountId`, COUNT(*) AS `_aggr_count_databases` FROM `main`.`d1_databases` WHERE 1=1 GROUP BY `main`.`d1_databases`.`accountId`) AS `aggr_selection_1_D1Database` ON (`main`.`cloudflare_accounts`.`id` = `aggr_selection_1_D1Database`.`accountId`) LEFT JOIN (SELECT `main`.`kv_namespaces`.`accountId`, COUNT(*) AS `_aggr_count_kvNamespaces` FROM `main`.`kv_namespaces` WHERE 1=1 GROUP BY `main`.`kv_namespaces`.`accountId`) AS `aggr_selection_2_KVNamespace` ON (`main`.`cloudflare_accounts`.`id` = `aggr_selection_2_KVNamespace`.`accountId`) LEFT JOIN (SELECT `main`.`r2_buckets`.`accountId`, COUNT(*) AS `_aggr_count_r2Buckets` FROM `main`.`r2_buckets` WHERE 1=1 GROUP BY `main`.`r2_buckets`.`accountId`) AS `aggr_selection_3_R2Bucket` ON (`main`.`cloudflare_accounts`.`id` = `aggr_selection_3_R2Bucket`.`accountId`) WHERE 1=1 ORDER BY `main`.`cloudflare_accounts`.`createdAt` DESC LIMIT ? OFFSET ?
- GET /api/accounts 200 in 9ms (compile: 3ms, render: 6ms)
-prisma:query SELECT `main`.`cloudflare_accounts`.`id`, `main`.`cloudflare_accounts`.`name`, `main`.`cloudflare_accounts`.`email`, `main`.`cloudflare_accounts`.`accountId`, `main`.`cloudflare_accounts`.`apiToken`, `main`.`cloudflare_accounts`.`isActive`, `main`.`cloudflare_accounts`.`isDefault`, `main`.`cloudflare_accounts`.`lastSync`, `main`.`cloudflare_accounts`.`createdAt`, `main`.`cloudflare_accounts`.`updatedAt`, COALESCE(`aggr_selection_0_Worker`.`_aggr_count_workers`, 0) AS `_aggr_count_workers`, COALESCE(`aggr_selection_1_D1Database`.`_aggr_count_databases`, 0) AS `_aggr_count_databases`, COALESCE(`aggr_selection_2_KVNamespace`.`_aggr_count_kvNamespaces`, 0) AS `_aggr_count_kvNamespaces`, COALESCE(`aggr_selection_3_R2Bucket`.`_aggr_count_r2Buckets`, 0) AS `_aggr_count_r2Buckets` FROM `main`.`cloudflare_accounts` LEFT JOIN (SELECT `main`.`workers`.`accountId`, COUNT(*) AS `_aggr_count_workers` FROM `main`.`workers` WHERE 1=1 GROUP BY `main`.`workers`.`accountId`) AS `aggr_selection_0_Worker` ON (`main`.`cloudflare_accounts`.`id` = `aggr_selection_0_Worker`.`accountId`) LEFT JOIN (SELECT `main`.`d1_databases`.`accountId`, COUNT(*) AS `_aggr_count_databases` FROM `main`.`d1_databases` WHERE 1=1 GROUP BY `main`.`d1_databases`.`accountId`) AS `aggr_selection_1_D1Database` ON (`main`.`cloudflare_accounts`.`id` = `aggr_selection_1_D1Database`.`accountId`) LEFT JOIN (SELECT `main`.`kv_namespaces`.`accountId`, COUNT(*) AS `_aggr_count_kvNamespaces` FROM `main`.`kv_namespaces` WHERE 1=1 GROUP BY `main`.`kv_namespaces`.`accountId`) AS `aggr_selection_2_KVNamespace` ON (`main`.`cloudflare_accounts`.`id` = `aggr_selection_2_KVNamespace`.`accountId`) LEFT JOIN (SELECT `main`.`r2_buckets`.`accountId`, COUNT(*) AS `_aggr_count_r2Buckets` FROM `main`.`r2_buckets` WHERE 1=1 GROUP BY `main`.`r2_buckets`.`accountId`) AS `aggr_selection_3_R2Bucket` ON (`main`.`cloudflare_accounts`.`id` = `aggr_selection_3_R2Bucket`.`accountId`) WHERE 1=1 ORDER BY `main`.`cloudflare_accounts`.`createdAt` DESC LIMIT ? OFFSET ?
- GET /api/accounts 200 in 7ms (compile: 1598µs, render: 5ms)
-prisma:query SELECT `main`.`cloudflare_accounts`.`id`, `main`.`cloudflare_accounts`.`name`, `main`.`cloudflare_accounts`.`email`, `main`.`cloudflare_accounts`.`accountId`, `main`.`cloudflare_accounts`.`apiToken`, `main`.`cloudflare_accounts`.`isActive`, `main`.`cloudflare_accounts`.`isDefault`, `main`.`cloudflare_accounts`.`lastSync`, `main`.`cloudflare_accounts`.`createdAt`, `main`.`cloudflare_accounts`.`updatedAt` FROM `main`.`cloudflare_accounts` WHERE (`main`.`cloudflare_accounts`.`id` = ? AND 1=1) LIMIT ? OFFSET ?
-prisma:query SELECT `main`.`workers`.`id`, `main`.`workers`.`accountId`, `main`.`workers`.`workerId`, `main`.`workers`.`name`, `main`.`workers`.`script`, `main`.`workers`.`createdAt`, `main`.`workers`.`updatedAt` FROM `main`.`workers` WHERE `main`.`workers`.`accountId` IN (?) LIMIT ? OFFSET ?
-prisma:query SELECT `main`.`d1_databases`.`id`, `main`.`d1_databases`.`accountId`, `main`.`d1_databases`.`databaseId`, `main`.`d1_databases`.`name`, `main`.`d1_databases`.`version`, `main`.`d1_databases`.`createdAt`, `main`.`d1_databases`.`updatedAt` FROM `main`.`d1_databases` WHERE `main`.`d1_databases`.`accountId` IN (?) LIMIT ? OFFSET ?
-prisma:query SELECT `main`.`kv_namespaces`.`id`, `main`.`kv_namespaces`.`accountId`, `main`.`kv_namespaces`.`namespaceId`, `main`.`kv_namespaces`.`title`, `main`.`kv_namespaces`.`createdAt`, `main`.`kv_namespaces`.`updatedAt` FROM `main`.`kv_namespaces` WHERE `main`.`kv_namespaces`.`accountId` IN (?) LIMIT ? OFFSET ?
-prisma:query SELECT `main`.`r2_buckets`.`id`, `main`.`r2_buckets`.`accountId`, `main`.`r2_buckets`.`bucketName`, `main`.`r2_buckets`.`creationDate`, `main`.`r2_buckets`.`createdAt`, `main`.`r2_buckets`.`updatedAt` FROM `main`.`r2_buckets` WHERE `main`.`r2_buckets`.`accountId` IN (?) LIMIT ? OFFSET ?
- GET /api/accounts/cmn3g679t0000m9p1s42jgd5g 200 in 38ms (compile: 30ms, render: 8ms)
-✓ Compiled in 232ms
- GET / 200 in 41ms (compile: 4ms, render: 37ms)
-prisma:query SELECT 1
-prisma:query SELECT `main`.`cloudflare_accounts`.`id`, `main`.`cloudflare_accounts`.`name`, `main`.`cloudflare_accounts`.`email`, `main`.`cloudflare_accounts`.`accountId`, `main`.`cloudflare_accounts`.`apiToken`, `main`.`cloudflare_accounts`.`isActive`, `main`.`cloudflare_accounts`.`isDefault`, `main`.`cloudflare_accounts`.`lastSync`, `main`.`cloudflare_accounts`.`createdAt`, `main`.`cloudflare_accounts`.`updatedAt`, COALESCE(`aggr_selection_0_Worker`.`_aggr_count_workers`, 0) AS `_aggr_count_workers`, COALESCE(`aggr_selection_1_D1Database`.`_aggr_count_databases`, 0) AS `_aggr_count_databases`, COALESCE(`aggr_selection_2_KVNamespace`.`_aggr_count_kvNamespaces`, 0) AS `_aggr_count_kvNamespaces`, COALESCE(`aggr_selection_3_R2Bucket`.`_aggr_count_r2Buckets`, 0) AS `_aggr_count_r2Buckets` FROM `main`.`cloudflare_accounts` LEFT JOIN (SELECT `main`.`workers`.`accountId`, COUNT(*) AS `_aggr_count_workers` FROM `main`.`workers` WHERE 1=1 GROUP BY `main`.`workers`.`accountId`) AS `aggr_selection_0_Worker` ON (`main`.`cloudflare_accounts`.`id` = `aggr_selection_0_Worker`.`accountId`) LEFT JOIN (SELECT `main`.`d1_databases`.`accountId`, COUNT(*) AS `_aggr_count_databases` FROM `main`.`d1_databases` WHERE 1=1 GROUP BY `main`.`d1_databases`.`accountId`) AS `aggr_selection_1_D1Database` ON (`main`.`cloudflare_accounts`.`id` = `aggr_selection_1_D1Database`.`accountId`) LEFT JOIN (SELECT `main`.`kv_namespaces`.`accountId`, COUNT(*) AS `_aggr_count_kvNamespaces` FROM `main`.`kv_namespaces` WHERE 1=1 GROUP BY `main`.`kv_namespaces`.`accountId`) AS `aggr_selection_2_KVNamespace` ON (`main`.`cloudflare_accounts`.`id` = `aggr_selection_2_KVNamespace`.`accountId`) LEFT JOIN (SELECT `main`.`r2_buckets`.`accountId`, COUNT(*) AS `_aggr_count_r2Buckets` FROM `main`.`r2_buckets` WHERE 1=1 GROUP BY `main`.`r2_buckets`.`accountId`) AS `aggr_selection_3_R2Bucket` ON (`main`.`cloudflare_accounts`.`id` = `aggr_selection_3_R2Bucket`.`accountId`) WHERE 1=1 ORDER BY `main`.`cloudflare_accounts`.`createdAt` DESC LIMIT ? OFFSET ?
- GET /api/accounts 200 in 7ms (compile: 1872µs, render: 5ms)
- GET /api/accounts 200 in 7ms (compile: 1846µs, render: 6ms)
-prisma:query SELECT `main`.`cloudflare_accounts`.`id`, `main`.`cloudflare_accounts`.`name`, `main`.`cloudflare_accounts`.`email`, `main`.`cloudflare_accounts`.`accountId`, `main`.`cloudflare_accounts`.`apiToken`, `main`.`cloudflare_accounts`.`isActive`, `main`.`cloudflare_accounts`.`isDefault`, `main`.`cloudflare_accounts`.`lastSync`, `main`.`cloudflare_accounts`.`createdAt`, `main`.`cloudflare_accounts`.`updatedAt`, COALESCE(`aggr_selection_0_Worker`.`_aggr_count_workers`, 0) AS `_aggr_count_workers`, COALESCE(`aggr_selection_1_D1Database`.`_aggr_count_databases`, 0) AS `_aggr_count_databases`, COALESCE(`aggr_selection_2_KVNamespace`.`_aggr_count_kvNamespaces`, 0) AS `_aggr_count_kvNamespaces`, COALESCE(`aggr_selection_3_R2Bucket`.`_aggr_count_r2Buckets`, 0) AS `_aggr_count_r2Buckets` FROM `main`.`cloudflare_accounts` LEFT JOIN (SELECT `main`.`workers`.`accountId`, COUNT(*) AS `_aggr_count_workers` FROM `main`.`workers` WHERE 1=1 GROUP BY `main`.`workers`.`accountId`) AS `aggr_selection_0_Worker` ON (`main`.`cloudflare_accounts`.`id` = `aggr_selection_0_Worker`.`accountId`) LEFT JOIN (SELECT `main`.`d1_databases`.`accountId`, COUNT(*) AS `_aggr_count_databases` FROM `main`.`d1_databases` WHERE 1=1 GROUP BY `main`.`d1_databases`.`accountId`) AS `aggr_selection_1_D1Database` ON (`main`.`cloudflare_accounts`.`id` = `aggr_selection_1_D1Database`.`accountId`) LEFT JOIN (SELECT `main`.`kv_namespaces`.`accountId`, COUNT(*) AS `_aggr_count_kvNamespaces` FROM `main`.`kv_namespaces` WHERE 1=1 GROUP BY `main`.`kv_namespaces`.`accountId`) AS `aggr_selection_2_KVNamespace` ON (`main`.`cloudflare_accounts`.`id` = `aggr_selection_2_KVNamespace`.`accountId`) LEFT JOIN (SELECT `main`.`r2_buckets`.`accountId`, COUNT(*) AS `_aggr_count_r2Buckets` FROM `main`.`r2_buckets` WHERE 1=1 GROUP BY `main`.`r2_buckets`.`accountId`) AS `aggr_selection_3_R2Bucket` ON (`main`.`cloudflare_accounts`.`id` = `aggr_selection_3_R2Bucket`.`accountId`) WHERE 1=1 ORDER BY `main`.`cloudflare_accounts`.`createdAt` DESC LIMIT ? OFFSET ?
-prisma:query SELECT `main`.`cloudflare_accounts`.`id`, `main`.`cloudflare_accounts`.`name`, `main`.`cloudflare_accounts`.`email`, `main`.`cloudflare_accounts`.`accountId`, `main`.`cloudflare_accounts`.`apiToken`, `main`.`cloudflare_accounts`.`isActive`, `main`.`cloudflare_accounts`.`isDefault`, `main`.`cloudflare_accounts`.`lastSync`, `main`.`cloudflare_accounts`.`createdAt`, `main`.`cloudflare_accounts`.`updatedAt` FROM `main`.`cloudflare_accounts` WHERE (`main`.`cloudflare_accounts`.`id` = ? AND 1=1) LIMIT ? OFFSET ?
-prisma:query SELECT `main`.`workers`.`id`, `main`.`workers`.`accountId`, `main`.`workers`.`workerId`, `main`.`workers`.`name`, `main`.`workers`.`script`, `main`.`workers`.`createdAt`, `main`.`workers`.`updatedAt` FROM `main`.`workers` WHERE `main`.`workers`.`accountId` IN (?) LIMIT ? OFFSET ?
-prisma:query SELECT `main`.`d1_databases`.`id`, `main`.`d1_databases`.`accountId`, `main`.`d1_databases`.`databaseId`, `main`.`d1_databases`.`name`, `main`.`d1_databases`.`version`, `main`.`d1_databases`.`createdAt`, `main`.`d1_databases`.`updatedAt` FROM `main`.`d1_databases` WHERE `main`.`d1_databases`.`accountId` IN (?) LIMIT ? OFFSET ?
-prisma:query SELECT `main`.`kv_namespaces`.`id`, `main`.`kv_namespaces`.`accountId`, `main`.`kv_namespaces`.`namespaceId`, `main`.`kv_namespaces`.`title`, `main`.`kv_namespaces`.`createdAt`, `main`.`kv_namespaces`.`updatedAt` FROM `main`.`kv_namespaces` WHERE `main`.`kv_namespaces`.`accountId` IN (?) LIMIT ? OFFSET ?
-prisma:query SELECT `main`.`r2_buckets`.`id`, `main`.`r2_buckets`.`accountId`, `main`.`r2_buckets`.`bucketName`, `main`.`r2_buckets`.`creationDate`, `main`.`r2_buckets`.`createdAt`, `main`.`r2_buckets`.`updatedAt` FROM `main`.`r2_buckets` WHERE `main`.`r2_buckets`.`accountId` IN (?) LIMIT ? OFFSET ?
- GET /api/accounts/cmn3g679t0000m9p1s42jgd5g 200 in 45ms (compile: 33ms, render: 12ms)
-⨯ ./src/app/layout.tsx:4:1
-Module not found: Can't resolve '@/components/ui/toaster'
-[0m [90m 2 |[39m [36mimport[39m { [33mGeist[39m[33m,[39m [33mGeist_Mono[39m } [36mfrom[39m [32m"next/font/google"[39m[33m;[39m
- [90m 3 |[39m [36mimport[39m [32m"./globals.css"[39m[33m;[39m
-[31m[1m>[22m[39m[90m 4 |[39m [36mimport[39m { [33mToaster[39m } [36mfrom[39m [32m"@/components/ui/toaster"[39m[33m;[39m
- [90m   |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
- [90m 5 |[39m
- [90m 6 |[39m [36mconst[39m geistSans [33m=[39m [33mGeist[39m({
- [90m 7 |[39m   variable[33m:[39m [32m"--font-geist-sans"[39m[33m,[39m[0m
-
-
-
-https://nextjs.org/docs/messages/module-not-found
-
-
- GET / 500 in 1431ms (compile: 1292ms, render: 139ms)
-⨯ ./src/app/layout.tsx:4:1
-Module not found: Can't resolve '@/components/ui/toaster'
-[0m [90m 2 |[39m [36mimport[39m { [33mGeist[39m[33m,[39m [33mGeist_Mono[39m } [36mfrom[39m [32m"next/font/google"[39m[33m;[39m
- [90m 3 |[39m [36mimport[39m [32m"./globals.css"[39m[33m;[39m
-[31m[1m>[22m[39m[90m 4 |[39m [36mimport[39m { [33mToaster[39m } [36mfrom[39m [32m"@/components/ui/toaster"[39m[33m;[39m
- [90m   |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
- [90m 5 |[39m
- [90m 6 |[39m [36mconst[39m geistSans [33m=[39m [33mGeist[39m({
- [90m 7 |[39m   variable[33m:[39m [32m"--font-geist-sans"[39m[33m,[39m[0m
-
-
-
-https://nextjs.org/docs/messages/module-not-found
-
-
- GET / 500 in 11ms (compile: 4ms, render: 7ms)
-⨯ ./src/app/layout.tsx:4:1
-Module not found: Can't resolve '@/components/ui/toaster'
-[0m [90m 2 |[39m [36mimport[39m { [33mGeist[39m[33m,[39m [33mGeist_Mono[39m } [36mfrom[39m [32m"next/font/google"[39m[33m;[39m
- [90m 3 |[39m [36mimport[39m [32m"./globals.css"[39m[33m;[39m
-[31m[1m>[22m[39m[90m 4 |[39m [36mimport[39m { [33mToaster[39m } [36mfrom[39m [32m"@/components/ui/toaster"[39m[33m;[39m
- [90m   |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
- [90m 5 |[39m
- [90m 6 |[39m [36mconst[39m geistSans [33m=[39m [33mGeist[39m({
- [90m 7 |[39m   variable[33m:[39m [32m"--font-geist-sans"[39m[33m,[39m[0m
-
-
-
-https://nextjs.org/docs/messages/module-not-found
-
-
- GET / 500 in 15ms (compile: 6ms, render: 10ms)
-⨯ ./src/app/layout.tsx:4:1
-Module not found: Can't resolve '@/components/ui/toaster'
-[0m [90m 2 |[39m [36mimport[39m { [33mGeist[39m[33m,[39m [33mGeist_Mono[39m } [36mfrom[39m [32m"next/font/google"[39m[33m;[39m
- [90m 3 |[39m [36mimport[39m [32m"./globals.css"[39m[33m;[39m
-[31m[1m>[22m[39m[90m 4 |[39m [36mimport[39m { [33mToaster[39m } [36mfrom[39m [32m"@/components/ui/toaster"[39m[33m;[39m
- [90m   |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
- [90m 5 |[39m
- [90m 6 |[39m [36mconst[39m geistSans [33m=[39m [33mGeist[39m({
- [90m 7 |[39m   variable[33m:[39m [32m"--font-geist-sans"[39m[33m,[39m[0m
-
-
-
-https://nextjs.org/docs/messages/module-not-found
-
-
- GET / 500 in 14ms (compile: 6ms, render: 9ms)
-==========================================
-[2026-03-23 17:29:32] Starting: bun install
-==========================================
-[BUN] Installing dependencies...
-error: Bun could not find a package.json file to install from
-note: Run "bun init" to initialize a project
-✓ Compiled in 205ms
- GET / 404 in 192ms (compile: 101ms, render: 91ms)
- GET / 404 in 61ms (compile: 39ms, render: 23ms)
- GET / 404 in 24ms (compile: 3ms, render: 20ms)
- GET / 404 in 87ms (compile: 2ms, render: 85ms)
- GET / 404 in 23ms (compile: 4ms, render: 19ms)
- GET / 404 in 52ms (compile: 39ms, render: 13ms)
- GET / 404 in 68ms (compile: 2ms, render: 66ms)
- GET / 404 in 48ms (compile: 2ms, render: 46ms)
- GET / 404 in 48ms (compile: 30ms, render: 18ms)
- GET / 404 in 78ms (compile: 4ms, render: 74ms)
- GET / 404 in 57ms (compile: 3ms, render: 53ms)
- GET / 404 in 79ms (compile: 38ms, render: 41ms)
- GET / 404 in 14ms (compile: 3ms, render: 11ms)
- GET / 404 in 43ms (compile: 1927µs, render: 41ms)
- GET / 404 in 18ms (compile: 3ms, render: 15ms)
- GET / 404 in 58ms (compile: 36ms, render: 22ms)
- GET / 404 in 22ms (compile: 3ms, render: 19ms)
- GET / 404 in 89ms (compile: 2ms, render: 87ms)
- GET / 404 in 39ms (compile: 3ms, render: 36ms)
- GET / 404 in 55ms (compile: 34ms, render: 21ms)
- GET / 404 in 25ms (compile: 3ms, render: 21ms)
- GET / 404 in 19ms (compile: 8ms, render: 11ms)
- GET / 404 in 67ms (compile: 2ms, render: 64ms)
- GET / 404 in 14ms (compile: 2ms, render: 12ms)
- GET / 404 in 13ms (compile: 1999µs, render: 11ms)
- GET / 404 in 29ms (compile: 1912µs, render: 27ms)
- GET / 404 in 22ms (compile: 4ms, render: 18ms)
- GET / 404 in 47ms (compile: 30ms, render: 17ms)
- GET / 404 in 18ms (compile: 2ms, render: 16ms)
- GET / 404 in 42ms (compile: 1881µs, render: 40ms)
- GET / 404 in 16ms (compile: 1852µs, render: 14ms)
- GET / 404 in 60ms (compile: 38ms, render: 23ms)
- GET / 404 in 23ms (compile: 3ms, render: 20ms)
- GET / 404 in 51ms (compile: 1946µs, render: 49ms)
- GET / 404 in 20ms (compile: 3ms, render: 18ms)
- GET / 404 in 50ms (compile: 29ms, render: 22ms)
- GET / 404 in 61ms (compile: 3ms, render: 58ms)
- GET / 404 in 33ms (compile: 3ms, render: 30ms)
- GET / 404 in 41ms (compile: 27ms, render: 13ms)
- GET / 404 in 18ms (compile: 3ms, render: 15ms)
- GET / 404 in 64ms (compile: 3ms, render: 61ms)
- GET / 404 in 13ms (compile: 1967µs, render: 11ms)
- GET / 404 in 42ms (compile: 30ms, render: 12ms)
- GET / 404 in 15ms (compile: 3ms, render: 12ms)
- GET / 404 in 82ms (compile: 2ms, render: 80ms)
-✓ Compiled in 181ms
- GET / 404 in 61ms (compile: 36ms, render: 24ms)
- GET / 404 in 75ms (compile: 3ms, render: 72ms)
- GET / 404 in 20ms (compile: 3ms, render: 17ms)
- GET / 404 in 54ms (compile: 30ms, render: 24ms)
- GET / 404 in 14ms (compile: 1962µs, render: 12ms)
- GET / 404 in 66ms (compile: 1774µs, render: 64ms)
- GET / 404 in 17ms (compile: 1904µs, render: 15ms)
-✓ Compiled in 163ms
-⨯ ./src/app/page.tsx:29:1
-Module not found: Can't resolve '@/components/ui/alert'
-[0m [90m 27 |[39m   [33mDropdownMenuTrigger[39m[33m,[39m
- [90m 28 |[39m } [36mfrom[39m [32m'@/components/ui/dropdown-menu'[39m[33m;[39m
-[31m[1m>[22m[39m[90m 29 |[39m [36mimport[39m { [33mAlert[39m[33m,[39m [33mAlertDescription[39m } [36mfrom[39m [32m'@/components/ui/alert'[39m[33m;[39m
- [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
- [90m 30 |[39m [36mimport[39m {
- [90m 31 |[39m   [33mCloud[39m[33m,[39m
- [90m 32 |[39m   [33mServer[39m[33m,[39m[0m
-
-
-
-Import traces:
-  Client Component Browser:
-    ./src/app/page.tsx [Client Component Browser]
-    ./src/app/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./src/app/page.tsx [Client Component SSR]
-    ./src/app/page.tsx [Server Component]
-
-https://nextjs.org/docs/messages/module-not-found
-
-
-
-./src/app/page.tsx:9:1
-Module not found: Can't resolve '@/components/ui/badge'
-[0m [90m  7 |[39m [36mimport[39m { [33mLabel[39m } [36mfrom[39m [32m'@/components/ui/label'[39m[33m;[39m
- [90m  8 |[39m [36mimport[39m { [33mCard[39m[33m,[39m [33mCardContent[39m[33m,[39m [33mCardDescription[39m[33m,[39m [33mCardHeader[39m[33m,[39m [33mCardTitle[39m } [36mfrom[39m [32m'@/components/ui/card'[39m[33m;[39m
-[31m[1m>[22m[39m[90m  9 |[39m [36mimport[39m { [33mBadge[39m } [36mfrom[39m [32m'@/components/ui/badge'[39m[33m;[39m
- [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
- [90m 10 |[39m [36mimport[39m { [33mTabs[39m[33m,[39m [33mTabsContent[39m[33m,[39m [33mTabsList[39m[33m,[39m [33mTabsTrigger[39m } [36mfrom[39m [32m'@/components/ui/tabs'[39m[33m;[39m
- [90m 11 |[39m [36mimport[39m { [33mScrollArea[39m } [36mfrom[39m [32m'@/components/ui/scroll-area'[39m[33m;[39m
- [90m 12 |[39m [36mimport[39m { [33mSeparator[39m } [36mfrom[39m [32m'@/components/ui/separator'[39m[33m;[39m[0m
-
-
-
-Import traces:
-  Client Component Browser:
-    ./src/app/page.tsx [Client Component Browser]
-    ./src/app/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./src/app/page.tsx [Client Component SSR]
-    ./src/app/page.tsx [Server Component]
-
-https://nextjs.org/docs/messages/module-not-found
-
-
-
-./src/app/page.tsx:5:1
-Module not found: Can't resolve '@/components/ui/button'
-[0m [90m 3 |[39m [36mimport[39m { useState[33m,[39m useEffect[33m,[39m useCallback } [36mfrom[39m [32m'react'[39m[33m;[39m
- [90m 4 |[39m [36mimport[39m { useRouter } [36mfrom[39m [32m'next/navigation'[39m[33m;[39m
-[31m[1m>[22m[39m[90m 5 |[39m [36mimport[39m { [33mButton[39m } [36mfrom[39m [32m'@/components/ui/button'[39m[33m;[39m
- [90m   |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
- [90m 6 |[39m [36mimport[39m { [33mInput[39m } [36mfrom[39m [32m'@/components/ui/input'[39m[33m;[39m
- [90m 7 |[39m [36mimport[39m { [33mLabel[39m } [36mfrom[39m [32m'@/components/ui/label'[39m[33m;[39m
- [90m 8 |[39m [36mimport[39m { [33mCard[39m[33m,[39m [33mCardContent[39m[33m,[39m [33mCardDescription[39m[33m,[39m [33mCardHeader[39m[33m,[39m [33mCardTitle[39m } [36mfrom[39m [32m'@/components/ui/card'[39m[33m;[39m[0m
-
-
-
-Import traces:
-  Client Component Browser:
-    ./src/app/page.tsx [Client Component Browser]
-    ./src/app/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./src/app/page.tsx [Client Component SSR]
-    ./src/app/page.tsx [Server Component]
-
-https://nextjs.org/docs/messages/module-not-found
-
-
-
-./src/app/page.tsx:8:1
-Module not found: Can't resolve '@/components/ui/card'
-[0m [90m  6 |[39m [36mimport[39m { [33mInput[39m } [36mfrom[39m [32m'@/components/ui/input'[39m[33m;[39m
- [90m  7 |[39m [36mimport[39m { [33mLabel[39m } [36mfrom[39m [32m'@/components/ui/label'[39m[33m;[39m
-[31m[1m>[22m[39m[90m  8 |[39m [36mimport[39m { [33mCard[39m[33m,[39m [33mCardContent[39m[33m,[39m [33mCardDescription[39m[33m,[39m [33mCardHeader[39m[33m,[39m [33mCardTitle[39m } [36mfrom[39m [32m'@/components/ui/card'[39m[33m;[39m
- [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
- [90m  9 |[39m [36mimport[39m { [33mBadge[39m } [36mfrom[39m [32m'@/components/ui/badge'[39m[33m;[39m
- [90m 10 |[39m [36mimport[39m { [33mTabs[39m[33m,[39m [33mTabsContent[39m[33m,[39m [33mTabsList[39m[33m,[39m [33mTabsTrigger[39m } [36mfrom[39m [32m'@/components/ui/tabs'[39m[33m;[39m
- [90m 11 |[39m [36mimport[39m { [33mScrollArea[39m } [36mfrom[39m [32m'@/components/ui/scroll-area'[39m[33m;[39m[0m
-
-
-
-Import traces:
-  Client Component Browser:
-    ./src/app/page.tsx [Client Component Browser]
-    ./src/app/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./src/app/page.tsx [Client Component SSR]
-    ./src/app/page.tsx [Server Component]
-
-https://nextjs.org/docs/messages/module-not-found
-
-
-
-./src/app/page.tsx:13:1
-Module not found: Can't resolve '@/components/ui/dialog'
-[0m [90m 11 |[39m [36mimport[39m { [33mScrollArea[39m } [36mfrom[39m [32m'@/components/ui/scroll-area'[39m[33m;[39m
- [90m 12 |[39m [36mimport[39m { [33mSeparator[39m } [36mfrom[39m [32m'@/components/ui/separator'[39m[33m;[39m
-[31m[1m>[22m[39m[90m 13 |[39m [36mimport[39m {
- [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
-[31m[1m>[22m[39m[90m 14 |[39m   [33mDialog[39m[33m,[39m
- [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
-[31m[1m>[22m[39m[90m 15 |[39m   [33mDialogContent[39m[33m,[39m
- [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
-[31m[1m>[22m[39m[90m 16 |[39m   [33mDialogDescription[39m[33m,[39m
- [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
-[31m[1m>[22m[39m[90m 17 |[39m   [33mDialogFooter[39m[33m,[39m
- [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
-[31m[1m>[22m[39m[90m 18 |[39m   [33mDialogHeader[39m[33m,[39m
- [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
-[31m[1m>[22m[39m[90m 19 |[39m   [33mDialogTitle[39m[33m,[39m
- [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
-[31m[1m>[22m[39m[90m 20 |[39m   [33mDialogTrigger[39m[33m,[39m
- [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
-[31m[1m>[22m[39m[90m 21 |[39m } [36mfrom[39m [32m'@/components/ui/dialog'[39m[33m;[39m
- [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
- [90m 22 |[39m [36mimport[39m {
- [90m 23 |[39m   [33mDropdownMenu[39m[33m,[39m
- [90m 24 |[39m   [33mDropdownMenuContent[39m[33m,[39m[0m
-
-
-
-Import traces:
-  Client Component Browser:
-    ./src/app/page.tsx [Client Component Browser]
-    ./src/app/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./src/app/page.tsx [Client Component SSR]
-    ./src/app/page.tsx [Server Component]
-
-https://nextjs.org/docs/messages/module-not-found
-
-
-
-./src/app/page.tsx:22:1
-Module not found: Can't resolve '@/components/ui/dropdown-menu'
-[0m [90m 20 |[39m   [33mDialogTrigger[39m[33m,[39m
- [90m 21 |[39m } [36mfrom[39m [32m'@/components/ui/dialog'[39m[33m;[39m
-[31m[1m>[22m[39m[90m 22 |[39m [36mimport[39m {
- [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
-[31m[1m>[22m[39m[90m 23 |[39m   [33mDropdownMenu[39m[33m,[39m
- [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
-[31m[1m>[22m[39m[90m 24 |[39m   [33mDropdownMenuContent[39m[33m,[39m
- [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
-[31m[1m>[22m[39m[90m 25 |[39m   [33mDropdownMenuItem[39m[33m,[39m
- [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
-[31m[1m>[22m[39m[90m 26 |[39m   [33mDropdownMenuSeparator[39m[33m,[39m
- [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
-[31m[1m>[22m[39m[90m 27 |[39m   [33mDropdownMenuTrigger[39m[33m,[39m
- [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
-[31m[1m>[22m[39m[90m 28 |[39m } [36mfrom[39m [32m'@/components/ui/dropdown-menu'[39m[33m;[39m
- [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
- [90m 29 |[39m [36mimport[39m { [33mAlert[39m[33m,[39m [33mAlertDescription[39m } [36mfrom[39m [32m'@/components/ui/alert'[39m[33m;[39m
- [90m 30 |[39m [36mimport[39m {
- [90m 31 |[39m   [33mCloud[39m[33m,[39m[0m
-
-
-
-Import traces:
-  Client Component Browser:
-    ./src/app/page.tsx [Client Component Browser]
-    ./src/app/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./src/app/page.tsx [Client Component SSR]
-    ./src/app/page.tsx [Server Component]
-
-https://nextjs.org/docs/messages/module-not-found
-
-
-
-./src/app/page.tsx:6:1
-Module not found: Can't resolve '@/components/ui/input'
-[0m [90m 4 |[39m [36mimport[39m { useRouter } [36mfrom[39m [32m'next/navigation'[39m[33m;[39m
- [90m 5 |[39m [36mimport[39m { [33mButton[39m } [36mfrom[39m [32m'@/components/ui/button'[39m[33m;[39m
-[31m[1m>[22m[39m[90m 6 |[39m [36mimport[39m { [33mInput[39m } [36mfrom[39m [32m'@/components/ui/input'[39m[33m;[39m
- [90m   |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
- [90m 7 |[39m [36mimport[39m { [33mLabel[39m } [36mfrom[39m [32m'@/components/ui/label'[39m[33m;[39m
- [90m 8 |[39m [36mimport[39m { [33mCard[39m[33m,[39m [33mCardContent[39m[33m,[39m [33mCardDescription[39m[33m,[39m [33mCardHeader[39m[33m,[39m [33mCardTitle[39m } [36mfrom[39m [32m'@/components/ui/card'[39m[33m;[39m
- [90m 9 |[39m [36mimport[39m { [33mBadge[39m } [36mfrom[39m [32m'@/components/ui/badge'[39m[33m;[39m[0m
-
-
-
-Import traces:
-  Client Component Browser:
-    ./src/app/page.tsx [Client Component Browser]
-    ./src/app/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./src/app/page.tsx [Client Component SSR]
-    ./src/app/page.tsx [Server Component]
-
-https://nextjs.org/docs/messages/module-not-found
-
-
-
-./src/app/page.tsx:7:1
-Module not found: Can't resolve '@/components/ui/label'
-[0m [90m  5 |[39m [36mimport[39m { [33mButton[39m } [36mfrom[39m [32m'@/components/ui/button'[39m[33m;[39m
- [90m  6 |[39m [36mimport[39m { [33mInput[39m } [36mfrom[39m [32m'@/components/ui/input'[39m[33m;[39m
-[31m[1m>[22m[39m[90m  7 |[39m [36mimport[39m { [33mLabel[39m } [36mfrom[39m [32m'@/components/ui/label'[39m[33m;[39m
- [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
- [90m  8 |[39m [36mimport[39m { [33mCard[39m[33m,[39m [33mCardContent[39m[33m,[39m [33mCardDescription[39m[33m,[39m [33mCardHeader[39m[33m,[39m [33mCardTitle[39m } [36mfrom[39m [32m'@/components/ui/card'[39m[33m;[39m
- [90m  9 |[39m [36mimport[39m { [33mBadge[39m } [36mfrom[39m [32m'@/components/ui/badge'[39m[33m;[39m
- [90m 10 |[39m [36mimport[39m { [33mTabs[39m[33m,[39m [33mTabsContent[39m[33m,[39m [33mTabsList[39m[33m,[39m [33mTabsTrigger[39m } [36mfrom[39m [32m'@/components/ui/tabs'[39m[33m;[39m[0m
-
-
-
-Import traces:
-  Client Component Browser:
-    ./src/app/page.tsx [Client Component Browser]
-    ./src/app/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./src/app/page.tsx [Client Component SSR]
-    ./src/app/page.tsx [Server Component]
-
-https://nextjs.org/docs/messages/module-not-found
-
-
-
-./src/app/page.tsx:11:1
-Module not found: Can't resolve '@/components/ui/scroll-area'
-[0m [90m  9 |[39m [36mimport[39m { [33mBadge[39m } [36mfrom[39m [32m'@/components/ui/badge'[39m[33m;[39m
- [90m 10 |[39m [36mimport[39m { [33mTabs[39m[33m,[39m [33mTabsContent[39m[33m,[39m [33mTabsList[39m[33m,[39m [33mTabsTrigger[39m } [36mfrom[39m [32m'@/components/ui/tabs'[39m[33m;[39m
-[31m[1m>[22m[39m[90m 11 |[39m [36mimport[39m { [33mScrollArea[39m } [36mfrom[39m [32m'@/components/ui/scroll-area'[39m[33m;[39m
- [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
- [90m 12 |[39m [36mimport[39m { [33mSeparator[39m } [36mfrom[39m [32m'@/components/ui/separator'[39m[33m;[39m
- [90m 13 |[39m [36mimport[39m {
- [90m 14 |[39m   [33mDialog[39m[33m,[39m[0m
-
-
-
-Import traces:
-  Client Component Browser:
-    ./src/app/page.tsx [Client Component Browser]
-    ./src/app/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./src/app/page.tsx [Client Component SSR]
-    ./src/app/page.tsx [Server Component]
-
-https://nextjs.org/docs/messages/module-not-found
-
-
-
-./src/app/page.tsx:10:1
-Module not found: Can't resolve '@/components/ui/tabs'
-[0m [90m  8 |[39m [36mimport[39m { [33mCard[39m[33m,[39m [33mCardContent[39m[33m,[39m [33mCardDescription[39m[33m,[39m [33mCardHeader[39m[33m,[39m [33mCardTitle[39m } [36mfrom[39m [32m'@/components/ui/card'[39m[33m;[39m
- [90m  9 |[39m [36mimport[39m { [33mBadge[39m } [36mfrom[39m [32m'@/components/ui/badge'[39m[33m;[39m
-[31m[1m>[22m[39m[90m 10 |[39m [36mimport[39m { [33mTabs[39m[33m,[39m [33mTabsContent[39m[33m,[39m [33mTabsList[39m[33m,[39m [33mTabsTrigger[39m } [36mfrom[39m [32m'@/components/ui/tabs'[39m[33m;[39m
- [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
- [90m 11 |[39m [36mimport[39m { [33mScrollArea[39m } [36mfrom[39m [32m'@/components/ui/scroll-area'[39m[33m;[39m
- [90m 12 |[39m [36mimport[39m { [33mSeparator[39m } [36mfrom[39m [32m'@/components/ui/separator'[39m[33m;[39m
- [90m 13 |[39m [36mimport[39m {[0m
-
-
-
-Import traces:
-  Client Component Browser:
-    ./src/app/page.tsx [Client Component Browser]
-    ./src/app/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./src/app/page.tsx [Client Component SSR]
-    ./src/app/page.tsx [Server Component]
-
-https://nextjs.org/docs/messages/module-not-found
-
-
- GET / 500 in 809ms (compile: 795ms, render: 14ms)
-⨯ ./src/app/page.tsx:29:1
-Module not found: Can't resolve '@/components/ui/alert'
-[0m [90m 27 |[39m   [33mDropdownMenuTrigger[39m[33m,[39m
- [90m 28 |[39m } [36mfrom[39m [32m'@/components/ui/dropdown-menu'[39m[33m;[39m
-[31m[1m>[22m[39m[90m 29 |[39m [36mimport[39m { [33mAlert[39m[33m,[39m [33mAlertDescription[39m } [36mfrom[39m [32m'@/components/ui/alert'[39m[33m;[39m
- [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
- [90m 30 |[39m [36mimport[39m {
- [90m 31 |[39m   [33mCloud[39m[33m,[39m
- [90m 32 |[39m   [33mServer[39m[33m,[39m[0m
-
-
-
-Import traces:
-  Client Component Browser:
-    ./src/app/page.tsx [Client Component Browser]
-    ./src/app/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./src/app/page.tsx [Client Component SSR]
-    ./src/app/page.tsx [Server Component]
-
-https://nextjs.org/docs/messages/module-not-found
-
-
-
-./src/app/page.tsx:9:1
-Module not found: Can't resolve '@/components/ui/badge'
-[0m [90m  7 |[39m [36mimport[39m { [33mLabel[39m } [36mfrom[39m [32m'@/components/ui/label'[39m[33m;[39m
- [90m  8 |[39m [36mimport[39m { [33mCard[39m[33m,[39m [33mCardContent[39m[33m,[39m [33mCardDescription[39m[33m,[39m [33mCardHeader[39m[33m,[39m [33mCardTitle[39m } [36mfrom[39m [32m'@/components/ui/card'[39m[33m;[39m
-[31m[1m>[22m[39m[90m  9 |[39m [36mimport[39m { [33mBadge[39m } [36mfrom[39m [32m'@/components/ui/badge'[39m[33m;[39m
- [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
- [90m 10 |[39m [36mimport[39m { [33mTabs[39m[33m,[39m [33mTabsContent[39m[33m,[39m [33mTabsList[39m[33m,[39m [33mTabsTrigger[39m } [36mfrom[39m [32m'@/components/ui/tabs'[39m[33m;[39m
- [90m 11 |[39m [36mimport[39m { [33mScrollArea[39m } [36mfrom[39m [32m'@/components/ui/scroll-area'[39m[33m;[39m
- [90m 12 |[39m [36mimport[39m { [33mSeparator[39m } [36mfrom[39m [32m'@/components/ui/separator'[39m[33m;[39m[0m
-
-
-
-Import traces:
-  Client Component Browser:
-    ./src/app/page.tsx [Client Component Browser]
-    ./src/app/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./src/app/page.tsx [Client Component SSR]
-    ./src/app/page.tsx [Server Component]
-
-https://nextjs.org/docs/messages/module-not-found
-
-
-
-./src/app/page.tsx:5:1
-Module not found: Can't resolve '@/components/ui/button'
-[0m [90m 3 |[39m [36mimport[39m { useState[33m,[39m useEffect[33m,[39m useCallback } [36mfrom[39m [32m'react'[39m[33m;[39m
- [90m 4 |[39m [36mimport[39m { useRouter } [36mfrom[39m [32m'next/navigation'[39m[33m;[39m
-[31m[1m>[22m[39m[90m 5 |[39m [36mimport[39m { [33mButton[39m } [36mfrom[39m [32m'@/components/ui/button'[39m[33m;[39m
- [90m   |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
- [90m 6 |[39m [36mimport[39m { [33mInput[39m } [36mfrom[39m [32m'@/components/ui/input'[39m[33m;[39m
- [90m 7 |[39m [36mimport[39m { [33mLabel[39m } [36mfrom[39m [32m'@/components/ui/label'[39m[33m;[39m
- [90m 8 |[39m [36mimport[39m { [33mCard[39m[33m,[39m [33mCardContent[39m[33m,[39m [33mCardDescription[39m[33m,[39m [33mCardHeader[39m[33m,[39m [33mCardTitle[39m } [36mfrom[39m [32m'@/components/ui/card'[39m[33m;[39m[0m
-
-
-
-Import traces:
-  Client Component Browser:
-    ./src/app/page.tsx [Client Component Browser]
-    ./src/app/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./src/app/page.tsx [Client Component SSR]
-    ./src/app/page.tsx [Server Component]
-
-https://nextjs.org/docs/messages/module-not-found
-
-
-
-./src/app/page.tsx:8:1
-Module not found: Can't resolve '@/components/ui/card'
-[0m [90m  6 |[39m [36mimport[39m { [33mInput[39m } [36mfrom[39m [32m'@/components/ui/input'[39m[33m;[39m
- [90m  7 |[39m [36mimport[39m { [33mLabel[39m } [36mfrom[39m [32m'@/components/ui/label'[39m[33m;[39m
-[31m[1m>[22m[39m[90m  8 |[39m [36mimport[39m { [33mCard[39m[33m,[39m [33mCardContent[39m[33m,[39m [33mCardDescription[39m[33m,[39m [33mCardHeader[39m[33m,[39m [33mCardTitle[39m } [36mfrom[39m [32m'@/components/ui/card'[39m[33m;[39m
- [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
- [90m  9 |[39m [36mimport[39m { [33mBadge[39m } [36mfrom[39m [32m'@/components/ui/badge'[39m[33m;[39m
- [90m 10 |[39m [36mimport[39m { [33mTabs[39m[33m,[39m [33mTabsContent[39m[33m,[39m [33mTabsList[39m[33m,[39m [33mTabsTrigger[39m } [36mfrom[39m [32m'@/components/ui/tabs'[39m[33m;[39m
- [90m 11 |[39m [36mimport[39m { [33mScrollArea[39m } [36mfrom[39m [32m'@/components/ui/scroll-area'[39m[33m;[39m[0m
-
-
-
-Import traces:
-  Client Component Browser:
-    ./src/app/page.tsx [Client Component Browser]
-    ./src/app/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./src/app/page.tsx [Client Component SSR]
-    ./src/app/page.tsx [Server Component]
-
-https://nextjs.org/docs/messages/module-not-found
-
-
-
-./src/app/page.tsx:13:1
-Module not found: Can't resolve '@/components/ui/dialog'
-[0m [90m 11 |[39m [36mimport[39m { [33mScrollArea[39m } [36mfrom[39m [32m'@/components/ui/scroll-area'[39m[33m;[39m
- [90m 12 |[39m [36mimport[39m { [33mSeparator[39m } [36mfrom[39m [32m'@/components/ui/separator'[39m[33m;[39m
-[31m[1m>[22m[39m[90m 13 |[39m [36mimport[39m {
- [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
-[31m[1m>[22m[39m[90m 14 |[39m   [33mDialog[39m[33m,[39m
- [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
-[31m[1m>[22m[39m[90m 15 |[39m   [33mDialogContent[39m[33m,[39m
- [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
-[31m[1m>[22m[39m[90m 16 |[39m   [33mDialogDescription[39m[33m,[39m
- [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
-[31m[1m>[22m[39m[90m 17 |[39m   [33mDialogFooter[39m[33m,[39m
- [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
-[31m[1m>[22m[39m[90m 18 |[39m   [33mDialogHeader[39m[33m,[39m
- [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
-[31m[1m>[22m[39m[90m 19 |[39m   [33mDialogTitle[39m[33m,[39m
- [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
-[31m[1m>[22m[39m[90m 20 |[39m   [33mDialogTrigger[39m[33m,[39m
- [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
-[31m[1m>[22m[39m[90m 21 |[39m } [36mfrom[39m [32m'@/components/ui/dialog'[39m[33m;[39m
- [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
- [90m 22 |[39m [36mimport[39m {
- [90m 23 |[39m   [33mDropdownMenu[39m[33m,[39m
- [90m 24 |[39m   [33mDropdownMenuContent[39m[33m,[39m[0m
-
-
-
-Import traces:
-  Client Component Browser:
-    ./src/app/page.tsx [Client Component Browser]
-    ./src/app/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./src/app/page.tsx [Client Component SSR]
-    ./src/app/page.tsx [Server Component]
-
-https://nextjs.org/docs/messages/module-not-found
-
-
-
-./src/app/page.tsx:22:1
-Module not found: Can't resolve '@/components/ui/dropdown-menu'
-[0m [90m 20 |[39m   [33mDialogTrigger[39m[33m,[39m
- [90m 21 |[39m } [36mfrom[39m [32m'@/components/ui/dialog'[39m[33m;[39m
-[31m[1m>[22m[39m[90m 22 |[39m [36mimport[39m {
- [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
-[31m[1m>[22m[39m[90m 23 |[39m   [33mDropdownMenu[39m[33m,[39m
- [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
-[31m[1m>[22m[39m[90m 24 |[39m   [33mDropdownMenuContent[39m[33m,[39m
- [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
-[31m[1m>[22m[39m[90m 25 |[39m   [33mDropdownMenuItem[39m[33m,[39m
- [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
-[31m[1m>[22m[39m[90m 26 |[39m   [33mDropdownMenuSeparator[39m[33m,[39m
- [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
-[31m[1m>[22m[39m[90m 27 |[39m   [33mDropdownMenuTrigger[39m[33m,[39m
- [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
-[31m[1m>[22m[39m[90m 28 |[39m } [36mfrom[39m [32m'@/components/ui/dropdown-menu'[39m[33m;[39m
- [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
- [90m 29 |[39m [36mimport[39m { [33mAlert[39m[33m,[39m [33mAlertDescription[39m } [36mfrom[39m [32m'@/components/ui/alert'[39m[33m;[39m
- [90m 30 |[39m [36mimport[39m {
- [90m 31 |[39m   [33mCloud[39m[33m,[39m[0m
-
-
-
-Import traces:
-  Client Component Browser:
-    ./src/app/page.tsx [Client Component Browser]
-    ./src/app/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./src/app/page.tsx [Client Component SSR]
-    ./src/app/page.tsx [Server Component]
-
-https://nextjs.org/docs/messages/module-not-found
-
-
-
-./src/app/page.tsx:6:1
-Module not found: Can't resolve '@/components/ui/input'
-[0m [90m 4 |[39m [36mimport[39m { useRouter } [36mfrom[39m [32m'next/navigation'[39m[33m;[39m
- [90m 5 |[39m [36mimport[39m { [33mButton[39m } [36mfrom[39m [32m'@/components/ui/button'[39m[33m;[39m
-[31m[1m>[22m[39m[90m 6 |[39m [36mimport[39m { [33mInput[39m } [36mfrom[39m [32m'@/components/ui/input'[39m[33m;[39m
- [90m   |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
- [90m 7 |[39m [36mimport[39m { [33mLabel[39m } [36mfrom[39m [32m'@/components/ui/label'[39m[33m;[39m
- [90m 8 |[39m [36mimport[39m { [33mCard[39m[33m,[39m [33mCardContent[39m[33m,[39m [33mCardDescription[39m[33m,[39m [33mCardHeader[39m[33m,[39m [33mCardTitle[39m } [36mfrom[39m [32m'@/components/ui/card'[39m[33m;[39m
- [90m 9 |[39m [36mimport[39m { [33mBadge[39m } [36mfrom[39m [32m'@/components/ui/badge'[39m[33m;[39m[0m
-
-
-
-Import traces:
-  Client Component Browser:
-    ./src/app/page.tsx [Client Component Browser]
-    ./src/app/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./src/app/page.tsx [Client Component SSR]
-    ./src/app/page.tsx [Server Component]
-
-https://nextjs.org/docs/messages/module-not-found
-
-
-
-./src/app/page.tsx:7:1
-Module not found: Can't resolve '@/components/ui/label'
-[0m [90m  5 |[39m [36mimport[39m { [33mButton[39m } [36mfrom[39m [32m'@/components/ui/button'[39m[33m;[39m
- [90m  6 |[39m [36mimport[39m { [33mInput[39m } [36mfrom[39m [32m'@/components/ui/input'[39m[33m;[39m
-[31m[1m>[22m[39m[90m  7 |[39m [36mimport[39m { [33mLabel[39m } [36mfrom[39m [32m'@/components/ui/label'[39m[33m;[39m
- [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
- [90m  8 |[39m [36mimport[39m { [33mCard[39m[33m,[39m [33mCardContent[39m[33m,[39m [33mCardDescription[39m[33m,[39m [33mCardHeader[39m[33m,[39m [33mCardTitle[39m } [36mfrom[39m [32m'@/components/ui/card'[39m[33m;[39m
- [90m  9 |[39m [36mimport[39m { [33mBadge[39m } [36mfrom[39m [32m'@/components/ui/badge'[39m[33m;[39m
- [90m 10 |[39m [36mimport[39m { [33mTabs[39m[33m,[39m [33mTabsContent[39m[33m,[39m [33mTabsList[39m[33m,[39m [33mTabsTrigger[39m } [36mfrom[39m [32m'@/components/ui/tabs'[39m[33m;[39m[0m
-
-
-
-Import traces:
-  Client Component Browser:
-    ./src/app/page.tsx [Client Component Browser]
-    ./src/app/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./src/app/page.tsx [Client Component SSR]
-    ./src/app/page.tsx [Server Component]
-
-https://nextjs.org/docs/messages/module-not-found
-
-
-
-./src/app/page.tsx:11:1
-Module not found: Can't resolve '@/components/ui/scroll-area'
-[0m [90m  9 |[39m [36mimport[39m { [33mBadge[39m } [36mfrom[39m [32m'@/components/ui/badge'[39m[33m;[39m
- [90m 10 |[39m [36mimport[39m { [33mTabs[39m[33m,[39m [33mTabsContent[39m[33m,[39m [33mTabsList[39m[33m,[39m [33mTabsTrigger[39m } [36mfrom[39m [32m'@/components/ui/tabs'[39m[33m;[39m
-[31m[1m>[22m[39m[90m 11 |[39m [36mimport[39m { [33mScrollArea[39m } [36mfrom[39m [32m'@/components/ui/scroll-area'[39m[33m;[39m
- [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
- [90m 12 |[39m [36mimport[39m { [33mSeparator[39m } [36mfrom[39m [32m'@/components/ui/separator'[39m[33m;[39m
- [90m 13 |[39m [36mimport[39m {
- [90m 14 |[39m   [33mDialog[39m[33m,[39m[0m
-
-
-
-Import traces:
-  Client Component Browser:
-    ./src/app/page.tsx [Client Component Browser]
-    ./src/app/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./src/app/page.tsx [Client Component SSR]
-    ./src/app/page.tsx [Server Component]
-
-https://nextjs.org/docs/messages/module-not-found
-
-
-
-./src/app/page.tsx:10:1
-Module not found: Can't resolve '@/components/ui/tabs'
-[0m [90m  8 |[39m [36mimport[39m { [33mCard[39m[33m,[39m [33mCardContent[39m[33m,[39m [33mCardDescription[39m[33m,[39m [33mCardHeader[39m[33m,[39m [33mCardTitle[39m } [36mfrom[39m [32m'@/components/ui/card'[39m[33m;[39m
- [90m  9 |[39m [36mimport[39m { [33mBadge[39m } [36mfrom[39m [32m'@/components/ui/badge'[39m[33m;[39m
-[31m[1m>[22m[39m[90m 10 |[39m [36mimport[39m { [33mTabs[39m[33m,[39m [33mTabsContent[39m[33m,[39m [33mTabsList[39m[33m,[39m [33mTabsTrigger[39m } [36mfrom[39m [32m'@/components/ui/tabs'[39m[33m;[39m
- [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
- [90m 11 |[39m [36mimport[39m { [33mScrollArea[39m } [36mfrom[39m [32m'@/components/ui/scroll-area'[39m[33m;[39m
- [90m 12 |[39m [36mimport[39m { [33mSeparator[39m } [36mfrom[39m [32m'@/components/ui/separator'[39m[33m;[39m
- [90m 13 |[39m [36mimport[39m {[0m
-
-
-
-Import traces:
-  Client Component Browser:
-    ./src/app/page.tsx [Client Component Browser]
-    ./src/app/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./src/app/page.tsx [Client Component SSR]
-    ./src/app/page.tsx [Server Component]
-
-https://nextjs.org/docs/messages/module-not-found
-
-
- GET / 500 in 444ms (compile: 435ms, render: 9ms)
-⨯ ./src/app/page.tsx:29:1
-Module not found: Can't resolve '@/components/ui/alert'
-[0m [90m 27 |[39m   [33mDropdownMenuTrigger[39m[33m,[39m
- [90m 28 |[39m } [36mfrom[39m [32m'@/components/ui/dropdown-menu'[39m[33m;[39m
-[31m[1m>[22m[39m[90m 29 |[39m [36mimport[39m { [33mAlert[39m[33m,[39m [33mAlertDescription[39m } [36mfrom[39m [32m'@/components/ui/alert'[39m[33m;[39m
- [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
- [90m 30 |[39m [36mimport[39m {
- [90m 31 |[39m   [33mCloud[39m[33m,[39m
- [90m 32 |[39m   [33mServer[39m[33m,[39m[0m
-
-
-
-Import traces:
-  Client Component Browser:
-    ./src/app/page.tsx [Client Component Browser]
-    ./src/app/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./src/app/page.tsx [Client Component SSR]
-    ./src/app/page.tsx [Server Component]
-
-https://nextjs.org/docs/messages/module-not-found
-
-
-
-./src/app/page.tsx:9:1
-Module not found: Can't resolve '@/components/ui/badge'
-[0m [90m  7 |[39m [36mimport[39m { [33mLabel[39m } [36mfrom[39m [32m'@/components/ui/label'[39m[33m;[39m
- [90m  8 |[39m [36mimport[39m { [33mCard[39m[33m,[39m [33mCardContent[39m[33m,[39m [33mCardDescription[39m[33m,[39m [33mCardHeader[39m[33m,[39m [33mCardTitle[39m } [36mfrom[39m [32m'@/components/ui/card'[39m[33m;[39m
-[31m[1m>[22m[39m[90m  9 |[39m [36mimport[39m { [33mBadge[39m } [36mfrom[39m [32m'@/components/ui/badge'[39m[33m;[39m
- [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
- [90m 10 |[39m [36mimport[39m { [33mTabs[39m[33m,[39m [33mTabsContent[39m[33m,[39m [33mTabsList[39m[33m,[39m [33mTabsTrigger[39m } [36mfrom[39m [32m'@/components/ui/tabs'[39m[33m;[39m
- [90m 11 |[39m [36mimport[39m { [33mScrollArea[39m } [36mfrom[39m [32m'@/components/ui/scroll-area'[39m[33m;[39m
- [90m 12 |[39m [36mimport[39m { [33mSeparator[39m } [36mfrom[39m [32m'@/components/ui/separator'[39m[33m;[39m[0m
-
-
-
-Import traces:
-  Client Component Browser:
-    ./src/app/page.tsx [Client Component Browser]
-    ./src/app/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./src/app/page.tsx [Client Component SSR]
-    ./src/app/page.tsx [Server Component]
-
-https://nextjs.org/docs/messages/module-not-found
-
-
-
-./src/app/page.tsx:5:1
-Module not found: Can't resolve '@/components/ui/button'
-[0m [90m 3 |[39m [36mimport[39m { useState[33m,[39m useEffect[33m,[39m useCallback } [36mfrom[39m [32m'react'[39m[33m;[39m
- [90m 4 |[39m [36mimport[39m { useRouter } [36mfrom[39m [32m'next/navigation'[39m[33m;[39m
-[31m[1m>[22m[39m[90m 5 |[39m [36mimport[39m { [33mButton[39m } [36mfrom[39m [32m'@/components/ui/button'[39m[33m;[39m
- [90m   |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
- [90m 6 |[39m [36mimport[39m { [33mInput[39m } [36mfrom[39m [32m'@/components/ui/input'[39m[33m;[39m
- [90m 7 |[39m [36mimport[39m { [33mLabel[39m } [36mfrom[39m [32m'@/components/ui/label'[39m[33m;[39m
- [90m 8 |[39m [36mimport[39m { [33mCard[39m[33m,[39m [33mCardContent[39m[33m,[39m [33mCardDescription[39m[33m,[39m [33mCardHeader[39m[33m,[39m [33mCardTitle[39m } [36mfrom[39m [32m'@/components/ui/card'[39m[33m;[39m[0m
-
-
-
-Import traces:
-  Client Component Browser:
-    ./src/app/page.tsx [Client Component Browser]
-    ./src/app/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./src/app/page.tsx [Client Component SSR]
-    ./src/app/page.tsx [Server Component]
-
-https://nextjs.org/docs/messages/module-not-found
-
-
-
-./src/app/page.tsx:8:1
-Module not found: Can't resolve '@/components/ui/card'
-[0m [90m  6 |[39m [36mimport[39m { [33mInput[39m } [36mfrom[39m [32m'@/components/ui/input'[39m[33m;[39m
- [90m  7 |[39m [36mimport[39m { [33mLabel[39m } [36mfrom[39m [32m'@/components/ui/label'[39m[33m;[39m
-[31m[1m>[22m[39m[90m  8 |[39m [36mimport[39m { [33mCard[39m[33m,[39m [33mCardContent[39m[33m,[39m [33mCardDescription[39m[33m,[39m [33mCardHeader[39m[33m,[39m [33mCardTitle[39m } [36mfrom[39m [32m'@/components/ui/card'[39m[33m;[39m
- [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
- [90m  9 |[39m [36mimport[39m { [33mBadge[39m } [36mfrom[39m [32m'@/components/ui/badge'[39m[33m;[39m
- [90m 10 |[39m [36mimport[39m { [33mTabs[39m[33m,[39m [33mTabsContent[39m[33m,[39m [33mTabsList[39m[33m,[39m [33mTabsTrigger[39m } [36mfrom[39m [32m'@/components/ui/tabs'[39m[33m;[39m
- [90m 11 |[39m [36mimport[39m { [33mScrollArea[39m } [36mfrom[39m [32m'@/components/ui/scroll-area'[39m[33m;[39m[0m
-
-
-
-Import traces:
-  Client Component Browser:
-    ./src/app/page.tsx [Client Component Browser]
-    ./src/app/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./src/app/page.tsx [Client Component SSR]
-    ./src/app/page.tsx [Server Component]
-
-https://nextjs.org/docs/messages/module-not-found
-
-
-
-./src/app/page.tsx:13:1
-Module not found: Can't resolve '@/components/ui/dialog'
-[0m [90m 11 |[39m [36mimport[39m { [33mScrollArea[39m } [36mfrom[39m [32m'@/components/ui/scroll-area'[39m[33m;[39m
- [90m 12 |[39m [36mimport[39m { [33mSeparator[39m } [36mfrom[39m [32m'@/components/ui/separator'[39m[33m;[39m
-[31m[1m>[22m[39m[90m 13 |[39m [36mimport[39m {
- [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
-[31m[1m>[22m[39m[90m 14 |[39m   [33mDialog[39m[33m,[39m
- [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
-[31m[1m>[22m[39m[90m 15 |[39m   [33mDialogContent[39m[33m,[39m
- [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
-[31m[1m>[22m[39m[90m 16 |[39m   [33mDialogDescription[39m[33m,[39m
- [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
-[31m[1m>[22m[39m[90m 17 |[39m   [33mDialogFooter[39m[33m,[39m
- [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
-[31m[1m>[22m[39m[90m 18 |[39m   [33mDialogHeader[39m[33m,[39m
- [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
-[31m[1m>[22m[39m[90m 19 |[39m   [33mDialogTitle[39m[33m,[39m
- [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
-[31m[1m>[22m[39m[90m 20 |[39m   [33mDialogTrigger[39m[33m,[39m
- [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
-[31m[1m>[22m[39m[90m 21 |[39m } [36mfrom[39m [32m'@/components/ui/dialog'[39m[33m;[39m
- [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
- [90m 22 |[39m [36mimport[39m {
- [90m 23 |[39m   [33mDropdownMenu[39m[33m,[39m
- [90m 24 |[39m   [33mDropdownMenuContent[39m[33m,[39m[0m
-
-
-
-Import traces:
-  Client Component Browser:
-    ./src/app/page.tsx [Client Component Browser]
-    ./src/app/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./src/app/page.tsx [Client Component SSR]
-    ./src/app/page.tsx [Server Component]
-
-https://nextjs.org/docs/messages/module-not-found
-
-
-
-./src/app/page.tsx:22:1
-Module not found: Can't resolve '@/components/ui/dropdown-menu'
-[0m [90m 20 |[39m   [33mDialogTrigger[39m[33m,[39m
- [90m 21 |[39m } [36mfrom[39m [32m'@/components/ui/dialog'[39m[33m;[39m
-[31m[1m>[22m[39m[90m 22 |[39m [36mimport[39m {
- [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
-[31m[1m>[22m[39m[90m 23 |[39m   [33mDropdownMenu[39m[33m,[39m
- [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
-[31m[1m>[22m[39m[90m 24 |[39m   [33mDropdownMenuContent[39m[33m,[39m
- [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
-[31m[1m>[22m[39m[90m 25 |[39m   [33mDropdownMenuItem[39m[33m,[39m
- [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
-[31m[1m>[22m[39m[90m 26 |[39m   [33mDropdownMenuSeparator[39m[33m,[39m
- [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
-[31m[1m>[22m[39m[90m 27 |[39m   [33mDropdownMenuTrigger[39m[33m,[39m
- [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
-[31m[1m>[22m[39m[90m 28 |[39m } [36mfrom[39m [32m'@/components/ui/dropdown-menu'[39m[33m;[39m
- [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
- [90m 29 |[39m [36mimport[39m { [33mAlert[39m[33m,[39m [33mAlertDescription[39m } [36mfrom[39m [32m'@/components/ui/alert'[39m[33m;[39m
- [90m 30 |[39m [36mimport[39m {
- [90m 31 |[39m   [33mCloud[39m[33m,[39m[0m
-
-
-
-Import traces:
-  Client Component Browser:
-    ./src/app/page.tsx [Client Component Browser]
-    ./src/app/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./src/app/page.tsx [Client Component SSR]
-    ./src/app/page.tsx [Server Component]
-
-https://nextjs.org/docs/messages/module-not-found
-
-
-
-./src/app/page.tsx:6:1
-Module not found: Can't resolve '@/components/ui/input'
-[0m [90m 4 |[39m [36mimport[39m { useRouter } [36mfrom[39m [32m'next/navigation'[39m[33m;[39m
- [90m 5 |[39m [36mimport[39m { [33mButton[39m } [36mfrom[39m [32m'@/components/ui/button'[39m[33m;[39m
-[31m[1m>[22m[39m[90m 6 |[39m [36mimport[39m { [33mInput[39m } [36mfrom[39m [32m'@/components/ui/input'[39m[33m;[39m
- [90m   |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
- [90m 7 |[39m [36mimport[39m { [33mLabel[39m } [36mfrom[39m [32m'@/components/ui/label'[39m[33m;[39m
- [90m 8 |[39m [36mimport[39m { [33mCard[39m[33m,[39m [33mCardContent[39m[33m,[39m [33mCardDescription[39m[33m,[39m [33mCardHeader[39m[33m,[39m [33mCardTitle[39m } [36mfrom[39m [32m'@/components/ui/card'[39m[33m;[39m
- [90m 9 |[39m [36mimport[39m { [33mBadge[39m } [36mfrom[39m [32m'@/components/ui/badge'[39m[33m;[39m[0m
-
-
-
-Import traces:
-  Client Component Browser:
-    ./src/app/page.tsx [Client Component Browser]
-    ./src/app/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./src/app/page.tsx [Client Component SSR]
-    ./src/app/page.tsx [Server Component]
-
-https://nextjs.org/docs/messages/module-not-found
-
-
-
-./src/app/page.tsx:7:1
-Module not found: Can't resolve '@/components/ui/label'
-[0m [90m  5 |[39m [36mimport[39m { [33mButton[39m } [36mfrom[39m [32m'@/components/ui/button'[39m[33m;[39m
- [90m  6 |[39m [36mimport[39m { [33mInput[39m } [36mfrom[39m [32m'@/components/ui/input'[39m[33m;[39m
-[31m[1m>[22m[39m[90m  7 |[39m [36mimport[39m { [33mLabel[39m } [36mfrom[39m [32m'@/components/ui/label'[39m[33m;[39m
- [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
- [90m  8 |[39m [36mimport[39m { [33mCard[39m[33m,[39m [33mCardContent[39m[33m,[39m [33mCardDescription[39m[33m,[39m [33mCardHeader[39m[33m,[39m [33mCardTitle[39m } [36mfrom[39m [32m'@/components/ui/card'[39m[33m;[39m
- [90m  9 |[39m [36mimport[39m { [33mBadge[39m } [36mfrom[39m [32m'@/components/ui/badge'[39m[33m;[39m
- [90m 10 |[39m [36mimport[39m { [33mTabs[39m[33m,[39m [33mTabsContent[39m[33m,[39m [33mTabsList[39m[33m,[39m [33mTabsTrigger[39m } [36mfrom[39m [32m'@/components/ui/tabs'[39m[33m;[39m[0m
-
-
-
-Import traces:
-  Client Component Browser:
-    ./src/app/page.tsx [Client Component Browser]
-    ./src/app/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./src/app/page.tsx [Client Component SSR]
-    ./src/app/page.tsx [Server Component]
-
-https://nextjs.org/docs/messages/module-not-found
-
-
-
-./src/app/page.tsx:11:1
-Module not found: Can't resolve '@/components/ui/scroll-area'
-[0m [90m  9 |[39m [36mimport[39m { [33mBadge[39m } [36mfrom[39m [32m'@/components/ui/badge'[39m[33m;[39m
- [90m 10 |[39m [36mimport[39m { [33mTabs[39m[33m,[39m [33mTabsContent[39m[33m,[39m [33mTabsList[39m[33m,[39m [33mTabsTrigger[39m } [36mfrom[39m [32m'@/components/ui/tabs'[39m[33m;[39m
-[31m[1m>[22m[39m[90m 11 |[39m [36mimport[39m { [33mScrollArea[39m } [36mfrom[39m [32m'@/components/ui/scroll-area'[39m[33m;[39m
- [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
- [90m 12 |[39m [36mimport[39m { [33mSeparator[39m } [36mfrom[39m [32m'@/components/ui/separator'[39m[33m;[39m
- [90m 13 |[39m [36mimport[39m {
- [90m 14 |[39m   [33mDialog[39m[33m,[39m[0m
-
-
-
-Import traces:
-  Client Component Browser:
-    ./src/app/page.tsx [Client Component Browser]
-    ./src/app/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./src/app/page.tsx [Client Component SSR]
-    ./src/app/page.tsx [Server Component]
-
-https://nextjs.org/docs/messages/module-not-found
-
-
-
-./src/app/page.tsx:10:1
-Module not found: Can't resolve '@/components/ui/tabs'
-[0m [90m  8 |[39m [36mimport[39m { [33mCard[39m[33m,[39m [33mCardContent[39m[33m,[39m [33mCardDescription[39m[33m,[39m [33mCardHeader[39m[33m,[39m [33mCardTitle[39m } [36mfrom[39m [32m'@/components/ui/card'[39m[33m;[39m
- [90m  9 |[39m [36mimport[39m { [33mBadge[39m } [36mfrom[39m [32m'@/components/ui/badge'[39m[33m;[39m
-[31m[1m>[22m[39m[90m 10 |[39m [36mimport[39m { [33mTabs[39m[33m,[39m [33mTabsContent[39m[33m,[39m [33mTabsList[39m[33m,[39m [33mTabsTrigger[39m } [36mfrom[39m [32m'@/components/ui/tabs'[39m[33m;[39m
- [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
- [90m 11 |[39m [36mimport[39m { [33mScrollArea[39m } [36mfrom[39m [32m'@/components/ui/scroll-area'[39m[33m;[39m
- [90m 12 |[39m [36mimport[39m { [33mSeparator[39m } [36mfrom[39m [32m'@/components/ui/separator'[39m[33m;[39m
- [90m 13 |[39m [36mimport[39m {[0m
-
-
-
-Import traces:
-  Client Component Browser:
-    ./src/app/page.tsx [Client Component Browser]
-    ./src/app/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./src/app/page.tsx [Client Component SSR]
-    ./src/app/page.tsx [Server Component]
-
-https://nextjs.org/docs/messages/module-not-found
-
-
-⨯ ./src/app/page.tsx:29:1
-Module not found: Can't resolve '@/components/ui/alert'
-[0m [90m 27 |[39m   [33mDropdownMenuTrigger[39m[33m,[39m
- [90m 28 |[39m } [36mfrom[39m [32m'@/components/ui/dropdown-menu'[39m[33m;[39m
-[31m[1m>[22m[39m[90m 29 |[39m [36mimport[39m { [33mAlert[39m[33m,[39m [33mAlertDescription[39m } [36mfrom[39m [32m'@/components/ui/alert'[39m[33m;[39m
- [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
- [90m 30 |[39m [36mimport[39m {
- [90m 31 |[39m   [33mCloud[39m[33m,[39m
- [90m 32 |[39m   [33mServer[39m[33m,[39m[0m
-
-
-
-Import traces:
-  Client Component Browser:
-    ./src/app/page.tsx [Client Component Browser]
-    ./src/app/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./src/app/page.tsx [Client Component SSR]
-    ./src/app/page.tsx [Server Component]
-
-https://nextjs.org/docs/messages/module-not-found
-
-
-
-./src/app/page.tsx:9:1
-Module not found: Can't resolve '@/components/ui/badge'
-[0m [90m  7 |[39m [36mimport[39m { [33mLabel[39m } [36mfrom[39m [32m'@/components/ui/label'[39m[33m;[39m
- [90m  8 |[39m [36mimport[39m { [33mCard[39m[33m,[39m [33mCardContent[39m[33m,[39m [33mCardDescription[39m[33m,[39m [33mCardHeader[39m[33m,[39m [33mCardTitle[39m } [36mfrom[39m [32m'@/components/ui/card'[39m[33m;[39m
-[31m[1m>[22m[39m[90m  9 |[39m [36mimport[39m { [33mBadge[39m } [36mfrom[39m [32m'@/components/ui/badge'[39m[33m;[39m
- [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
- [90m 10 |[39m [36mimport[39m { [33mTabs[39m[33m,[39m [33mTabsContent[39m[33m,[39m [33mTabsList[39m[33m,[39m [33mTabsTrigger[39m } [36mfrom[39m [32m'@/components/ui/tabs'[39m[33m;[39m
- [90m 11 |[39m [36mimport[39m { [33mScrollArea[39m } [36mfrom[39m [32m'@/components/ui/scroll-area'[39m[33m;[39m
- [90m 12 |[39m [36mimport[39m { [33mSeparator[39m } [36mfrom[39m [32m'@/components/ui/separator'[39m[33m;[39m[0m
-
-
-
-Import traces:
-  Client Component Browser:
-    ./src/app/page.tsx [Client Component Browser]
-    ./src/app/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./src/app/page.tsx [Client Component SSR]
-    ./src/app/page.tsx [Server Component]
-
-https://nextjs.org/docs/messages/module-not-found
-
-
-
-./src/app/page.tsx:5:1
-Module not found: Can't resolve '@/components/ui/button'
-[0m [90m 3 |[39m [36mimport[39m { useState[33m,[39m useEffect[33m,[39m useCallback } [36mfrom[39m [32m'react'[39m[33m;[39m
- [90m 4 |[39m [36mimport[39m { useRouter } [36mfrom[39m [32m'next/navigation'[39m[33m;[39m
-[31m[1m>[22m[39m[90m 5 |[39m [36mimport[39m { [33mButton[39m } [36mfrom[39m [32m'@/components/ui/button'[39m[33m;[39m
- [90m   |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
- [90m 6 |[39m [36mimport[39m { [33mInput[39m } [36mfrom[39m [32m'@/components/ui/input'[39m[33m;[39m
- [90m 7 |[39m [36mimport[39m { [33mLabel[39m } [36mfrom[39m [32m'@/components/ui/label'[39m[33m;[39m
- [90m 8 |[39m [36mimport[39m { [33mCard[39m[33m,[39m [33mCardContent[39m[33m,[39m [33mCardDescription[39m[33m,[39m [33mCardHeader[39m[33m,[39m [33mCardTitle[39m } [36mfrom[39m [32m'@/components/ui/card'[39m[33m;[39m[0m
-
-
-
-Import traces:
-  Client Component Browser:
-    ./src/app/page.tsx [Client Component Browser]
-    ./src/app/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./src/app/page.tsx [Client Component SSR]
-    ./src/app/page.tsx [Server Component]
-
-https://nextjs.org/docs/messages/module-not-found
-
-
-
-./src/app/page.tsx:8:1
-Module not found: Can't resolve '@/components/ui/card'
-[0m [90m  6 |[39m [36mimport[39m { [33mInput[39m } [36mfrom[39m [32m'@/components/ui/input'[39m[33m;[39m
- [90m  7 |[39m [36mimport[39m { [33mLabel[39m } [36mfrom[39m [32m'@/components/ui/label'[39m[33m;[39m
-[31m[1m>[22m[39m[90m  8 |[39m [36mimport[39m { [33mCard[39m[33m,[39m [33mCardContent[39m[33m,[39m [33mCardDescription[39m[33m,[39m [33mCardHeader[39m[33m,[39m [33mCardTitle[39m } [36mfrom[39m [32m'@/components/ui/card'[39m[33m;[39m
- [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
- [90m  9 |[39m [36mimport[39m { [33mBadge[39m } [36mfrom[39m [32m'@/components/ui/badge'[39m[33m;[39m
- [90m 10 |[39m [36mimport[39m { [33mTabs[39m[33m,[39m [33mTabsContent[39m[33m,[39m [33mTabsList[39m[33m,[39m [33mTabsTrigger[39m } [36mfrom[39m [32m'@/components/ui/tabs'[39m[33m;[39m
- [90m 11 |[39m [36mimport[39m { [33mScrollArea[39m } [36mfrom[39m [32m'@/components/ui/scroll-area'[39m[33m;[39m[0m
-
-
-
-Import traces:
-  Client Component Browser:
-    ./src/app/page.tsx [Client Component Browser]
-    ./src/app/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./src/app/page.tsx [Client Component SSR]
-    ./src/app/page.tsx [Server Component]
-
-https://nextjs.org/docs/messages/module-not-found
-
-
-
-./src/app/page.tsx:13:1
-Module not found: Can't resolve '@/components/ui/dialog'
-[0m [90m 11 |[39m [36mimport[39m { [33mScrollArea[39m } [36mfrom[39m [32m'@/components/ui/scroll-area'[39m[33m;[39m
- [90m 12 |[39m [36mimport[39m { [33mSeparator[39m } [36mfrom[39m [32m'@/components/ui/separator'[39m[33m;[39m
-[31m[1m>[22m[39m[90m 13 |[39m [36mimport[39m {
- [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
-[31m[1m>[22m[39m[90m 14 |[39m   [33mDialog[39m[33m,[39m
- [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
-[31m[1m>[22m[39m[90m 15 |[39m   [33mDialogContent[39m[33m,[39m
- [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
-[31m[1m>[22m[39m[90m 16 |[39m   [33mDialogDescription[39m[33m,[39m
- [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
-[31m[1m>[22m[39m[90m 17 |[39m   [33mDialogFooter[39m[33m,[39m
- [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
-[31m[1m>[22m[39m[90m 18 |[39m   [33mDialogHeader[39m[33m,[39m
- [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
-[31m[1m>[22m[39m[90m 19 |[39m   [33mDialogTitle[39m[33m,[39m
- [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
-[31m[1m>[22m[39m[90m 20 |[39m   [33mDialogTrigger[39m[33m,[39m
- [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
-[31m[1m>[22m[39m[90m 21 |[39m } [36mfrom[39m [32m'@/components/ui/dialog'[39m[33m;[39m
- [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
- [90m 22 |[39m [36mimport[39m {
- [90m 23 |[39m   [33mDropdownMenu[39m[33m,[39m
- [90m 24 |[39m   [33mDropdownMenuContent[39m[33m,[39m[0m
-
-
-
-Import traces:
-  Client Component Browser:
-    ./src/app/page.tsx [Client Component Browser]
-    ./src/app/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./src/app/page.tsx [Client Component SSR]
-    ./src/app/page.tsx [Server Component]
-
-https://nextjs.org/docs/messages/module-not-found
-
-
-
-./src/app/page.tsx:22:1
-Module not found: Can't resolve '@/components/ui/dropdown-menu'
-[0m [90m 20 |[39m   [33mDialogTrigger[39m[33m,[39m
- [90m 21 |[39m } [36mfrom[39m [32m'@/components/ui/dialog'[39m[33m;[39m
-[31m[1m>[22m[39m[90m 22 |[39m [36mimport[39m {
- [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
-[31m[1m>[22m[39m[90m 23 |[39m   [33mDropdownMenu[39m[33m,[39m
- [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
-[31m[1m>[22m[39m[90m 24 |[39m   [33mDropdownMenuContent[39m[33m,[39m
- [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
-[31m[1m>[22m[39m[90m 25 |[39m   [33mDropdownMenuItem[39m[33m,[39m
- [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
-[31m[1m>[22m[39m[90m 26 |[39m   [33mDropdownMenuSeparator[39m[33m,[39m
- [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
-[31m[1m>[22m[39m[90m 27 |[39m   [33mDropdownMenuTrigger[39m[33m,[39m
- [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
-[31m[1m>[22m[39m[90m 28 |[39m } [36mfrom[39m [32m'@/components/ui/dropdown-menu'[39m[33m;[39m
- [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
- [90m 29 |[39m [36mimport[39m { [33mAlert[39m[33m,[39m [33mAlertDescription[39m } [36mfrom[39m [32m'@/components/ui/alert'[39m[33m;[39m
- [90m 30 |[39m [36mimport[39m {
- [90m 31 |[39m   [33mCloud[39m[33m,[39m[0m
-
-
-
-Import traces:
-  Client Component Browser:
-    ./src/app/page.tsx [Client Component Browser]
-    ./src/app/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./src/app/page.tsx [Client Component SSR]
-    ./src/app/page.tsx [Server Component]
-
-https://nextjs.org/docs/messages/module-not-found
-
-
-
-./src/app/page.tsx:6:1
-Module not found: Can't resolve '@/components/ui/input'
-[0m [90m 4 |[39m [36mimport[39m { useRouter } [36mfrom[39m [32m'next/navigation'[39m[33m;[39m
- [90m 5 |[39m [36mimport[39m { [33mButton[39m } [36mfrom[39m [32m'@/components/ui/button'[39m[33m;[39m
-[31m[1m>[22m[39m[90m 6 |[39m [36mimport[39m { [33mInput[39m } [36mfrom[39m [32m'@/components/ui/input'[39m[33m;[39m
- [90m   |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
- [90m 7 |[39m [36mimport[39m { [33mLabel[39m } [36mfrom[39m [32m'@/components/ui/label'[39m[33m;[39m
- [90m 8 |[39m [36mimport[39m { [33mCard[39m[33m,[39m [33mCardContent[39m[33m,[39m [33mCardDescription[39m[33m,[39m [33mCardHeader[39m[33m,[39m [33mCardTitle[39m } [36mfrom[39m [32m'@/components/ui/card'[39m[33m;[39m
- [90m 9 |[39m [36mimport[39m { [33mBadge[39m } [36mfrom[39m [32m'@/components/ui/badge'[39m[33m;[39m[0m
-
-
-
-Import traces:
-  Client Component Browser:
-    ./src/app/page.tsx [Client Component Browser]
-    ./src/app/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./src/app/page.tsx [Client Component SSR]
-    ./src/app/page.tsx [Server Component]
-
-https://nextjs.org/docs/messages/module-not-found
-
-
-
-./src/app/page.tsx:7:1
-Module not found: Can't resolve '@/components/ui/label'
-[0m [90m  5 |[39m [36mimport[39m { [33mButton[39m } [36mfrom[39m [32m'@/components/ui/button'[39m[33m;[39m
- [90m  6 |[39m [36mimport[39m { [33mInput[39m } [36mfrom[39m [32m'@/components/ui/input'[39m[33m;[39m
-[31m[1m>[22m[39m[90m  7 |[39m [36mimport[39m { [33mLabel[39m } [36mfrom[39m [32m'@/components/ui/label'[39m[33m;[39m
- [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
- [90m  8 |[39m [36mimport[39m { [33mCard[39m[33m,[39m [33mCardContent[39m[33m,[39m [33mCardDescription[39m[33m,[39m [33mCardHeader[39m[33m,[39m [33mCardTitle[39m } [36mfrom[39m [32m'@/components/ui/card'[39m[33m;[39m
- [90m  9 |[39m [36mimport[39m { [33mBadge[39m } [36mfrom[39m [32m'@/components/ui/badge'[39m[33m;[39m
- [90m 10 |[39m [36mimport[39m { [33mTabs[39m[33m,[39m [33mTabsContent[39m[33m,[39m [33mTabsList[39m[33m,[39m [33mTabsTrigger[39m } [36mfrom[39m [32m'@/components/ui/tabs'[39m[33m;[39m[0m
-
-
-
-Import traces:
-  Client Component Browser:
-    ./src/app/page.tsx [Client Component Browser]
-    ./src/app/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./src/app/page.tsx [Client Component SSR]
-    ./src/app/page.tsx [Server Component]
-
-https://nextjs.org/docs/messages/module-not-found
-
-
-
-./src/app/page.tsx:11:1
-Module not found: Can't resolve '@/components/ui/scroll-area'
-[0m [90m  9 |[39m [36mimport[39m { [33mBadge[39m } [36mfrom[39m [32m'@/components/ui/badge'[39m[33m;[39m
- [90m 10 |[39m [36mimport[39m { [33mTabs[39m[33m,[39m [33mTabsContent[39m[33m,[39m [33mTabsList[39m[33m,[39m [33mTabsTrigger[39m } [36mfrom[39m [32m'@/components/ui/tabs'[39m[33m;[39m
-[31m[1m>[22m[39m[90m 11 |[39m [36mimport[39m { [33mScrollArea[39m } [36mfrom[39m [32m'@/components/ui/scroll-area'[39m[33m;[39m
- [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
- [90m 12 |[39m [36mimport[39m { [33mSeparator[39m } [36mfrom[39m [32m'@/components/ui/separator'[39m[33m;[39m
- [90m 13 |[39m [36mimport[39m {
- [90m 14 |[39m   [33mDialog[39m[33m,[39m[0m
-
-
-
-Import traces:
-  Client Component Browser:
-    ./src/app/page.tsx [Client Component Browser]
-    ./src/app/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./src/app/page.tsx [Client Component SSR]
-    ./src/app/page.tsx [Server Component]
-
-https://nextjs.org/docs/messages/module-not-found
-
-
-
-./src/app/page.tsx:10:1
-Module not found: Can't resolve '@/components/ui/tabs'
-[0m [90m  8 |[39m [36mimport[39m { [33mCard[39m[33m,[39m [33mCardContent[39m[33m,[39m [33mCardDescription[39m[33m,[39m [33mCardHeader[39m[33m,[39m [33mCardTitle[39m } [36mfrom[39m [32m'@/components/ui/card'[39m[33m;[39m
- [90m  9 |[39m [36mimport[39m { [33mBadge[39m } [36mfrom[39m [32m'@/components/ui/badge'[39m[33m;[39m
-[31m[1m>[22m[39m[90m 10 |[39m [36mimport[39m { [33mTabs[39m[33m,[39m [33mTabsContent[39m[33m,[39m [33mTabsList[39m[33m,[39m [33mTabsTrigger[39m } [36mfrom[39m [32m'@/components/ui/tabs'[39m[33m;[39m
- [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
- [90m 11 |[39m [36mimport[39m { [33mScrollArea[39m } [36mfrom[39m [32m'@/components/ui/scroll-area'[39m[33m;[39m
- [90m 12 |[39m [36mimport[39m { [33mSeparator[39m } [36mfrom[39m [32m'@/components/ui/separator'[39m[33m;[39m
- [90m 13 |[39m [36mimport[39m {[0m
-
-
-
-Import traces:
-  Client Component Browser:
-    ./src/app/page.tsx [Client Component Browser]
-    ./src/app/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./src/app/page.tsx [Client Component SSR]
-    ./src/app/page.tsx [Server Component]
-
-https://nextjs.org/docs/messages/module-not-found
-
-
- GET / 500 in 583ms (compile: 290ms, render: 293ms)
- GET / 500 in 307ms (compile: 300ms, render: 7ms)
-✓ Compiled in 211ms
- GET / 200 in 211ms (compile: 114ms, render: 96ms)
- GET /api/auth/me 401 in 135ms (compile: 128ms, render: 7ms)
- GET /login 200 in 514ms (compile: 494ms, render: 19ms)
+ GET / 200 in 158ms (compile: 42ms, render: 116ms)
+ GET /api/auth/me 401 in 368ms (compile: 352ms, render: 16ms)
+✓ Compiled in 144ms
+ GET / 200 in 63ms (compile: 37ms, render: 25ms)
+ GET / 200 in 115ms (compile: 2ms, render: 113ms)
+ GET /api/auth/me 401 in 10ms (compile: 2ms, render: 7ms)
+  Reload env: .env
+ GET / 200 in 44ms (compile: 30ms, render: 14ms)

@@ -1,3 +1,6 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
 generator client {
   provider = "prisma-client-js"
 }
@@ -7,102 +10,107 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// Users table - for app authentication
 model User {
-  id           String   @id @default(cuid())
-  email        String   @unique
-  passwordHash String
-  name         String?
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
-  
-  sessions       Session[]
-  cfAccounts     CloudflareAccount[]
+  id            String   @id @default(cuid())
+  email         String   @unique
+  passwordHash  String
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  sessions      Session[]
+  accounts      CloudflareAccount[]
 }
 
+// Sessions table - for user sessions
 model Session {
   id        String   @id @default(cuid())
   userId    String
   token     String   @unique
   expiresAt DateTime
   createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-  
+  @@index([userId])
   @@index([token])
 }
 
+// Cloudflare accounts - stores encrypted API tokens
 model CloudflareAccount {
-  id              String    @id @default(cuid())
-  userId          String
-  name            String
-  email           String?
-  accountId       String
-  apiTokenEnc     String
-  apiTokenIv      String
-  isActive        Boolean   @default(true)
-  lastSync        DateTime?
-  createdAt       DateTime  @default(now())
-  updatedAt       DateTime  @updatedAt
-  
-  user         User            @relation(fields: [userId], references: [id], onDelete: Cascade)
-  workers      Worker[]
-  databases    D1Database[]
-  kvNamespaces KVNamespace[]
-  r2Buckets    R2Bucket[]
+  id                  String   @id @default(cuid())
+  userId              String
+  name                String
+  email               String?
+  accountId           String
+  apiTokenEncrypted   String   // AES-256 encrypted
+  encryptionIv        String   // IV for decryption
+  isActive            Boolean  @default(true)
+  lastSync            DateTime?
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+  user                User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  workers             Worker[]
+  d1Databases         D1Database[]
+  kvNamespaces        KVNamespace[]
+  r2Buckets           R2Bucket[]
   
   @@index([userId])
 }
 
+// Workers - cached from Cloudflare API
 model Worker {
   id                String   @id @default(cuid())
-  cfAccountId       String
+  accountId         String
   workerId          String
   name              String
+  script            String?
   compatibilityDate String?
   createdAt         DateTime @default(now())
   updatedAt         DateTime @updatedAt
+  account           CloudflareAccount @relation(fields: [accountId], references: [id], onDelete: Cascade)
   
-  cfAccount CloudflareAccount @relation(fields: [cfAccountId], references: [id], onDelete: Cascade)
-  
-  @@unique([cfAccountId, workerId])
+  @@unique([accountId, workerId])
+  @@index([accountId])
 }
 
+// D1 Databases - cached from Cloudflare API
 model D1Database {
   id          String   @id @default(cuid())
-  cfAccountId String
+  accountId   String
   databaseId  String
   name        String
   version     String?
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+  account     CloudflareAccount @relation(fields: [accountId], references: [id], onDelete: Cascade)
   
-  cfAccount CloudflareAccount @relation(fields: [cfAccountId], references: [id], onDelete: Cascade)
-  
-  @@unique([cfAccountId, databaseId])
+  @@unique([accountId, databaseId])
+  @@index([accountId])
 }
 
+// KV Namespaces - cached from Cloudflare API
 model KVNamespace {
   id          String   @id @default(cuid())
-  cfAccountId String
+  accountId   String
   namespaceId String
   title       String
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+  account     CloudflareAccount @relation(fields: [accountId], references: [id], onDelete: Cascade)
   
-  cfAccount CloudflareAccount @relation(fields: [cfAccountId], references: [id], onDelete: Cascade)
-  
-  @@unique([cfAccountId, namespaceId])
+  @@unique([accountId, namespaceId])
+  @@index([accountId])
 }
 
+// R2 Buckets - cached from Cloudflare API
 model R2Bucket {
-  id            String    @id @default(cuid())
-  cfAccountId   String
+  id            String   @id @default(cuid())
+  accountId     String
   bucketName    String
   creationDate  DateTime?
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  account       CloudflareAccount @relation(fields: [accountId], references: [id], onDelete: Cascade)
   
-  cfAccount CloudflareAccount @relation(fields: [cfAccountId], references: [id], onDelete: Cascade)
-  
-  @@unique([cfAccountId, bucketName])
+  @@unique([accountId, bucketName])
+  @@index([accountId])
 }

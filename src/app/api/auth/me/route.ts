@@ -1,51 +1,34 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
+import { getSessionUser } from '@/lib/auth';
 import { db } from '@/lib/db';
 
-export async function GET(request: NextRequest) {
+export async function GET() {
   try {
-    const token = request.cookies.get('auth_token')?.value;
-
-    if (!token) {
+    const user = await getSessionUser();
+    
+    if (!user) {
       return NextResponse.json(
-        { success: false, error: 'Not authenticated' },
+        { error: 'Unauthorized' },
         { status: 401 }
       );
     }
 
-    // Find session with user
-    const session = await db.session.findUnique({
-      where: { token },
-      include: {
-        user: {
-          include: {
-            _count: {
-              select: { cfAccounts: true },
-            },
-          },
-        },
-      },
+    // Get account count
+    const accountsCount = await db.cloudflareAccount.count({
+      where: { userId: user.id },
     });
 
-    if (!session || session.expiresAt < new Date()) {
-      return NextResponse.json(
-        { success: false, error: 'Session expired' },
-        { status: 401 }
-      );
-    }
-
     return NextResponse.json({
-      success: true,
       user: {
-        id: session.user.id,
-        email: session.user.email,
-        name: session.user.name,
-        accountsCount: session.user._count.cfAccounts,
+        id: user.id,
+        email: user.email,
+        accountsCount,
       },
     });
   } catch (error) {
-    console.error('Auth check error:', error);
+    console.error('Get user error:', error);
     return NextResponse.json(
-      { success: false, error: 'Failed to verify authentication' },
+      { error: 'Internal server error' },
       { status: 500 }
     );
   }

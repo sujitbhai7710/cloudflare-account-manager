@@ -1,24 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { getSessionUser } from '@/lib/auth';
 import { db } from '@/lib/db';
 import { decrypt } from '@/lib/encryption';
-import { listWorkers, listD1Databases, listKVNamespaces, listR2Buckets } from '@/lib/cloudflare-api';
-
-// Get current user from session
-async function getCurrentUser(request: NextRequest) {
-  const token = request.cookies.get('auth_token')?.value;
-  if (!token) return null;
-
-  const session = await db.session.findUnique({
-    where: { token },
-    include: { user: true },
-  });
-
-  if (!session || session.expiresAt < new Date()) {
-    return null;
-  }
-
-  return session.user;
-}
+import { CloudflareAPI } from '@/lib/cloudflare-api';
 
 // POST - Sync account resources
 export async function POST(
@@ -26,91 +10,100 @@ export async function POST(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const user = await getCurrentUser(request);
+    const user = await getSessionUser();
+    
     if (!user) {
       return NextResponse.json(
-        { success: false, error: 'Not authenticated' },
+        { error: 'Unauthorized' },
         { status: 401 }
       );
     }
 
     const { id } = await params;
 
-    // Get account with encrypted token
+    // Get account
     const account = await db.cloudflareAccount.findFirst({
-      where: { id, userId: user.id },
+      where: {
+        id,
+        userId: user.id,
+      },
     });
 
     if (!account) {
       return NextResponse.json(
-        { success: false, error: 'Account not found' },
+        { error: 'Account not found' },
         { status: 404 }
       );
     }
 
     // Decrypt API token
-    const apiToken = decrypt(account.apiTokenEnc, account.apiTokenIv);
-    const config = { accountId: account.accountId, apiToken };
+    const apiToken = decrypt({
+      ciphertext: account.apiTokenEncrypted,
+      iv: account.encryptionIv,
+    });
+
+    const api = new CloudflareAPI(apiToken, account.accountId);
 
     // Fetch all resources
-    const [workers, databases, kvNamespaces, r2Buckets] = await Promise.all([
-      listWorkers(config),
-      listD1Databases(config),
-      listKVNamespaces(config),
-      listR2Buckets(config),
+    const [workers, databases, namespaces, buckets] = await Promise.all([
+      api.getWorkers().catch(() => []),
+      api.getD1Databases().catch(() => []),
+      api.getKVNamespaces().catch(() => []),
+      api.getR2Buckets().catch(() => []),
     ]);
 
-    // Clear old data and insert new
+    // Clear existing resources and insert new ones
     await db.$transaction([
-      db.worker.deleteMany({ where: { cfAccountId: account.id } }),
-      db.d1Database.deleteMany({ where: { cfAccountId: account.id } }),
-      db.kVNamespace.deleteMany({ where: { cfAccountId: account.id } }),
-      db.r2Bucket.deleteMany({ where: { cfAccountId: account.id } }),
+      // Delete existing
+      db.worker.deleteMany({ where: { accountId: account.id } }),
+      db.d1Database.deleteMany({ where: { accountId: account.id } }),
+      db.kVNamespace.deleteMany({ where: { accountId: account.id } }),
+      db.r2Bucket.deleteMany({ where: { accountId: account.id } }),
     ]);
 
-    // Store workers
-    for (const worker of workers) {
-      await db.worker.create({
-        data: {
-          cfAccountId: account.id,
-          workerId: worker.id,
-          name: worker.name,
-          compatibilityDate: worker.compatibility_date,
-        },
+    // Insert workers
+    if (workers.length > 0) {
+      await db.worker.createMany({
+        data: workers.map(w => ({
+          accountId: account.id,
+          workerId: w.id,
+          name: w.id,
+          script: w.script,
+        })),
       });
     }
 
-    // Store databases
-    for (const dbase of databases) {
-      await db.d1Database.create({
-        data: {
-          cfAccountId: account.id,
-          databaseId: dbase.uuid,
-          name: dbase.name,
-          version: dbase.version,
-        },
+    // Insert D1 databases
+    if (databases.length > 0) {
+      await db.d1Database.createMany({
+        data: databases.map(d => ({
+          accountId: account.id,
+          databaseId: d.uuid,
+          name: d.name,
+          version: d.version,
+        })),
       });
     }
 
-    // Store KV namespaces
-    for (const kv of kvNamespaces) {
-      await db.kVNamespace.create({
-        data: {
-          cfAccountId: account.id,
-          namespaceId: kv.id,
-          title: kv.title,
-        },
+    // Insert KV namespaces
+    if (namespaces.length > 0) {
+      await db.kVNamespace.createMany({
+        data: namespaces.map(n => ({
+          accountId: account.id,
+          namespaceId: n.id,
+          title: n.title,
+        })),
       });
     }
 
-    // Store R2 buckets
-    for (const bucket of r2Buckets) {
-      await db.r2Bucket.create({
-        data: {
-          cfAccountId: account.id,
-          bucketName: bucket.name,
-          creationDate: bucket.creation_date ? new Date(bucket.creation_date) : null,
-        },
+    // Insert R2 buckets
+    if (buckets.length > 0) {
+      await db.r2Bucket.createMany({
+        data: buckets.map(b => ({
+          accountId: account.id,
+          bucketName: b.name,
+          creationDate: new Date(b.creation_date),
+        })),
       });
     }
 
@@ -125,14 +118,14 @@ export async function POST(
       stats: {
         workers: workers.length,
         databases: databases.length,
-        kvNamespaces: kvNamespaces.length,
-        r2Buckets: r2Buckets.length,
+        namespaces: namespaces.length,
+        buckets: buckets.length,
       },
     });
   } catch (error) {
-    console.error('Error syncing account:', error);
+    console.error('Sync error:', error);
     return NextResponse.json(
-      { success: false, error: 'Failed to sync account' },
+      { error: 'Failed to sync account' },
       { status: 500 }
     );
   }

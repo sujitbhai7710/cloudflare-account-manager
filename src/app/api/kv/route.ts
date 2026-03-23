@@ -1,63 +1,48 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
+import { getSessionUser } from '@/lib/auth';
 import { db } from '@/lib/db';
 
-// Get current user from session
-async function getCurrentUser(request: NextRequest) {
-  const token = request.cookies.get('auth_token')?.value;
-  if (!token) return null;
-
-  const session = await db.session.findUnique({
-    where: { token },
-    include: { user: true },
-  });
-
-  if (!session || session.expiresAt < new Date()) {
-    return null;
-  }
-
-  return session.user;
-}
-
-// GET - List all KV namespaces from all accounts
-export async function GET(request: NextRequest) {
+// GET - Get all KV namespaces from all accounts
+export async function GET() {
   try {
-    const user = await getCurrentUser(request);
+    const user = await getSessionUser();
+    
     if (!user) {
       return NextResponse.json(
-        { success: false, error: 'Not authenticated' },
+        { error: 'Unauthorized' },
         { status: 401 }
       );
     }
 
-    // Get all accounts for user
+    // Get all KV namespaces with account info
     const accounts = await db.cloudflareAccount.findMany({
-      where: { userId: user.id, isActive: true },
-      include: { kvNamespaces: true },
+      where: {
+        userId: user.id,
+        isActive: true,
+      },
+      include: {
+        kvNamespaces: true,
+      },
     });
 
-    // Build namespaces list with account info
-    const namespaces = [];
+    // Flatten namespaces with account name
+    const namespaces = accounts.flatMap(account =>
+      account.kvNamespaces.map(ns => ({
+        id: ns.id,
+        namespaceId: ns.namespaceId,
+        title: ns.title,
+        accountId: account.id,
+        accountName: account.name,
+        createdAt: ns.createdAt,
+        updatedAt: ns.updatedAt,
+      }))
+    );
 
-    for (const account of accounts) {
-      for (const ns of account.kvNamespaces) {
-        namespaces.push({
-          id: ns.id,
-          namespaceId: ns.namespaceId,
-          title: ns.title,
-          createdAt: ns.createdAt,
-          account: {
-            id: account.id,
-            name: account.name,
-          },
-        });
-      }
-    }
-
-    return NextResponse.json({ success: true, namespaces });
+    return NextResponse.json({ namespaces });
   } catch (error) {
-    console.error('Error fetching KV namespaces:', error);
+    console.error('Get KV namespaces error:', error);
     return NextResponse.json(
-      { success: false, error: 'Failed to fetch KV namespaces' },
+      { error: 'Internal server error' },
       { status: 500 }
     );
   }

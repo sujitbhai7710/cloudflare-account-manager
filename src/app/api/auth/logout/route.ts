@@ -1,30 +1,27 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { db } from '@/lib/db';
+import { NextResponse } from 'next/server';
+import { getSessionUser, clearSessionCookie, deleteSession } from '@/lib/auth';
+import { cookies } from 'next/headers';
 
-export async function POST(request: NextRequest) {
+export async function POST() {
   try {
-    const token = request.cookies.get('auth_token')?.value;
-
-    if (token) {
-      // Delete session from database
-      await db.session.deleteMany({
-        where: { token },
-      });
+    const user = await getSessionUser();
+    
+    if (user) {
+      const cookieStore = await cookies();
+      const token = cookieStore.get('session_token')?.value;
+      if (token) {
+        await deleteSession(token);
+      }
     }
-
-    // Clear cookie
-    const response = NextResponse.json({ success: true });
-    response.cookies.set('auth_token', '', {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: 'lax',
-      expires: new Date(0),
-      path: '/',
-    });
-
-    return response;
+    
+    await clearSessionCookie();
+    
+    return NextResponse.json({ success: true });
   } catch (error) {
     console.error('Logout error:', error);
-    return NextResponse.json({ success: true }); // Still return success
+    return NextResponse.json(
+      { error: 'Internal server error' },
+      { status: 500 }
+    );
   }
 }

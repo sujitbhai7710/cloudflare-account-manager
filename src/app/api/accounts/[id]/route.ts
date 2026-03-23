@@ -1,35 +1,18 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { getSessionUser } from '@/lib/auth';
 import { db } from '@/lib/db';
-import { decrypt } from '@/lib/encryption';
-import { verifyAccount, listWorkers, listD1Databases, listKVNamespaces, listR2Buckets } from '@/lib/cloudflare-api';
 
-// Get current user from session
-async function getCurrentUser(request: NextRequest) {
-  const token = request.cookies.get('auth_token')?.value;
-  if (!token) return null;
-
-  const session = await db.session.findUnique({
-    where: { token },
-    include: { user: true },
-  });
-
-  if (!session || session.expiresAt < new Date()) {
-    return null;
-  }
-
-  return session.user;
-}
-
-// GET - Get single account with details
+// GET - Get single account
 export async function GET(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const user = await getCurrentUser(request);
+    const user = await getSessionUser();
+    
     if (!user) {
       return NextResponse.json(
-        { success: false, error: 'Not authenticated' },
+        { error: 'Unauthorized' },
         { status: 401 }
       );
     }
@@ -37,10 +20,13 @@ export async function GET(
     const { id } = await params;
 
     const account = await db.cloudflareAccount.findFirst({
-      where: { id, userId: user.id },
+      where: {
+        id,
+        userId: user.id,
+      },
       include: {
         workers: true,
-        databases: true,
+        d1Databases: true,
         kvNamespaces: true,
         r2Buckets: true,
       },
@@ -48,13 +34,12 @@ export async function GET(
 
     if (!account) {
       return NextResponse.json(
-        { success: false, error: 'Account not found' },
+        { error: 'Account not found' },
         { status: 404 }
       );
     }
 
     return NextResponse.json({
-      success: true,
       account: {
         id: account.id,
         name: account.name,
@@ -62,32 +47,32 @@ export async function GET(
         accountId: account.accountId,
         isActive: account.isActive,
         lastSync: account.lastSync,
-        createdAt: account.createdAt,
         workers: account.workers,
-        databases: account.databases,
+        d1Databases: account.d1Databases,
         kvNamespaces: account.kvNamespaces,
         r2Buckets: account.r2Buckets,
       },
     });
   } catch (error) {
-    console.error('Error fetching account:', error);
+    console.error('Get account error:', error);
     return NextResponse.json(
-      { success: false, error: 'Failed to fetch account' },
+      { error: 'Internal server error' },
       { status: 500 }
     );
   }
 }
 
-// DELETE - Delete account
+// DELETE - Delete an account
 export async function DELETE(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const user = await getCurrentUser(request);
+    const user = await getSessionUser();
+    
     if (!user) {
       return NextResponse.json(
-        { success: false, error: 'Not authenticated' },
+        { error: 'Unauthorized' },
         { status: 401 }
       );
     }
@@ -96,75 +81,89 @@ export async function DELETE(
 
     // Verify ownership
     const account = await db.cloudflareAccount.findFirst({
-      where: { id, userId: user.id },
+      where: {
+        id,
+        userId: user.id,
+      },
     });
 
     if (!account) {
       return NextResponse.json(
-        { success: false, error: 'Account not found' },
+        { error: 'Account not found' },
         { status: 404 }
       );
     }
 
-    // Delete account (cascades to related data)
+    // Delete account (cascade will delete all related resources)
     await db.cloudflareAccount.delete({
       where: { id },
     });
 
     return NextResponse.json({ success: true });
   } catch (error) {
-    console.error('Error deleting account:', error);
+    console.error('Delete account error:', error);
     return NextResponse.json(
-      { success: false, error: 'Failed to delete account' },
+      { error: 'Internal server error' },
       { status: 500 }
     );
   }
 }
 
-// PUT - Update account
+// PUT - Update an account
 export async function PUT(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const user = await getCurrentUser(request);
+    const user = await getSessionUser();
+    
     if (!user) {
       return NextResponse.json(
-        { success: false, error: 'Not authenticated' },
+        { error: 'Unauthorized' },
         { status: 401 }
       );
     }
 
     const { id } = await params;
     const body = await request.json();
-    const { name, email, isActive } = body;
+    const { name, isActive } = body;
 
     // Verify ownership
     const account = await db.cloudflareAccount.findFirst({
-      where: { id, userId: user.id },
+      where: {
+        id,
+        userId: user.id,
+      },
     });
 
     if (!account) {
       return NextResponse.json(
-        { success: false, error: 'Account not found' },
+        { error: 'Account not found' },
         { status: 404 }
       );
     }
 
+    // Update account
     const updated = await db.cloudflareAccount.update({
       where: { id },
       data: {
-        ...(name && { name }),
-        ...(email !== undefined && { email }),
-        ...(isActive !== undefined && { isActive }),
+        name: name || account.name,
+        isActive: isActive !== undefined ? isActive : account.isActive,
       },
     });
 
-    return NextResponse.json({ success: true, account: updated });
+    return NextResponse.json({
+      success: true,
+      account: {
+        id: updated.id,
+        name: updated.name,
+        isActive: updated.isActive,
+      },
+    });
   } catch (error) {
-    console.error('Error updating account:', error);
+    console.error('Update account error:', error);
     return NextResponse.json(
-      { success: false, error: 'Failed to update account' },
+      { error: 'Internal server error' },
       { status: 500 }
     );
   }

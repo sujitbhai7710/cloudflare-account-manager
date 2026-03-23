@@ -1,67 +1,49 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
+import { getSessionUser } from '@/lib/auth';
 import { db } from '@/lib/db';
-import { decrypt } from '@/lib/encryption';
-import { getCFConfig, queryD1Database, getD1DatabaseSchema } from '@/lib/cloudflare-api';
-import { z } from 'zod';
 
-// Get current user from session
-async function getCurrentUser(request: NextRequest) {
-  const token = request.cookies.get('auth_token')?.value;
-  if (!token) return null;
-
-  const session = await db.session.findUnique({
-    where: { token },
-    include: { user: true },
-  });
-
-  if (!session || session.expiresAt < new Date()) {
-    return null;
-  }
-
-  return session.user;
-}
-
-// GET - List all D1 databases from all accounts
-export async function GET(request: NextRequest) {
+// GET - Get all D1 databases from all accounts
+export async function GET() {
   try {
-    const user = await getCurrentUser(request);
+    const user = await getSessionUser();
+    
     if (!user) {
       return NextResponse.json(
-        { success: false, error: 'Not authenticated' },
+        { error: 'Unauthorized' },
         { status: 401 }
       );
     }
 
-    // Get all accounts for user
+    // Get all D1 databases with account info
     const accounts = await db.cloudflareAccount.findMany({
-      where: { userId: user.id, isActive: true },
-      include: { databases: true },
+      where: {
+        userId: user.id,
+        isActive: true,
+      },
+      include: {
+        d1Databases: true,
+      },
     });
 
-    // Build databases list with account info
-    const databases = [];
+    // Flatten databases with account name
+    const databases = accounts.flatMap(account =>
+      account.d1Databases.map(db => ({
+        id: db.id,
+        databaseId: db.databaseId,
+        name: db.name,
+        version: db.version,
+        accountId: account.id,
+        accountName: account.name,
+        createdAt: db.createdAt,
+        updatedAt: db.updatedAt,
+      }))
+    );
 
-    for (const account of accounts) {
-      for (const dbase of account.databases) {
-        databases.push({
-          id: dbase.id,
-          databaseId: dbase.databaseId,
-          name: dbase.name,
-          version: dbase.version,
-          createdAt: dbase.createdAt,
-          account: {
-            id: account.id,
-            name: account.name,
-          },
-        });
-      }
-    }
-
-    return NextResponse.json({ success: true, databases });
+    return NextResponse.json({ databases });
   } catch (error) {
-    console.error('Error fetching databases:', error);
+    console.error('Get D1 databases error:', error);
     return NextResponse.json(
-      { success: false, error: 'Failed to fetch databases' },
+      { error: 'Internal server error' },
       { status: 500 }
     );
   }

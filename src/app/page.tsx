@@ -1,15 +1,19 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
-import { useRouter } from 'next/navigation';
+import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { ScrollArea } from '@/components/ui/scroll-area';
-import { Separator } from '@/components/ui/separator';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/ui/table';
 import {
   Dialog,
   DialogContent,
@@ -19,132 +23,147 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-import { Alert, AlertDescription } from '@/components/ui/alert';
-import {
-  Cloud,
-  Server,
-  Database,
-  FolderKanban,
+import { Badge } from '@/components/ui/badge';
+import { Separator } from '@/components/ui/separator';
+import { ScrollArea } from '@/components/ui/scroll-area';
+import { 
+  Loader2, 
+  LogOut, 
+  Plus, 
+  RefreshCw, 
+  Trash2, 
+  Cloud, 
+  Database, 
+  FolderKanban, 
   HardDrive,
-  Plus,
-  RefreshCw,
-  Settings,
-  LogOut,
-  User,
-  Loader2,
-  CheckCircle2,
-  XCircle,
-  MoreVertical,
-  Trash2,
+  Server,
   ExternalLink,
-  Search,
-  Filter,
-  Clock,
   AlertCircle,
+  CheckCircle,
+  Eye,
+  EyeOff
 } from 'lucide-react';
+import { toast } from 'sonner';
 
 // Types
+interface User {
+  id: string;
+  email: string;
+  accountsCount: number;
+}
+
 interface Account {
   id: string;
   name: string;
-  email: string | null;
+  email?: string;
   accountId: string;
   isActive: boolean;
-  lastSync: string | null;
-  createdAt: string;
+  lastSync?: string;
   stats: {
     workers: number;
-    databases: number;
+    d1Databases: number;
     kvNamespaces: number;
     r2Buckets: number;
   };
+  createdAt: string;
 }
 
 interface Worker {
   id: string;
   workerId: string;
   name: string;
-  compatibilityDate: string | null;
+  accountId: string;
+  accountName: string;
   createdAt: string;
-  account: { id: string; name: string };
 }
 
 interface D1Database {
   id: string;
   databaseId: string;
   name: string;
-  version: string | null;
+  version?: string;
+  accountId: string;
+  accountName: string;
   createdAt: string;
-  account: { id: string; name: string };
 }
 
 interface KVNamespace {
   id: string;
   namespaceId: string;
   title: string;
+  accountId: string;
+  accountName: string;
   createdAt: string;
-  account: { id: string; name: string };
 }
 
 interface R2Bucket {
   id: string;
   bucketName: string;
-  creationDate: string | null;
+  creationDate?: string;
+  accountId: string;
+  accountName: string;
   createdAt: string;
-  account: { id: string; name: string };
 }
 
-export default function Dashboard() {
-  const router = useRouter();
-
-  // State
-  const [user, setUser] = useState<{ id: string; email: string; name: string | null } | null>(null);
+export default function HomePage() {
+  // Auth state
+  const [user, setUser] = useState<User | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  
+  // Form state
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [authMode, setAuthMode] = useState<'login' | 'signup'>('login');
+  
+  // Data state
   const [accounts, setAccounts] = useState<Account[]>([]);
   const [workers, setWorkers] = useState<Worker[]>([]);
   const [databases, setDatabases] = useState<D1Database[]>([]);
-  const [kvNamespaces, setKVNamespaces] = useState<KVNamespace[]>([]);
-  const [r2Buckets, setR2Buckets] = useState<R2Bucket[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [namespaces, setNamespaces] = useState<KVNamespace[]>([]);
+  const [buckets, setBuckets] = useState<R2Bucket[]>([]);
   const [activeTab, setActiveTab] = useState('overview');
-  const [searchQuery, setSearchQuery] = useState('');
-  const [filterAccount, setFilterAccount] = useState<string>('all');
-
-  // Add Account Dialog
-  const [addDialogOpen, setAddDialogOpen] = useState(false);
+  
+  // Modal state
+  const [showAddAccount, setShowAddAccount] = useState(false);
   const [newAccount, setNewAccount] = useState({
     name: '',
     email: '',
     accountId: '',
     apiToken: '',
   });
-  const [addingAccount, setAddingAccount] = useState(false);
-  const [addError, setAddError] = useState('');
-
-  // Sync state
-  const [syncing, setSyncing] = useState<string | null>(null);
-
-  // Check authentication and fetch data
-  const fetchData = useCallback(async () => {
+  const [showToken, setShowToken] = useState(false);
+  const [syncingAccountId, setSyncingAccountId] = useState<string | null>(null);
+  
+  // Check auth on mount
+  useEffect(() => {
+    checkAuth();
+  }, []);
+  
+  // Fetch data when user logs in
+  useEffect(() => {
+    if (user) {
+      fetchData();
+    }
+  }, [user]);
+  
+  const checkAuth = async () => {
     try {
-      // Check auth
-      const authRes = await fetch('/api/auth/me');
-      const authData = await authRes.json();
-
-      if (!authData.success) {
-        router.push('/login');
-        return;
+      const res = await fetch('/api/auth/me');
+      if (res.ok) {
+        const data = await res.json();
+        setUser(data.user);
       }
-
-      setUser(authData.user);
-
-      // Fetch all data in parallel
+    } catch {
+      // Not logged in
+    } finally {
+      setIsLoading(false);
+    }
+  };
+  
+  const fetchData = async () => {
+    try {
       const [accountsRes, workersRes, d1Res, kvRes, r2Res] = await Promise.all([
         fetch('/api/accounts'),
         fetch('/api/workers'),
@@ -152,745 +171,763 @@ export default function Dashboard() {
         fetch('/api/kv'),
         fetch('/api/r2'),
       ]);
-
-      const [accountsData, workersData, d1Data, kvData, r2Data] = await Promise.all([
-        accountsRes.json(),
-        workersRes.json(),
-        d1Res.json(),
-        kvRes.json(),
-        r2Res.json(),
-      ]);
-
-      if (accountsData.success) setAccounts(accountsData.accounts);
-      if (workersData.success) setWorkers(workersData.workers);
-      if (d1Data.success) setDatabases(d1Data.databases);
-      if (kvData.success) setKVNamespaces(kvData.namespaces);
-      if (r2Data.success) setR2Buckets(r2Data.buckets);
+      
+      if (accountsRes.ok) {
+        const data = await accountsRes.json();
+        setAccounts(data.accounts);
+      }
+      if (workersRes.ok) {
+        const data = await workersRes.json();
+        setWorkers(data.workers);
+      }
+      if (d1Res.ok) {
+        const data = await d1Res.json();
+        setDatabases(data.databases);
+      }
+      if (kvRes.ok) {
+        const data = await kvRes.json();
+        setNamespaces(data.namespaces);
+      }
+      if (r2Res.ok) {
+        const data = await r2Res.json();
+        setBuckets(data.buckets);
+      }
     } catch (error) {
       console.error('Failed to fetch data:', error);
-    } finally {
-      setLoading(false);
     }
-  }, [router]);
-
-  useEffect(() => {
-    fetchData();
-  }, [fetchData]);
-
-  // Logout
-  const handleLogout = async () => {
-    await fetch('/api/auth/logout', { method: 'POST' });
-    router.push('/login');
   };
-
-  // Add account
+  
+  const handleAuth = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    
+    try {
+      const endpoint = authMode === 'login' ? '/api/auth/login' : '/api/auth/signup';
+      const body = authMode === 'login' 
+        ? { email, password }
+        : { email, password, confirmPassword };
+      
+      const res = await fetch(endpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+      });
+      
+      const data = await res.json();
+      
+      if (!res.ok) {
+        toast.error(data.error || 'Authentication failed');
+        return;
+      }
+      
+      toast.success(authMode === 'login' ? 'Welcome back!' : 'Account created!');
+      checkAuth();
+    } catch (error) {
+      toast.error('Something went wrong');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+  
+  const handleLogout = async () => {
+    try {
+      await fetch('/api/auth/logout', { method: 'POST' });
+      setUser(null);
+      setAccounts([]);
+      setWorkers([]);
+      setDatabases([]);
+      setNamespaces([]);
+      setBuckets([]);
+      toast.success('Logged out successfully');
+    } catch (error) {
+      toast.error('Failed to logout');
+    }
+  };
+  
   const handleAddAccount = async () => {
     if (!newAccount.name || !newAccount.accountId || !newAccount.apiToken) {
-      setAddError('Please fill in all required fields');
+      toast.error('Please fill in all required fields');
       return;
     }
-
-    setAddingAccount(true);
-    setAddError('');
-
+    
+    setIsSubmitting(true);
     try {
       const res = await fetch('/api/accounts', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newAccount),
       });
-
+      
       const data = await res.json();
-
-      if (data.success) {
-        setAddDialogOpen(false);
-        setNewAccount({ name: '', email: '', accountId: '', apiToken: '' });
-        fetchData();
-      } else {
-        setAddError(data.error || 'Failed to add account');
+      
+      if (!res.ok) {
+        toast.error(data.error || 'Failed to add account');
+        return;
       }
-    } catch {
-      setAddError('Failed to add account');
-    } finally {
-      setAddingAccount(false);
-    }
-  };
-
-  // Sync account
-  const handleSyncAccount = async (accountId: string) => {
-    setSyncing(accountId);
-    try {
-      const res = await fetch(`/api/accounts/${accountId}/sync`, { method: 'POST' });
-      const data = await res.json();
-      if (data.success) {
-        fetchData();
-      }
-    } catch (error) {
-      console.error('Sync failed:', error);
-    } finally {
-      setSyncing(null);
-    }
-  };
-
-  // Delete account
-  const handleDeleteAccount = async (accountId: string) => {
-    if (!confirm('Are you sure you want to delete this account? All cached data will be removed.')) return;
-
-    try {
-      await fetch(`/api/accounts/${accountId}`, { method: 'DELETE' });
+      
+      toast.success('Account added successfully!');
+      setShowAddAccount(false);
+      setNewAccount({ name: '', email: '', accountId: '', apiToken: '' });
       fetchData();
     } catch (error) {
-      console.error('Delete failed:', error);
+      toast.error('Failed to add account');
+    } finally {
+      setIsSubmitting(false);
     }
   };
-
-  // Filter resources
-  const filterResources = <T extends { account: { id: string; name: string }; name?: string; title?: string; workerId?: string; bucketName?: string }>(
-    resources: T[]
-  ): T[] => {
-    return resources.filter((resource) => {
-      const matchesSearch = searchQuery === '' ||
-        (resource.name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        resource.title?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        resource.workerId?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        resource.bucketName?.toLowerCase().includes(searchQuery.toLowerCase()));
-
-      const matchesAccount = filterAccount === 'all' || resource.account.id === filterAccount;
-
-      return matchesSearch && matchesAccount;
-    });
+  
+  const handleDeleteAccount = async (id: string) => {
+    if (!confirm('Are you sure you want to delete this account? This will remove all cached data.')) {
+      return;
+    }
+    
+    try {
+      const res = await fetch(`/api/accounts/${id}`, { method: 'DELETE' });
+      
+      if (!res.ok) {
+        toast.error('Failed to delete account');
+        return;
+      }
+      
+      toast.success('Account deleted');
+      fetchData();
+    } catch (error) {
+      toast.error('Failed to delete account');
+    }
   };
-
-  if (loading) {
+  
+  const handleSync = async (id: string) => {
+    setSyncingAccountId(id);
+    try {
+      const res = await fetch(`/api/accounts/${id}/sync`, { method: 'POST' });
+      const data = await res.json();
+      
+      if (!res.ok) {
+        toast.error(data.error || 'Failed to sync');
+        return;
+      }
+      
+      toast.success(`Synced: ${data.stats.workers} workers, ${data.stats.databases} databases, ${data.stats.namespaces} KV, ${data.stats.buckets} R2`);
+      fetchData();
+    } catch (error) {
+      toast.error('Failed to sync account');
+    } finally {
+      setSyncingAccountId(null);
+    }
+  };
+  
+  // Stats
+  const stats = {
+    accounts: accounts.length,
+    workers: workers.length,
+    databases: databases.length,
+    namespaces: namespaces.length,
+    buckets: buckets.length,
+  };
+  
+  // Loading state
+  if (isLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
-        <div className="flex flex-col items-center gap-4">
-          <Loader2 className="h-12 w-12 animate-spin text-orange-500" />
-          <p className="text-slate-400">Loading dashboard...</p>
-        </div>
+        <Loader2 className="w-8 h-8 animate-spin text-blue-500" />
       </div>
     );
   }
-
+  
+  // Auth form
+  if (!user) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-4">
+        <Card className="w-full max-w-md border-slate-700 bg-slate-800/50 backdrop-blur">
+          <CardHeader className="text-center">
+            <div className="flex justify-center mb-4">
+              <div className="p-3 rounded-full bg-gradient-to-br from-orange-500 to-red-500">
+                <Cloud className="w-8 h-8 text-white" />
+              </div>
+            </div>
+            <CardTitle className="text-2xl text-white">Cloudflare Manager</CardTitle>
+            <CardDescription className="text-slate-400">
+              Manage multiple Cloudflare accounts in one place
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <Tabs value={authMode} onValueChange={(v) => setAuthMode(v as 'login' | 'signup')}>
+              <TabsList className="grid w-full grid-cols-2 bg-slate-700">
+                <TabsTrigger value="login" className="data-[state=active]:bg-slate-600">Login</TabsTrigger>
+                <TabsTrigger value="signup" className="data-[state=active]:bg-slate-600">Sign Up</TabsTrigger>
+              </TabsList>
+              
+              <TabsContent value="login" className="mt-4">
+                <form onSubmit={handleAuth} className="space-y-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="email" className="text-slate-200">Email</Label>
+                    <Input
+                      id="email"
+                      type="email"
+                      placeholder="you@example.com"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      required
+                      className="bg-slate-700 border-slate-600 text-white placeholder:text-slate-400"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="password" className="text-slate-200">Password</Label>
+                    <Input
+                      id="password"
+                      type="password"
+                      placeholder="••••••••"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      required
+                      className="bg-slate-700 border-slate-600 text-white placeholder:text-slate-400"
+                    />
+                  </div>
+                  <Button type="submit" className="w-full bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600" disabled={isSubmitting}>
+                    {isSubmitting ? <Loader2 className="w-4 h-4 animate-spin mr-2" /> : null}
+                    Sign In
+                  </Button>
+                </form>
+              </TabsContent>
+              
+              <TabsContent value="signup" className="mt-4">
+                <form onSubmit={handleAuth} className="space-y-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="signup-email" className="text-slate-200">Email</Label>
+                    <Input
+                      id="signup-email"
+                      type="email"
+                      placeholder="you@example.com"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      required
+                      className="bg-slate-700 border-slate-600 text-white placeholder:text-slate-400"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="signup-password" className="text-slate-200">Password</Label>
+                    <Input
+                      id="signup-password"
+                      type="password"
+                      placeholder="••••••••"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      required
+                      className="bg-slate-700 border-slate-600 text-white placeholder:text-slate-400"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="confirm-password" className="text-slate-200">Confirm Password</Label>
+                    <Input
+                      id="confirm-password"
+                      type="password"
+                      placeholder="••••••••"
+                      value={confirmPassword}
+                      onChange={(e) => setConfirmPassword(e.target.value)}
+                      required
+                      className="bg-slate-700 border-slate-600 text-white placeholder:text-slate-400"
+                    />
+                  </div>
+                  <Button type="submit" className="w-full bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600" disabled={isSubmitting}>
+                    {isSubmitting ? <Loader2 className="w-4 h-4 animate-spin mr-2" /> : null}
+                    Create Account
+                  </Button>
+                </form>
+              </TabsContent>
+            </Tabs>
+          </CardContent>
+        </Card>
+      </div>
+    );
+  }
+  
+  // Dashboard
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
       {/* Header */}
-      <header className="border-b border-slate-700 bg-slate-900/50 backdrop-blur-sm sticky top-0 z-50">
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="p-2 bg-gradient-to-br from-orange-500 to-amber-500 rounded-lg">
-                <Cloud className="h-6 w-6 text-white" />
-              </div>
-              <div>
-                <h1 className="text-xl font-bold text-white">Cloudflare Manager</h1>
-                <p className="text-xs text-slate-400">{accounts.length} account{accounts.length !== 1 ? 's' : ''} connected</p>
-              </div>
+      <header className="border-b border-slate-700 bg-slate-800/50 backdrop-blur sticky top-0 z-50">
+        <div className="container mx-auto px-4 py-3 flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <div className="p-2 rounded-lg bg-gradient-to-br from-orange-500 to-red-500">
+              <Cloud className="w-5 h-5 text-white" />
             </div>
-
-            <div className="flex items-center gap-4">
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" className="text-slate-300 hover:text-white hover:bg-slate-700">
-                    <User className="h-4 w-4 mr-2" />
-                    {user?.name || user?.email}
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent className="bg-slate-800 border-slate-700">
-                  <DropdownMenuItem onClick={handleLogout} className="text-slate-300 hover:text-white hover:bg-slate-700">
-                    <LogOut className="h-4 w-4 mr-2" />
-                    Logout
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
+            <div>
+              <h1 className="text-lg font-semibold text-white">Cloudflare Manager</h1>
+              <p className="text-xs text-slate-400">{user.email}</p>
             </div>
+          </div>
+          <div className="flex items-center gap-2">
+            <Button variant="ghost" size="sm" onClick={fetchData} className="text-slate-300 hover:text-white">
+              <RefreshCw className="w-4 h-4 mr-2" />
+              Refresh
+            </Button>
+            <Button variant="ghost" size="sm" onClick={handleLogout} className="text-slate-300 hover:text-white">
+              <LogOut className="w-4 h-4 mr-2" />
+              Logout
+            </Button>
           </div>
         </div>
       </header>
-
+      
       {/* Main Content */}
       <main className="container mx-auto px-4 py-6">
         {/* Stats Cards */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-6">
           <Card className="bg-slate-800/50 border-slate-700">
-            <CardContent className="pt-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm text-slate-400">Accounts</p>
-                  <p className="text-3xl font-bold text-white">{accounts.length}</p>
+            <CardContent className="pt-4">
+              <div className="flex items-center gap-3">
+                <div className="p-2 rounded-lg bg-blue-500/20">
+                  <Server className="w-5 h-5 text-blue-400" />
                 </div>
-                <div className="p-3 bg-orange-500/20 rounded-lg">
-                  <Cloud className="h-6 w-6 text-orange-500" />
+                <div>
+                  <p className="text-2xl font-bold text-white">{stats.accounts}</p>
+                  <p className="text-xs text-slate-400">Accounts</p>
                 </div>
               </div>
             </CardContent>
           </Card>
-
+          
           <Card className="bg-slate-800/50 border-slate-700">
-            <CardContent className="pt-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm text-slate-400">Workers</p>
-                  <p className="text-3xl font-bold text-green-500">{workers.length}</p>
+            <CardContent className="pt-4">
+              <div className="flex items-center gap-3">
+                <div className="p-2 rounded-lg bg-orange-500/20">
+                  <Cloud className="w-5 h-5 text-orange-400" />
                 </div>
-                <div className="p-3 bg-green-500/20 rounded-lg">
-                  <Server className="h-6 w-6 text-green-500" />
+                <div>
+                  <p className="text-2xl font-bold text-white">{stats.workers}</p>
+                  <p className="text-xs text-slate-400">Workers</p>
                 </div>
               </div>
             </CardContent>
           </Card>
-
+          
           <Card className="bg-slate-800/50 border-slate-700">
-            <CardContent className="pt-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm text-slate-400">D1 Databases</p>
-                  <p className="text-3xl font-bold text-blue-500">{databases.length}</p>
+            <CardContent className="pt-4">
+              <div className="flex items-center gap-3">
+                <div className="p-2 rounded-lg bg-green-500/20">
+                  <Database className="w-5 h-5 text-green-400" />
                 </div>
-                <div className="p-3 bg-blue-500/20 rounded-lg">
-                  <Database className="h-6 w-6 text-blue-500" />
+                <div>
+                  <p className="text-2xl font-bold text-white">{stats.databases}</p>
+                  <p className="text-xs text-slate-400">D1 Databases</p>
                 </div>
               </div>
             </CardContent>
           </Card>
-
+          
           <Card className="bg-slate-800/50 border-slate-700">
-            <CardContent className="pt-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm text-slate-400">KV + R2</p>
-                  <p className="text-3xl font-bold text-purple-500">{kvNamespaces.length + r2Buckets.length}</p>
+            <CardContent className="pt-4">
+              <div className="flex items-center gap-3">
+                <div className="p-2 rounded-lg bg-purple-500/20">
+                  <FolderKanban className="w-5 h-5 text-purple-400" />
                 </div>
-                <div className="p-3 bg-purple-500/20 rounded-lg">
-                  <FolderKanban className="h-6 w-6 text-purple-500" />
+                <div>
+                  <p className="text-2xl font-bold text-white">{stats.namespaces}</p>
+                  <p className="text-xs text-slate-400">KV Namespaces</p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+          
+          <Card className="bg-slate-800/50 border-slate-700">
+            <CardContent className="pt-4">
+              <div className="flex items-center gap-3">
+                <div className="p-2 rounded-lg bg-cyan-500/20">
+                  <HardDrive className="w-5 h-5 text-cyan-400" />
+                </div>
+                <div>
+                  <p className="text-2xl font-bold text-white">{stats.buckets}</p>
+                  <p className="text-xs text-slate-400">R2 Buckets</p>
                 </div>
               </div>
             </CardContent>
           </Card>
         </div>
-
+        
         {/* Tabs */}
-        <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
-          <div className="flex items-center justify-between">
-            <TabsList className="bg-slate-800/50 border border-slate-700 p-1">
-              <TabsTrigger value="overview" className="data-[state=active]:bg-orange-500 data-[state=active]:text-white text-slate-400">
-                <Cloud className="h-4 w-4 mr-2" />
-                Overview
-              </TabsTrigger>
-              <TabsTrigger value="workers" className="data-[state=active]:bg-orange-500 data-[state=active]:text-white text-slate-400">
-                <Server className="h-4 w-4 mr-2" />
-                Workers
-              </TabsTrigger>
-              <TabsTrigger value="d1" className="data-[state=active]:bg-orange-500 data-[state=active]:text-white text-slate-400">
-                <Database className="h-4 w-4 mr-2" />
-                D1
-              </TabsTrigger>
-              <TabsTrigger value="kv" className="data-[state=active]:bg-orange-500 data-[state=active]:text-white text-slate-400">
-                <FolderKanban className="h-4 w-4 mr-2" />
-                KV
-              </TabsTrigger>
-              <TabsTrigger value="r2" className="data-[state=active]:bg-orange-500 data-[state=active]:text-white text-slate-400">
-                <HardDrive className="h-4 w-4 mr-2" />
-                R2
-              </TabsTrigger>
-            </TabsList>
-
-            {/* Add Account Button */}
-            <Dialog open={addDialogOpen} onOpenChange={setAddDialogOpen}>
-              <DialogTrigger asChild>
-                <Button className="bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600">
-                  <Plus className="h-4 w-4 mr-2" />
-                  Add Account
-                </Button>
-              </DialogTrigger>
-              <DialogContent className="bg-slate-800 border-slate-700 text-white max-w-md">
-                <DialogHeader>
-                  <DialogTitle>Add Cloudflare Account</DialogTitle>
-                  <DialogDescription className="text-slate-400">
-                    Connect your Cloudflare account using an API token
-                  </DialogDescription>
-                </DialogHeader>
-                <div className="space-y-4 py-4">
-                  {addError && (
-                    <Alert className="bg-red-900/20 border-red-800 text-red-400">
-                      <AlertCircle className="h-4 w-4" />
-                      <AlertDescription>{addError}</AlertDescription>
-                    </Alert>
-                  )}
-
-                  <div className="space-y-2">
-                    <Label className="text-slate-300">Account Name *</Label>
-                    <Input
-                      placeholder="Production Account"
-                      value={newAccount.name}
-                      onChange={(e) => setNewAccount({ ...newAccount, name: e.target.value })}
-                      className="bg-slate-900/50 border-slate-600 text-white"
-                    />
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label className="text-slate-300">Email (optional)</Label>
-                    <Input
-                      type="email"
-                      placeholder="admin@example.com"
-                      value={newAccount.email}
-                      onChange={(e) => setNewAccount({ ...newAccount, email: e.target.value })}
-                      className="bg-slate-900/50 border-slate-600 text-white"
-                    />
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label className="text-slate-300">Cloudflare Account ID *</Label>
-                    <Input
-                      placeholder="abc123def456..."
-                      value={newAccount.accountId}
-                      onChange={(e) => setNewAccount({ ...newAccount, accountId: e.target.value })}
-                      className="bg-slate-900/50 border-slate-600 text-white font-mono text-sm"
-                    />
-                    <p className="text-xs text-slate-500">Found in Cloudflare Dashboard sidebar</p>
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label className="text-slate-300">API Token *</Label>
-                    <Input
-                      type="password"
-                      placeholder="Enter your API token"
-                      value={newAccount.apiToken}
-                      onChange={(e) => setNewAccount({ ...newAccount, apiToken: e.target.value })}
-                      className="bg-slate-900/50 border-slate-600 text-white font-mono text-sm"
-                    />
-                    <p className="text-xs text-slate-500">
-                      Create token with Workers, D1, KV, R2 read permissions
-                    </p>
-                  </div>
-                </div>
-                <DialogFooter>
-                  <Button
-                    variant="outline"
-                    onClick={() => setAddDialogOpen(false)}
-                    className="bg-slate-700 border-slate-600 text-white hover:bg-slate-600"
-                  >
-                    Cancel
-                  </Button>
-                  <Button
-                    onClick={handleAddAccount}
-                    disabled={addingAccount}
-                    className="bg-orange-500 hover:bg-orange-600"
-                  >
-                    {addingAccount ? (
-                      <>
-                        <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-                        Adding...
-                      </>
-                    ) : (
-                      'Add Account'
-                    )}
-                  </Button>
-                </DialogFooter>
-              </DialogContent>
-            </Dialog>
-          </div>
-
-          {/* Search and Filter */}
-          {(activeTab !== 'overview') && (
-            <div className="flex items-center gap-4">
-              <div className="relative flex-1 max-w-md">
-                <Search className="absolute left-3 top-3 h-4 w-4 text-slate-500" />
-                <Input
-                  placeholder="Search resources..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-10 bg-slate-800/50 border-slate-700 text-white"
-                />
-              </div>
-              <select
-                value={filterAccount}
-                onChange={(e) => setFilterAccount(e.target.value)}
-                className="bg-slate-800/50 border border-slate-700 rounded-md px-3 py-2 text-white"
-              >
-                <option value="all">All Accounts</option>
-                {accounts.map((acc) => (
-                  <option key={acc.id} value={acc.id}>{acc.name}</option>
-                ))}
-              </select>
-            </div>
-          )}
-
+        <Tabs value={activeTab} onValueChange={setActiveTab}>
+          <TabsList className="bg-slate-800 border border-slate-700 mb-4">
+            <TabsTrigger value="overview" className="data-[state=active]:bg-slate-700">Overview</TabsTrigger>
+            <TabsTrigger value="workers" className="data-[state=active]:bg-slate-700">Workers</TabsTrigger>
+            <TabsTrigger value="d1" className="data-[state=active]:bg-slate-700">D1</TabsTrigger>
+            <TabsTrigger value="kv" className="data-[state=active]:bg-slate-700">KV</TabsTrigger>
+            <TabsTrigger value="r2" className="data-[state=active]:bg-slate-700">R2</TabsTrigger>
+          </TabsList>
+          
           {/* Overview Tab */}
-          <TabsContent value="overview" className="space-y-6">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              {/* Accounts List */}
-              <Card className="bg-slate-800/50 border-slate-700">
-                <CardHeader>
-                  <CardTitle className="text-white flex items-center gap-2">
-                    <Cloud className="h-5 w-5 text-orange-500" />
-                    Connected Accounts
-                  </CardTitle>
-                  <CardDescription className="text-slate-400">
-                    All your Cloudflare accounts
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  {accounts.length === 0 ? (
-                    <div className="py-8 text-center text-slate-500">
-                      <Cloud className="h-12 w-12 mx-auto mb-4 opacity-50" />
-                      <p>No accounts connected yet</p>
-                      <Button
-                        onClick={() => setAddDialogOpen(true)}
-                        className="mt-4 bg-orange-500 hover:bg-orange-600"
+          <TabsContent value="overview">
+            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+              {/* Add Account Button */}
+              <Dialog open={showAddAccount} onOpenChange={setShowAddAccount}>
+                <DialogTrigger asChild>
+                  <Card className="bg-slate-800/50 border-slate-700 border-dashed cursor-pointer hover:bg-slate-700/50 transition-colors">
+                    <CardContent className="flex flex-col items-center justify-center py-8">
+                      <Plus className="w-10 h-10 text-slate-500 mb-2" />
+                      <p className="text-slate-400">Add Cloudflare Account</p>
+                    </CardContent>
+                  </Card>
+                </DialogTrigger>
+                <DialogContent className="bg-slate-800 border-slate-700 text-white max-w-md">
+                  <DialogHeader>
+                    <DialogTitle>Add Cloudflare Account</DialogTitle>
+                    <DialogDescription className="text-slate-400">
+                      Add a Cloudflare account to manage its resources
+                    </DialogDescription>
+                  </DialogHeader>
+                  <div className="space-y-4 py-4">
+                    <div className="space-y-2">
+                      <Label className="text-slate-200">Account Name *</Label>
+                      <Input
+                        placeholder="My Production Account"
+                        value={newAccount.name}
+                        onChange={(e) => setNewAccount({ ...newAccount, name: e.target.value })}
+                        className="bg-slate-700 border-slate-600 text-white"
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <Label className="text-slate-200">Cloudflare Account ID *</Label>
+                      <Input
+                        placeholder="abc123def456..."
+                        value={newAccount.accountId}
+                        onChange={(e) => setNewAccount({ ...newAccount, accountId: e.target.value })}
+                        className="bg-slate-700 border-slate-600 text-white"
+                      />
+                      <p className="text-xs text-slate-400">Find in Cloudflare Dashboard → Overview</p>
+                    </div>
+                    <div className="space-y-2">
+                      <Label className="text-slate-200">API Token *</Label>
+                      <div className="relative">
+                        <Input
+                          type={showToken ? 'text' : 'password'}
+                          placeholder="••••••••••••••••"
+                          value={newAccount.apiToken}
+                          onChange={(e) => setNewAccount({ ...newAccount, apiToken: e.target.value })}
+                          className="bg-slate-700 border-slate-600 text-white pr-10"
+                        />
+                        <button
+                          type="button"
+                          onClick={() => setShowToken(!showToken)}
+                          className="absolute right-2 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white"
+                        >
+                          {showToken ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                        </button>
+                      </div>
+                      <p className="text-xs text-slate-400">Create token with Workers, D1, KV, R2 read permissions</p>
+                    </div>
+                    <div className="space-y-2">
+                      <Label className="text-slate-200">Email (optional)</Label>
+                      <Input
+                        type="email"
+                        placeholder="admin@example.com"
+                        value={newAccount.email}
+                        onChange={(e) => setNewAccount({ ...newAccount, email: e.target.value })}
+                        className="bg-slate-700 border-slate-600 text-white"
+                      />
+                    </div>
+                  </div>
+                  <DialogFooter>
+                    <Button variant="outline" onClick={() => setShowAddAccount(false)} className="border-slate-600 text-slate-300">
+                      Cancel
+                    </Button>
+                    <Button onClick={handleAddAccount} disabled={isSubmitting} className="bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600">
+                      {isSubmitting ? <Loader2 className="w-4 h-4 animate-spin mr-2" /> : null}
+                      Add Account
+                    </Button>
+                  </DialogFooter>
+                </DialogContent>
+              </Dialog>
+              
+              {/* Account Cards */}
+              {accounts.map((account) => (
+                <Card key={account.id} className="bg-slate-800/50 border-slate-700">
+                  <CardHeader className="pb-3">
+                    <div className="flex items-center justify-between">
+                      <CardTitle className="text-lg text-white">{account.name}</CardTitle>
+                      <div className="flex items-center gap-1">
+                        {account.isActive ? (
+                          <Badge variant="outline" className="text-green-400 border-green-400">Active</Badge>
+                        ) : (
+                          <Badge variant="outline" className="text-slate-400 border-slate-400">Inactive</Badge>
+                        )}
+                      </div>
+                    </div>
+                    <CardDescription className="text-slate-400">
+                      ID: {account.accountId.slice(0, 8)}...
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="grid grid-cols-2 gap-2 text-sm mb-4">
+                      <div className="bg-slate-700/50 rounded p-2">
+                        <p className="text-slate-400">Workers</p>
+                        <p className="text-xl font-semibold text-white">{account.stats.workers}</p>
+                      </div>
+                      <div className="bg-slate-700/50 rounded p-2">
+                        <p className="text-slate-400">D1</p>
+                        <p className="text-xl font-semibold text-white">{account.stats.d1Databases}</p>
+                      </div>
+                      <div className="bg-slate-700/50 rounded p-2">
+                        <p className="text-slate-400">KV</p>
+                        <p className="text-xl font-semibold text-white">{account.stats.kvNamespaces}</p>
+                      </div>
+                      <div className="bg-slate-700/50 rounded p-2">
+                        <p className="text-slate-400">R2</p>
+                        <p className="text-xl font-semibold text-white">{account.stats.r2Buckets}</p>
+                      </div>
+                    </div>
+                    <div className="flex gap-2">
+                      <Button 
+                        size="sm" 
+                        variant="outline" 
+                        onClick={() => handleSync(account.id)}
+                        disabled={syncingAccountId === account.id}
+                        className="flex-1 border-slate-600 text-slate-300 hover:bg-slate-700"
                       >
-                        <Plus className="h-4 w-4 mr-2" />
-                        Add Your First Account
+                        {syncingAccountId === account.id ? (
+                          <Loader2 className="w-4 h-4 animate-spin mr-1" />
+                        ) : (
+                          <RefreshCw className="w-4 h-4 mr-1" />
+                        )}
+                        Sync
+                      </Button>
+                      <Button 
+                        size="sm" 
+                        variant="outline" 
+                        onClick={() => handleDeleteAccount(account.id)}
+                        className="border-red-600/50 text-red-400 hover:bg-red-600/20"
+                      >
+                        <Trash2 className="w-4 h-4" />
                       </Button>
                     </div>
-                  ) : (
-                    <ScrollArea className="h-[400px]">
-                      <div className="space-y-3">
-                        {accounts.map((account) => (
-                          <div
-                            key={account.id}
-                            className="p-4 bg-slate-900/50 rounded-lg border border-slate-700 hover:border-slate-600 transition-colors"
-                          >
-                            <div className="flex items-center justify-between mb-2">
-                              <div className="flex items-center gap-2">
-                                <div className={`w-2 h-2 rounded-full ${account.isActive ? 'bg-green-500' : 'bg-red-500'}`} />
-                                <span className="font-medium text-white">{account.name}</span>
-                              </div>
-                              <div className="flex items-center gap-1">
-                                <Button
-                                  variant="ghost"
-                                  size="sm"
-                                  onClick={() => handleSyncAccount(account.id)}
-                                  disabled={syncing === account.id}
-                                  className="h-8 w-8 p-0 text-slate-400 hover:text-white"
-                                >
-                                  <RefreshCw className={`h-4 w-4 ${syncing === account.id ? 'animate-spin' : ''}`} />
-                                </Button>
-                                <DropdownMenu>
-                                  <DropdownMenuTrigger asChild>
-                                    <Button variant="ghost" size="sm" className="h-8 w-8 p-0 text-slate-400 hover:text-white">
-                                      <MoreVertical className="h-4 w-4" />
-                                    </Button>
-                                  </DropdownMenuTrigger>
-                                  <DropdownMenuContent className="bg-slate-800 border-slate-700">
-                                    <DropdownMenuItem
-                                      onClick={() => handleSyncAccount(account.id)}
-                                      className="text-slate-300 hover:text-white hover:bg-slate-700"
-                                    >
-                                      <RefreshCw className="h-4 w-4 mr-2" />
-                                      Sync Now
-                                    </DropdownMenuItem>
-                                    <DropdownMenuSeparator className="bg-slate-700" />
-                                    <DropdownMenuItem
-                                      onClick={() => handleDeleteAccount(account.id)}
-                                      className="text-red-400 hover:text-red-300 hover:bg-slate-700"
-                                    >
-                                      <Trash2 className="h-4 w-4 mr-2" />
-                                      Remove Account
-                                    </DropdownMenuItem>
-                                  </DropdownMenuContent>
-                                </DropdownMenu>
-                              </div>
-                            </div>
-                            <div className="flex items-center gap-4 text-xs text-slate-400">
-                              <span className="font-mono">{account.accountId}</span>
-                              {account.lastSync && (
-                                <span className="flex items-center gap-1">
-                                  <Clock className="h-3 w-3" />
-                                  {new Date(account.lastSync).toLocaleString()}
-                                </span>
-                              )}
-                            </div>
-                            <div className="flex items-center gap-4 mt-3 text-sm">
-                              <Badge variant="outline" className="border-slate-600 text-slate-300">
-                                {account.stats.workers} Workers
-                              </Badge>
-                              <Badge variant="outline" className="border-slate-600 text-slate-300">
-                                {account.stats.databases} D1
-                              </Badge>
-                              <Badge variant="outline" className="border-slate-600 text-slate-300">
-                                {account.stats.kvNamespaces} KV
-                              </Badge>
-                              <Badge variant="outline" className="border-slate-600 text-slate-300">
-                                {account.stats.r2Buckets} R2
-                              </Badge>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    </ScrollArea>
-                  )}
-                </CardContent>
-              </Card>
-
-              {/* Quick Stats */}
-              <Card className="bg-slate-800/50 border-slate-700">
-                <CardHeader>
-                  <CardTitle className="text-white">Resource Summary</CardTitle>
-                  <CardDescription className="text-slate-400">
-                    All resources across all accounts
-                  </CardDescription>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <div className="grid grid-cols-2 gap-4">
-                    <div className="p-4 bg-slate-900/50 rounded-lg border border-slate-700">
-                      <div className="flex items-center gap-3">
-                        <Server className="h-8 w-8 text-green-500" />
-                        <div>
-                          <p className="text-2xl font-bold text-white">{workers.length}</p>
-                          <p className="text-sm text-slate-400">Workers</p>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="p-4 bg-slate-900/50 rounded-lg border border-slate-700">
-                      <div className="flex items-center gap-3">
-                        <Database className="h-8 w-8 text-blue-500" />
-                        <div>
-                          <p className="text-2xl font-bold text-white">{databases.length}</p>
-                          <p className="text-sm text-slate-400">D1 Databases</p>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="p-4 bg-slate-900/50 rounded-lg border border-slate-700">
-                      <div className="flex items-center gap-3">
-                        <FolderKanban className="h-8 w-8 text-purple-500" />
-                        <div>
-                          <p className="text-2xl font-bold text-white">{kvNamespaces.length}</p>
-                          <p className="text-sm text-slate-400">KV Namespaces</p>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="p-4 bg-slate-900/50 rounded-lg border border-slate-700">
-                      <div className="flex items-center gap-3">
-                        <HardDrive className="h-8 w-8 text-amber-500" />
-                        <div>
-                          <p className="text-2xl font-bold text-white">{r2Buckets.length}</p>
-                          <p className="text-sm text-slate-400">R2 Buckets</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
+                    {account.lastSync && (
+                      <p className="text-xs text-slate-500 mt-2 text-center">
+                        Last sync: {new Date(account.lastSync).toLocaleString()}
+                      </p>
+                    )}
+                  </CardContent>
+                </Card>
+              ))}
             </div>
+            
+            {accounts.length === 0 && (
+              <div className="text-center py-12">
+                <AlertCircle className="w-12 h-12 text-slate-500 mx-auto mb-4" />
+                <p className="text-slate-400">No Cloudflare accounts added yet</p>
+                <p className="text-sm text-slate-500">Click the card above to add your first account</p>
+              </div>
+            )}
           </TabsContent>
-
+          
           {/* Workers Tab */}
           <TabsContent value="workers">
             <Card className="bg-slate-800/50 border-slate-700">
               <CardHeader>
-                <CardTitle className="text-white">All Workers</CardTitle>
+                <CardTitle className="text-white flex items-center gap-2">
+                  <Cloud className="w-5 h-5 text-orange-400" />
+                  All Workers
+                </CardTitle>
                 <CardDescription className="text-slate-400">
                   Workers from all connected accounts
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                {filterResources(workers).length === 0 ? (
-                  <div className="py-8 text-center text-slate-500">
-                    <Server className="h-12 w-12 mx-auto mb-4 opacity-50" />
-                    <p>No workers found</p>
-                  </div>
-                ) : (
-                  <ScrollArea className="h-[500px]">
-                    <table className="w-full">
-                      <thead className="bg-slate-900/50 sticky top-0">
-                        <tr className="text-left text-slate-400 text-sm">
-                          <th className="p-3">Name</th>
-                          <th className="p-3">Account</th>
-                          <th className="p-3">ID</th>
-                          <th className="p-3">Created</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {filterResources(workers).map((worker) => (
-                          <tr key={worker.id} className="border-t border-slate-700/50 hover:bg-slate-900/30">
-                            <td className="p-3">
-                              <div className="flex items-center gap-2">
-                                <Server className="h-4 w-4 text-green-500" />
-                                <span className="text-white font-medium">{worker.name}</span>
-                              </div>
-                            </td>
-                            <td className="p-3">
+                {workers.length > 0 ? (
+                  <ScrollArea className="h-[400px]">
+                    <Table>
+                      <TableHeader>
+                        <TableRow className="border-slate-700 hover:bg-slate-700/50">
+                          <TableHead className="text-slate-300">Name</TableHead>
+                          <TableHead className="text-slate-300">Worker ID</TableHead>
+                          <TableHead className="text-slate-300">Account</TableHead>
+                          <TableHead className="text-slate-300">Created</TableHead>
+                        </TableRow>
+                      </TableHeader>
+                      <TableBody>
+                        {workers.map((worker) => (
+                          <TableRow key={worker.id} className="border-slate-700 hover:bg-slate-700/50">
+                            <TableCell className="font-medium text-white">{worker.name}</TableCell>
+                            <TableCell className="text-slate-400 font-mono text-sm">{worker.workerId}</TableCell>
+                            <TableCell>
                               <Badge variant="outline" className="border-slate-600 text-slate-300">
-                                {worker.account.name}
+                                {worker.accountName}
                               </Badge>
-                            </td>
-                            <td className="p-3 font-mono text-xs text-slate-400">{worker.workerId}</td>
-                            <td className="p-3 text-sm text-slate-400">
+                            </TableCell>
+                            <TableCell className="text-slate-400 text-sm">
                               {new Date(worker.createdAt).toLocaleDateString()}
-                            </td>
-                          </tr>
+                            </TableCell>
+                          </TableRow>
                         ))}
-                      </tbody>
-                    </table>
+                      </TableBody>
+                    </Table>
                   </ScrollArea>
+                ) : (
+                  <div className="text-center py-8 text-slate-400">
+                    No workers found. Add a Cloudflare account to get started.
+                  </div>
                 )}
               </CardContent>
             </Card>
           </TabsContent>
-
+          
           {/* D1 Tab */}
           <TabsContent value="d1">
             <Card className="bg-slate-800/50 border-slate-700">
               <CardHeader>
-                <CardTitle className="text-white">D1 Databases</CardTitle>
+                <CardTitle className="text-white flex items-center gap-2">
+                  <Database className="w-5 h-5 text-green-400" />
+                  All D1 Databases
+                </CardTitle>
                 <CardDescription className="text-slate-400">
-                  SQLite databases from all accounts
+                  D1 databases from all connected accounts
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                {filterResources(databases).length === 0 ? (
-                  <div className="py-8 text-center text-slate-500">
-                    <Database className="h-12 w-12 mx-auto mb-4 opacity-50" />
-                    <p>No databases found</p>
-                  </div>
-                ) : (
-                  <ScrollArea className="h-[500px]">
-                    <table className="w-full">
-                      <thead className="bg-slate-900/50 sticky top-0">
-                        <tr className="text-left text-slate-400 text-sm">
-                          <th className="p-3">Name</th>
-                          <th className="p-3">Account</th>
-                          <th className="p-3">Database ID</th>
-                          <th className="p-3">Version</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {filterResources(databases).map((db) => (
-                          <tr key={db.id} className="border-t border-slate-700/50 hover:bg-slate-900/30">
-                            <td className="p-3">
-                              <div className="flex items-center gap-2">
-                                <Database className="h-4 w-4 text-blue-500" />
-                                <span className="text-white font-medium">{db.name}</span>
-                              </div>
-                            </td>
-                            <td className="p-3">
+                {databases.length > 0 ? (
+                  <ScrollArea className="h-[400px]">
+                    <Table>
+                      <TableHeader>
+                        <TableRow className="border-slate-700 hover:bg-slate-700/50">
+                          <TableHead className="text-slate-300">Name</TableHead>
+                          <TableHead className="text-slate-300">Database ID</TableHead>
+                          <TableHead className="text-slate-300">Version</TableHead>
+                          <TableHead className="text-slate-300">Account</TableHead>
+                          <TableHead className="text-slate-300">Created</TableHead>
+                        </TableRow>
+                      </TableHeader>
+                      <TableBody>
+                        {databases.map((db) => (
+                          <TableRow key={db.id} className="border-slate-700 hover:bg-slate-700/50">
+                            <TableCell className="font-medium text-white">{db.name}</TableCell>
+                            <TableCell className="text-slate-400 font-mono text-sm">{db.databaseId}</TableCell>
+                            <TableCell>
+                              {db.version && (
+                                <Badge variant="outline" className="border-green-600/50 text-green-400">
+                                  v{db.version}
+                                </Badge>
+                              )}
+                            </TableCell>
+                            <TableCell>
                               <Badge variant="outline" className="border-slate-600 text-slate-300">
-                                {db.account.name}
+                                {db.accountName}
                               </Badge>
-                            </td>
-                            <td className="p-3 font-mono text-xs text-slate-400">{db.databaseId}</td>
-                            <td className="p-3 text-sm text-slate-400">{db.version || '-'}</td>
-                          </tr>
+                            </TableCell>
+                            <TableCell className="text-slate-400 text-sm">
+                              {new Date(db.createdAt).toLocaleDateString()}
+                            </TableCell>
+                          </TableRow>
                         ))}
-                      </tbody>
-                    </table>
+                      </TableBody>
+                    </Table>
                   </ScrollArea>
+                ) : (
+                  <div className="text-center py-8 text-slate-400">
+                    No D1 databases found. Add a Cloudflare account to get started.
+                  </div>
                 )}
               </CardContent>
             </Card>
           </TabsContent>
-
+          
           {/* KV Tab */}
           <TabsContent value="kv">
             <Card className="bg-slate-800/50 border-slate-700">
               <CardHeader>
-                <CardTitle className="text-white">KV Namespaces</CardTitle>
+                <CardTitle className="text-white flex items-center gap-2">
+                  <FolderKanban className="w-5 h-5 text-purple-400" />
+                  All KV Namespaces
+                </CardTitle>
                 <CardDescription className="text-slate-400">
-                  Key-Value namespaces from all accounts
+                  KV namespaces from all connected accounts
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                {filterResources(kvNamespaces).length === 0 ? (
-                  <div className="py-8 text-center text-slate-500">
-                    <FolderKanban className="h-12 w-12 mx-auto mb-4 opacity-50" />
-                    <p>No KV namespaces found</p>
-                  </div>
-                ) : (
-                  <ScrollArea className="h-[500px]">
-                    <table className="w-full">
-                      <thead className="bg-slate-900/50 sticky top-0">
-                        <tr className="text-left text-slate-400 text-sm">
-                          <th className="p-3">Title</th>
-                          <th className="p-3">Account</th>
-                          <th className="p-3">Namespace ID</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {filterResources(kvNamespaces).map((kv) => (
-                          <tr key={kv.id} className="border-t border-slate-700/50 hover:bg-slate-900/30">
-                            <td className="p-3">
-                              <div className="flex items-center gap-2">
-                                <FolderKanban className="h-4 w-4 text-purple-500" />
-                                <span className="text-white font-medium">{kv.title}</span>
-                              </div>
-                            </td>
-                            <td className="p-3">
+                {namespaces.length > 0 ? (
+                  <ScrollArea className="h-[400px]">
+                    <Table>
+                      <TableHeader>
+                        <TableRow className="border-slate-700 hover:bg-slate-700/50">
+                          <TableHead className="text-slate-300">Title</TableHead>
+                          <TableHead className="text-slate-300">Namespace ID</TableHead>
+                          <TableHead className="text-slate-300">Account</TableHead>
+                          <TableHead className="text-slate-300">Created</TableHead>
+                        </TableRow>
+                      </TableHeader>
+                      <TableBody>
+                        {namespaces.map((ns) => (
+                          <TableRow key={ns.id} className="border-slate-700 hover:bg-slate-700/50">
+                            <TableCell className="font-medium text-white">{ns.title}</TableCell>
+                            <TableCell className="text-slate-400 font-mono text-sm">{ns.namespaceId}</TableCell>
+                            <TableCell>
                               <Badge variant="outline" className="border-slate-600 text-slate-300">
-                                {kv.account.name}
+                                {ns.accountName}
                               </Badge>
-                            </td>
-                            <td className="p-3 font-mono text-xs text-slate-400">{kv.namespaceId}</td>
-                          </tr>
+                            </TableCell>
+                            <TableCell className="text-slate-400 text-sm">
+                              {new Date(ns.createdAt).toLocaleDateString()}
+                            </TableCell>
+                          </TableRow>
                         ))}
-                      </tbody>
-                    </table>
+                      </TableBody>
+                    </Table>
                   </ScrollArea>
+                ) : (
+                  <div className="text-center py-8 text-slate-400">
+                    No KV namespaces found. Add a Cloudflare account to get started.
+                  </div>
                 )}
               </CardContent>
             </Card>
           </TabsContent>
-
+          
           {/* R2 Tab */}
           <TabsContent value="r2">
             <Card className="bg-slate-800/50 border-slate-700">
               <CardHeader>
-                <CardTitle className="text-white">R2 Buckets</CardTitle>
+                <CardTitle className="text-white flex items-center gap-2">
+                  <HardDrive className="w-5 h-5 text-cyan-400" />
+                  All R2 Buckets
+                </CardTitle>
                 <CardDescription className="text-slate-400">
-                  Object storage buckets from all accounts
+                  R2 buckets from all connected accounts
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                {filterResources(r2Buckets).length === 0 ? (
-                  <div className="py-8 text-center text-slate-500">
-                    <HardDrive className="h-12 w-12 mx-auto mb-4 opacity-50" />
-                    <p>No R2 buckets found</p>
-                  </div>
-                ) : (
-                  <ScrollArea className="h-[500px]">
-                    <table className="w-full">
-                      <thead className="bg-slate-900/50 sticky top-0">
-                        <tr className="text-left text-slate-400 text-sm">
-                          <th className="p-3">Bucket Name</th>
-                          <th className="p-3">Account</th>
-                          <th className="p-3">Created</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {filterResources(r2Buckets).map((bucket) => (
-                          <tr key={bucket.id} className="border-t border-slate-700/50 hover:bg-slate-900/30">
-                            <td className="p-3">
-                              <div className="flex items-center gap-2">
-                                <HardDrive className="h-4 w-4 text-amber-500" />
-                                <span className="text-white font-medium">{bucket.bucketName}</span>
-                              </div>
-                            </td>
-                            <td className="p-3">
+                {buckets.length > 0 ? (
+                  <ScrollArea className="h-[400px]">
+                    <Table>
+                      <TableHeader>
+                        <TableRow className="border-slate-700 hover:bg-slate-700/50">
+                          <TableHead className="text-slate-300">Bucket Name</TableHead>
+                          <TableHead className="text-slate-300">Account</TableHead>
+                          <TableHead className="text-slate-300">Created</TableHead>
+                        </TableRow>
+                      </TableHeader>
+                      <TableBody>
+                        {buckets.map((bucket) => (
+                          <TableRow key={bucket.id} className="border-slate-700 hover:bg-slate-700/50">
+                            <TableCell className="font-medium text-white">{bucket.bucketName}</TableCell>
+                            <TableCell>
                               <Badge variant="outline" className="border-slate-600 text-slate-300">
-                                {bucket.account.name}
+                                {bucket.accountName}
                               </Badge>
-                            </td>
-                            <td className="p-3 text-sm text-slate-400">
+                            </TableCell>
+                            <TableCell className="text-slate-400 text-sm">
                               {bucket.creationDate ? new Date(bucket.creationDate).toLocaleDateString() : '-'}
-                            </td>
-                          </tr>
+                            </TableCell>
+                          </TableRow>
                         ))}
-                      </tbody>
-                    </table>
+                      </TableBody>
+                    </Table>
                   </ScrollArea>
+                ) : (
+                  <div className="text-center py-8 text-slate-400">
+                    No R2 buckets found. Add a Cloudflare account to get started.
+                  </div>
                 )}
               </CardContent>
             </Card>
           </TabsContent>
         </Tabs>
       </main>
-
-      {/* Footer */}
-      <footer className="border-t border-slate-700 bg-slate-900/50 mt-auto py-4">
-        <div className="container mx-auto px-4 text-center text-sm text-slate-500">
-          <p>Cloudflare Manager • Multi-Account Dashboard</p>
-        </div>
-      </footer>
     </div>
   );
 }

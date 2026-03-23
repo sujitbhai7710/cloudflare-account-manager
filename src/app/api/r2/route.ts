@@ -1,63 +1,48 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
+import { getSessionUser } from '@/lib/auth';
 import { db } from '@/lib/db';
 
-// Get current user from session
-async function getCurrentUser(request: NextRequest) {
-  const token = request.cookies.get('auth_token')?.value;
-  if (!token) return null;
-
-  const session = await db.session.findUnique({
-    where: { token },
-    include: { user: true },
-  });
-
-  if (!session || session.expiresAt < new Date()) {
-    return null;
-  }
-
-  return session.user;
-}
-
-// GET - List all R2 buckets from all accounts
-export async function GET(request: NextRequest) {
+// GET - Get all R2 buckets from all accounts
+export async function GET() {
   try {
-    const user = await getCurrentUser(request);
+    const user = await getSessionUser();
+    
     if (!user) {
       return NextResponse.json(
-        { success: false, error: 'Not authenticated' },
+        { error: 'Unauthorized' },
         { status: 401 }
       );
     }
 
-    // Get all accounts for user
+    // Get all R2 buckets with account info
     const accounts = await db.cloudflareAccount.findMany({
-      where: { userId: user.id, isActive: true },
-      include: { r2Buckets: true },
+      where: {
+        userId: user.id,
+        isActive: true,
+      },
+      include: {
+        r2Buckets: true,
+      },
     });
 
-    // Build buckets list with account info
-    const buckets = [];
+    // Flatten buckets with account name
+    const buckets = accounts.flatMap(account =>
+      account.r2Buckets.map(bucket => ({
+        id: bucket.id,
+        bucketName: bucket.bucketName,
+        creationDate: bucket.creationDate,
+        accountId: account.id,
+        accountName: account.name,
+        createdAt: bucket.createdAt,
+        updatedAt: bucket.updatedAt,
+      }))
+    );
 
-    for (const account of accounts) {
-      for (const bucket of account.r2Buckets) {
-        buckets.push({
-          id: bucket.id,
-          bucketName: bucket.bucketName,
-          creationDate: bucket.creationDate,
-          createdAt: bucket.createdAt,
-          account: {
-            id: account.id,
-            name: account.name,
-          },
-        });
-      }
-    }
-
-    return NextResponse.json({ success: true, buckets });
+    return NextResponse.json({ buckets });
   } catch (error) {
-    console.error('Error fetching R2 buckets:', error);
+    console.error('Get R2 buckets error:', error);
     return NextResponse.json(
-      { success: false, error: 'Failed to fetch R2 buckets' },
+      { error: 'Internal server error' },
       { status: 500 }
     );
   }

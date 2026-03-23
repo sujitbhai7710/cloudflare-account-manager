@@ -1,0 +1,11 @@
+name = "cloudflare-account-manager"
+compatibility_date = "2024-01-01"
+pages_build_output_dir = ".next"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "cf-manager-db"
+database_id = "placeholder-database-id"
+
+[vars]
+ENVIRONMENT = "production"

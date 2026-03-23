@@ -1,84 +1,71 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/lib/db';
-import { hashPassword, generateToken } from '@/lib/encryption';
-import { z } from 'zod';
-
-const signupSchema = z.object({
-  email: z.string().email('Invalid email address'),
-  password: z.string().min(8, 'Password must be at least 8 characters'),
-  name: z.string().optional(),
-});
+import { hashPassword } from '@/lib/encryption';
+import { createSession, setSessionCookie } from '@/lib/auth';
 
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { email, password, name } = signupSchema.parse(body);
+    const { email, password, confirmPassword } = body;
 
-    // Check if user already exists
+    // Validation
+    if (!email || !password || !confirmPassword) {
+      return NextResponse.json(
+        { error: 'All fields are required' },
+        { status: 400 }
+      );
+    }
+
+    if (password !== confirmPassword) {
+      return NextResponse.json(
+        { error: 'Passwords do not match' },
+        { status: 400 }
+      );
+    }
+
+    if (password.length < 8) {
+      return NextResponse.json(
+        { error: 'Password must be at least 8 characters' },
+        { status: 400 }
+      );
+    }
+
+    // Check if user exists
     const existingUser = await db.user.findUnique({
-      where: { email },
+      where: { email: email.toLowerCase() },
     });
 
     if (existingUser) {
       return NextResponse.json(
-        { success: false, error: 'Email already registered' },
+        { error: 'Email already registered' },
         { status: 400 }
       );
     }
 
-    // Hash password
-    const passwordHash = await hashPassword(password);
-
     // Create user
+    const passwordHash = await hashPassword(password);
     const user = await db.user.create({
       data: {
-        email,
+        email: email.toLowerCase(),
         passwordHash,
-        name,
       },
     });
 
     // Create session
-    const token = generateToken();
-    const expiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000); // 7 days
+    const token = await createSession(user.id);
+    await setSessionCookie(token);
 
-    await db.session.create({
-      data: {
-        userId: user.id,
-        token,
-        expiresAt,
-      },
-    });
-
-    // Set cookie and return response
-    const response = NextResponse.json({
+    return NextResponse.json({
       success: true,
       user: {
         id: user.id,
         email: user.email,
-        name: user.name,
       },
     });
-
-    response.cookies.set('auth_token', token, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: 'lax',
-      expires: expiresAt,
-      path: '/',
-    });
-
-    return response;
   } catch (error) {
     console.error('Signup error:', error);
-    if (error instanceof z.ZodError) {
-      return NextResponse.json(
-        { success: false, error: error.errors[0].message },
-        { status: 400 }
-      );
-    }
     return NextResponse.json(
-      { success: false, error: 'Failed to create account' },
+      { error: 'Internal server error' },
       { status: 500 }
     );
   }
