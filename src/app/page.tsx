@@ -38,7 +38,8 @@ import {
   Eye,
   EyeOff,
   AlertCircle,
-  LogOut
+  LogOut,
+  ExternalLink
 } from 'lucide-react';
 import { toast } from 'sonner';
 
@@ -541,7 +542,17 @@ export default function HomePage() {
                           {showToken ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                         </button>
                       </div>
-                      <p className="text-xs text-slate-400">Create token with Workers, D1, KV, R2 read permissions</p>
+                      <p className="text-xs text-slate-400">
+                        <a 
+                          href="https://dash.cloudflare.com/profile/api-tokens/create?token_name=Cloudflare%20Account%20Manager&permissions=%7B%22account%22%3A%7B%22settings%22%3A%5B%22read%22%5D%2C%22workers_scripts%22%3A%5B%22read%22%5D%2C%22workers_kv_storage%22%3A%5B%22read%22%5D%2C%22d1%22%3A%5B%22read%22%5D%2C%22r2%22%3A%5B%22read%22%5D%7D%2C%22zone%22%3A%7B%22zone%22%3A%5B%22read%22%5D%2C%22workers_routes%22%3A%5B%22read%22%5D%7D%7D&account_resources=%7B%22include%22%3A%5B%22all%22%5D%7D&zone_resources=%7B%22include%22%3A%5B%22all%22%5D%7D"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-orange-400 hover:text-orange-300 underline inline-flex items-center gap-1"
+                        >
+                          Click here to create a token with all required permissions
+                          <ExternalLink className="w-3 h-3" />
+                        </a>
+                      </p>
                     </div>
                     <div className="space-y-2">
                       <Label className="text-slate-200">Email (optional)</Label>
