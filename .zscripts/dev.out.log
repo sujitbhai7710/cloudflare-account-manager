@@ -494,3 +494,26 @@ Persisting failed: Unable to write SST file 00000210.sst
 
 Caused by:
     No such file or directory (os error 2)
+
+thread 'tokio-runtime-worker' (3402) panicked at /build/turbopack/crates/turbo-tasks-backend/src/backend/operation/mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for get_written_endpoint_with_issues_operation (TaskId 261))
+
+Caused by:
+    0: Looking up data for TaskId 261 from database failed
+    1: Unable to open static sorted file referenced from 00000156.meta
+    2: Unable to open static sorted file 00000148.sst
+    3: No such file or directory (os error 2)
+
+-----
+[1m[31mFATAL[39m[0m: An unexpected Turbopack error occurred. A panic log has been written to /tmp/next-panic-70e01fe1319911f71a13c348b4951e7.log.
+
+To help make Turbopack better, report this error by clicking here: https://github.com/vercel/next.js/discussions/new?category=turbopack-error-report&title=Turbopack%20Error%3A%20Failed%20to%20restore%20task%20data%20%28corrupted%20database%20or%20bug%29%3A%20Data%20for%20get_written_endpoint_with_issues_operation%20%28TaskId%20261%29%29&body=Turbopack%20version%3A%20%60731ace46%60%0ANext.js%20version%3A%20%600.0.0%60%0A%0AError%20message%3A%0A%60%60%60%0ATurbopack%20Error%3A%20Failed%20to%20restore%20task%20data%20%28corrupted%20database%20or%20bug%29%3A%20Data%20for%20get_written_endpoint_with_issues_operation%20%28TaskId%20261%29%29%0A%60%60%60&labels=Turbopack,Turbopack%20Panic%20Backtrace
+-----
+
+error: script "dev" was terminated by signal SIGTERM (Polite quit request)
+Attention: Next.js now collects completely anonymous telemetry regarding usage.
+This information is used to shape Next.js' roadmap and prioritize features.
+You can learn more, including how to opt-out if you'd not like to participate in this anonymous program, by visiting the following URL:
+https://nextjs.org/telemetry
+
+[?25h

@@ -24,11 +24,9 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog';
 import { Badge } from '@/components/ui/badge';
-import { Separator } from '@/components/ui/separator';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { 
   Loader2, 
-  LogOut, 
   Plus, 
   RefreshCw, 
   Trash2, 
@@ -37,92 +35,71 @@ import {
   FolderKanban, 
   HardDrive,
   Server,
-  ExternalLink,
-  AlertCircle,
-  CheckCircle,
   Eye,
-  EyeOff
+  EyeOff,
+  AlertCircle,
+  LogOut
 } from 'lucide-react';
 import { toast } from 'sonner';
 
 // Types
-interface User {
-  id: string;
-  email: string;
-  accountsCount: number;
-}
-
 interface Account {
   id: string;
   name: string;
-  email?: string;
+  email: string;
   accountId: string;
+  apiToken: string;
   isActive: boolean;
   lastSync?: string;
-  stats: {
-    workers: number;
-    d1Databases: number;
-    kvNamespaces: number;
-    r2Buckets: number;
-  };
-  createdAt: string;
+  workers: WorkerItem[];
+  databases: D1Item[];
+  namespaces: KVItem[];
+  buckets: R2Item[];
 }
 
-interface Worker {
+interface WorkerItem {
   id: string;
-  workerId: string;
   name: string;
-  accountId: string;
-  accountName: string;
-  createdAt: string;
+  modified_on?: string;
 }
 
-interface D1Database {
-  id: string;
-  databaseId: string;
+interface D1Item {
+  uuid: string;
   name: string;
   version?: string;
-  accountId: string;
-  accountName: string;
-  createdAt: string;
+  created_at?: string;
 }
 
-interface KVNamespace {
+interface KVItem {
   id: string;
-  namespaceId: string;
   title: string;
-  accountId: string;
-  accountName: string;
-  createdAt: string;
 }
 
-interface R2Bucket {
-  id: string;
-  bucketName: string;
-  creationDate?: string;
-  accountId: string;
-  accountName: string;
-  createdAt: string;
+interface R2Item {
+  name: string;
+  creation_date?: string;
+}
+
+const STORAGE_KEY = 'cf_manager_accounts';
+
+// Cloudflare API functions
+async function fetchWithAuth(url: string, apiToken: string) {
+  const response = await fetch(url, {
+    headers: {
+      'Authorization': `Bearer ${apiToken}`,
+      'Content-Type': 'application/json',
+    },
+  });
+  const data = await response.json();
+  if (!data.success) {
+    throw new Error(data.errors?.[0]?.message || 'API Error');
+  }
+  return data.result;
 }
 
 export default function HomePage() {
-  // Auth state
-  const [user, setUser] = useState<User | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
-  
-  // Form state
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [authMode, setAuthMode] = useState<'login' | 'signup'>('login');
-  
-  // Data state
   const [accounts, setAccounts] = useState<Account[]>([]);
-  const [workers, setWorkers] = useState<Worker[]>([]);
-  const [databases, setDatabases] = useState<D1Database[]>([]);
-  const [namespaces, setNamespaces] = useState<KVNamespace[]>([]);
-  const [buckets, setBuckets] = useState<R2Bucket[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
   const [activeTab, setActiveTab] = useState('overview');
   
   // Modal state
@@ -134,208 +111,210 @@ export default function HomePage() {
     apiToken: '',
   });
   const [showToken, setShowToken] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [syncingAccountId, setSyncingAccountId] = useState<string | null>(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [password, setPassword] = useState('');
+  const [loginPassword, setLoginPassword] = useState('');
   
-  // Check auth on mount
+  // Load accounts from localStorage
   useEffect(() => {
-    checkAuth();
+    const savedPassword = localStorage.getItem('cf_manager_password');
+    if (savedPassword) {
+      setIsLoggedIn(true);
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (saved) {
+        setAccounts(JSON.parse(saved));
+      }
+    }
+    setIsLoading(false);
   }, []);
-  
-  // Fetch data when user logs in
+
+  // Save accounts to localStorage
   useEffect(() => {
-    if (user) {
-      fetchData();
+    if (accounts.length > 0) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(accounts));
     }
-  }, [user]);
-  
-  const checkAuth = async () => {
-    try {
-      const res = await fetch('/api/auth/me');
-      if (res.ok) {
-        const data = await res.json();
-        setUser(data.user);
+  }, [accounts]);
+
+  const handleSetPassword = () => {
+    if (password.length < 6) {
+      toast.error('Password must be at least 6 characters');
+      return;
+    }
+    localStorage.setItem('cf_manager_password', password);
+    setIsLoggedIn(true);
+    toast.success('Password set successfully');
+  };
+
+  const handleLogin = () => {
+    const savedPassword = localStorage.getItem('cf_manager_password');
+    if (loginPassword === savedPassword) {
+      setIsLoggedIn(true);
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (saved) {
+        setAccounts(JSON.parse(saved));
       }
-    } catch {
-      // Not logged in
-    } finally {
-      setIsLoading(false);
+      toast.success('Welcome back!');
+    } else {
+      toast.error('Incorrect password');
     }
   };
-  
-  const fetchData = async () => {
-    try {
-      const [accountsRes, workersRes, d1Res, kvRes, r2Res] = await Promise.all([
-        fetch('/api/accounts'),
-        fetch('/api/workers'),
-        fetch('/api/d1'),
-        fetch('/api/kv'),
-        fetch('/api/r2'),
-      ]);
-      
-      if (accountsRes.ok) {
-        const data = await accountsRes.json();
-        setAccounts(data.accounts);
-      }
-      if (workersRes.ok) {
-        const data = await workersRes.json();
-        setWorkers(data.workers);
-      }
-      if (d1Res.ok) {
-        const data = await d1Res.json();
-        setDatabases(data.databases);
-      }
-      if (kvRes.ok) {
-        const data = await kvRes.json();
-        setNamespaces(data.namespaces);
-      }
-      if (r2Res.ok) {
-        const data = await r2Res.json();
-        setBuckets(data.buckets);
-      }
-    } catch (error) {
-      console.error('Failed to fetch data:', error);
-    }
+
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+    setLoginPassword('');
   };
-  
-  const handleAuth = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    
-    try {
-      const endpoint = authMode === 'login' ? '/api/auth/login' : '/api/auth/signup';
-      const body = authMode === 'login' 
-        ? { email, password }
-        : { email, password, confirmPassword };
-      
-      const res = await fetch(endpoint, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(body),
-      });
-      
-      const data = await res.json();
-      
-      if (!res.ok) {
-        toast.error(data.error || 'Authentication failed');
-        return;
-      }
-      
-      toast.success(authMode === 'login' ? 'Welcome back!' : 'Account created!');
-      checkAuth();
-    } catch (error) {
-      toast.error('Something went wrong');
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-  
-  const handleLogout = async () => {
-    try {
-      await fetch('/api/auth/logout', { method: 'POST' });
-      setUser(null);
-      setAccounts([]);
-      setWorkers([]);
-      setDatabases([]);
-      setNamespaces([]);
-      setBuckets([]);
-      toast.success('Logged out successfully');
-    } catch (error) {
-      toast.error('Failed to logout');
-    }
-  };
-  
+
   const handleAddAccount = async () => {
     if (!newAccount.name || !newAccount.accountId || !newAccount.apiToken) {
       toast.error('Please fill in all required fields');
       return;
     }
-    
+
     setIsSubmitting(true);
     try {
-      const res = await fetch('/api/accounts', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(newAccount),
-      });
-      
-      const data = await res.json();
-      
-      if (!res.ok) {
-        toast.error(data.error || 'Failed to add account');
-        return;
+      // Verify token by fetching account info
+      const accountInfo = await fetchWithAuth(
+        `https://api.cloudflare.com/client/v4/accounts/${newAccount.accountId}`,
+        newAccount.apiToken
+      );
+
+      const account: Account = {
+        id: crypto.randomUUID(),
+        name: newAccount.name,
+        email: newAccount.email,
+        accountId: newAccount.accountId,
+        apiToken: newAccount.apiToken,
+        isActive: true,
+        workers: [],
+        databases: [],
+        namespaces: [],
+        buckets: [],
+      };
+
+      // Initial sync
+      try {
+        const [workers, databases, namespaces, buckets] = await Promise.all([
+          fetchWithAuth(
+            `https://api.cloudflare.com/client/v4/accounts/${newAccount.accountId}/workers/scripts`,
+            newAccount.apiToken
+          ).catch(() => []),
+          fetchWithAuth(
+            `https://api.cloudflare.com/client/v4/accounts/${newAccount.accountId}/d1/database`,
+            newAccount.apiToken
+          ).catch(() => []),
+          fetchWithAuth(
+            `https://api.cloudflare.com/client/v4/accounts/${newAccount.accountId}/storage/kv/namespaces`,
+            newAccount.apiToken
+          ).catch(() => []),
+          fetchWithAuth(
+            `https://api.cloudflare.com/client/v4/accounts/${newAccount.accountId}/r2/buckets`,
+            newAccount.apiToken
+          ).catch(() => []),
+        ]);
+
+        account.workers = workers.map((w: WorkerItem) => ({ id: w.id, name: w.id, modified_on: w.modified_on }));
+        account.databases = databases.map((d: D1Item) => ({ uuid: d.uuid, name: d.name, version: d.version, created_at: d.created_at }));
+        account.namespaces = namespaces.map((n: KVItem) => ({ id: n.id, title: n.title }));
+        account.buckets = buckets.map((b: R2Item) => ({ name: b.name, creation_date: b.creation_date }));
+        account.lastSync = new Date().toISOString();
+      } catch (syncError) {
+        console.error('Sync error:', syncError);
       }
-      
-      toast.success('Account added successfully!');
+
+      setAccounts(prev => [...prev, account]);
+      toast.success(`Account "${accountInfo.name}" added successfully!`);
       setShowAddAccount(false);
       setNewAccount({ name: '', email: '', accountId: '', apiToken: '' });
-      fetchData();
-    } catch (error) {
-      toast.error('Failed to add account');
+    } catch (error: unknown) {
+      const message = error instanceof Error ? error.message : 'Failed to add account';
+      toast.error(message);
     } finally {
       setIsSubmitting(false);
     }
   };
-  
-  const handleDeleteAccount = async (id: string) => {
-    if (!confirm('Are you sure you want to delete this account? This will remove all cached data.')) {
-      return;
-    }
-    
+
+  const handleSync = async (accountId: string) => {
+    const account = accounts.find(a => a.id === accountId);
+    if (!account) return;
+
+    setSyncingAccountId(accountId);
     try {
-      const res = await fetch(`/api/accounts/${id}`, { method: 'DELETE' });
-      
-      if (!res.ok) {
-        toast.error('Failed to delete account');
-        return;
-      }
-      
-      toast.success('Account deleted');
-      fetchData();
-    } catch (error) {
-      toast.error('Failed to delete account');
-    }
-  };
-  
-  const handleSync = async (id: string) => {
-    setSyncingAccountId(id);
-    try {
-      const res = await fetch(`/api/accounts/${id}/sync`, { method: 'POST' });
-      const data = await res.json();
-      
-      if (!res.ok) {
-        toast.error(data.error || 'Failed to sync');
-        return;
-      }
-      
-      toast.success(`Synced: ${data.stats.workers} workers, ${data.stats.databases} databases, ${data.stats.namespaces} KV, ${data.stats.buckets} R2`);
-      fetchData();
-    } catch (error) {
-      toast.error('Failed to sync account');
+      const [workers, databases, namespaces, buckets] = await Promise.all([
+        fetchWithAuth(
+          `https://api.cloudflare.com/client/v4/accounts/${account.accountId}/workers/scripts`,
+          account.apiToken
+        ).catch(() => []),
+        fetchWithAuth(
+          `https://api.cloudflare.com/client/v4/accounts/${account.accountId}/d1/database`,
+          account.apiToken
+        ).catch(() => []),
+        fetchWithAuth(
+          `https://api.cloudflare.com/client/v4/accounts/${account.accountId}/storage/kv/namespaces`,
+          account.apiToken
+        ).catch(() => []),
+        fetchWithAuth(
+          `https://api.cloudflare.com/client/v4/accounts/${account.accountId}/r2/buckets`,
+          account.apiToken
+        ).catch(() => []),
+      ]);
+
+      setAccounts(prev => prev.map(a => {
+        if (a.id === accountId) {
+          return {
+            ...a,
+            workers: workers.map((w: WorkerItem) => ({ id: w.id, name: w.id, modified_on: w.modified_on })),
+            databases: databases.map((d: D1Item) => ({ uuid: d.uuid, name: d.name, version: d.version, created_at: d.created_at })),
+            namespaces: namespaces.map((n: KVItem) => ({ id: n.id, title: n.title })),
+            buckets: buckets.map((b: R2Item) => ({ name: b.name, creation_date: b.creation_date })),
+            lastSync: new Date().toISOString(),
+          };
+        }
+        return a;
+      }));
+
+      toast.success(`Synced: ${workers.length} workers, ${databases.length} databases, ${namespaces.length} KV, ${buckets.length} R2`);
+    } catch (error: unknown) {
+      const message = error instanceof Error ? error.message : 'Failed to sync';
+      toast.error(message);
     } finally {
       setSyncingAccountId(null);
     }
   };
-  
-  // Stats
+
+  const handleDeleteAccount = (id: string) => {
+    if (!confirm('Are you sure you want to delete this account?')) return;
+    setAccounts(prev => prev.filter(a => a.id !== id));
+    toast.success('Account deleted');
+  };
+
+  // Get all resources across accounts
+  const allWorkers = accounts.flatMap(a => a.workers.map(w => ({ ...w, accountName: a.name, accountId: a.id })));
+  const allDatabases = accounts.flatMap(a => a.databases.map(d => ({ ...d, accountName: a.name, accountId: a.id })));
+  const allNamespaces = accounts.flatMap(a => a.namespaces.map(n => ({ ...n, accountName: a.name, accountId: a.id })));
+  const allBuckets = accounts.flatMap(a => a.buckets.map(b => ({ ...b, accountName: a.name, accountId: a.id })));
+
   const stats = {
     accounts: accounts.length,
-    workers: workers.length,
-    databases: databases.length,
-    namespaces: namespaces.length,
-    buckets: buckets.length,
+    workers: allWorkers.length,
+    databases: allDatabases.length,
+    namespaces: allNamespaces.length,
+    buckets: allBuckets.length,
   };
-  
-  // Loading state
+
   if (isLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
-        <Loader2 className="w-8 h-8 animate-spin text-blue-500" />
+        <Loader2 className="w-8 h-8 animate-spin text-orange-500" />
       </div>
     );
   }
-  
-  // Auth form
-  if (!user) {
+
+  // Login/Setup screen
+  if (!isLoggedIn) {
+    const hasPassword = !!localStorage.getItem('cf_manager_password');
+    
     return (
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-4">
         <Card className="w-full max-w-md border-slate-700 bg-slate-800/50 backdrop-blur">
@@ -347,100 +326,50 @@ export default function HomePage() {
             </div>
             <CardTitle className="text-2xl text-white">Cloudflare Manager</CardTitle>
             <CardDescription className="text-slate-400">
-              Manage multiple Cloudflare accounts in one place
+              {hasPassword ? 'Enter your password to continue' : 'Set a password to protect your accounts'}
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <Tabs value={authMode} onValueChange={(v) => setAuthMode(v as 'login' | 'signup')}>
-              <TabsList className="grid w-full grid-cols-2 bg-slate-700">
-                <TabsTrigger value="login" className="data-[state=active]:bg-slate-600">Login</TabsTrigger>
-                <TabsTrigger value="signup" className="data-[state=active]:bg-slate-600">Sign Up</TabsTrigger>
-              </TabsList>
-              
-              <TabsContent value="login" className="mt-4">
-                <form onSubmit={handleAuth} className="space-y-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="email" className="text-slate-200">Email</Label>
-                    <Input
-                      id="email"
-                      type="email"
-                      placeholder="you@example.com"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      required
-                      className="bg-slate-700 border-slate-600 text-white placeholder:text-slate-400"
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="password" className="text-slate-200">Password</Label>
-                    <Input
-                      id="password"
-                      type="password"
-                      placeholder="••••••••"
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                      required
-                      className="bg-slate-700 border-slate-600 text-white placeholder:text-slate-400"
-                    />
-                  </div>
-                  <Button type="submit" className="w-full bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600" disabled={isSubmitting}>
-                    {isSubmitting ? <Loader2 className="w-4 h-4 animate-spin mr-2" /> : null}
-                    Sign In
-                  </Button>
-                </form>
-              </TabsContent>
-              
-              <TabsContent value="signup" className="mt-4">
-                <form onSubmit={handleAuth} className="space-y-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="signup-email" className="text-slate-200">Email</Label>
-                    <Input
-                      id="signup-email"
-                      type="email"
-                      placeholder="you@example.com"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      required
-                      className="bg-slate-700 border-slate-600 text-white placeholder:text-slate-400"
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="signup-password" className="text-slate-200">Password</Label>
-                    <Input
-                      id="signup-password"
-                      type="password"
-                      placeholder="••••••••"
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                      required
-                      className="bg-slate-700 border-slate-600 text-white placeholder:text-slate-400"
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="confirm-password" className="text-slate-200">Confirm Password</Label>
-                    <Input
-                      id="confirm-password"
-                      type="password"
-                      placeholder="••••••••"
-                      value={confirmPassword}
-                      onChange={(e) => setConfirmPassword(e.target.value)}
-                      required
-                      className="bg-slate-700 border-slate-600 text-white placeholder:text-slate-400"
-                    />
-                  </div>
-                  <Button type="submit" className="w-full bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600" disabled={isSubmitting}>
-                    {isSubmitting ? <Loader2 className="w-4 h-4 animate-spin mr-2" /> : null}
-                    Create Account
-                  </Button>
-                </form>
-              </TabsContent>
-            </Tabs>
+            {hasPassword ? (
+              <form onSubmit={(e) => { e.preventDefault(); handleLogin(); }} className="space-y-4">
+                <div className="space-y-2">
+                  <Label className="text-slate-200">Password</Label>
+                  <Input
+                    type="password"
+                    placeholder="••••••••"
+                    value={loginPassword}
+                    onChange={(e) => setLoginPassword(e.target.value)}
+                    className="bg-slate-700 border-slate-600 text-white"
+                  />
+                </div>
+                <Button type="submit" className="w-full bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600">
+                  Unlock
+                </Button>
+              </form>
+            ) : (
+              <form onSubmit={(e) => { e.preventDefault(); handleSetPassword(); }} className="space-y-4">
+                <div className="space-y-2">
+                  <Label className="text-slate-200">Set Password</Label>
+                  <Input
+                    type="password"
+                    placeholder="••••••••"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    className="bg-slate-700 border-slate-600 text-white"
+                  />
+                  <p className="text-xs text-slate-400">This password protects your account data</p>
+                </div>
+                <Button type="submit" className="w-full bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600">
+                  Set Password
+                </Button>
+              </form>
+            )}
           </CardContent>
         </Card>
       </div>
     );
   }
-  
+
   // Dashboard
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
@@ -453,17 +382,17 @@ export default function HomePage() {
             </div>
             <div>
               <h1 className="text-lg font-semibold text-white">Cloudflare Manager</h1>
-              <p className="text-xs text-slate-400">{user.email}</p>
+              <p className="text-xs text-slate-400">{stats.accounts} accounts connected</p>
             </div>
           </div>
           <div className="flex items-center gap-2">
-            <Button variant="ghost" size="sm" onClick={fetchData} className="text-slate-300 hover:text-white">
-              <RefreshCw className="w-4 h-4 mr-2" />
-              Refresh
+            <Button variant="ghost" size="sm" onClick={() => { localStorage.removeItem(STORAGE_KEY); setAccounts([]); toast.success('All data cleared'); }} className="text-slate-300 hover:text-white">
+              <Trash2 className="w-4 h-4 mr-2" />
+              Clear Data
             </Button>
             <Button variant="ghost" size="sm" onClick={handleLogout} className="text-slate-300 hover:text-white">
               <LogOut className="w-4 h-4 mr-2" />
-              Logout
+              Lock
             </Button>
           </div>
         </div>
@@ -547,7 +476,7 @@ export default function HomePage() {
         {/* Tabs */}
         <Tabs value={activeTab} onValueChange={setActiveTab}>
           <TabsList className="bg-slate-800 border border-slate-700 mb-4">
-            <TabsTrigger value="overview" className="data-[state=active]:bg-slate-700">Overview</TabsTrigger>
+            <TabsTrigger value="overview" className="data-[state=active]:bg-slate-700">Accounts</TabsTrigger>
             <TabsTrigger value="workers" className="data-[state=active]:bg-slate-700">Workers</TabsTrigger>
             <TabsTrigger value="d1" className="data-[state=active]:bg-slate-700">D1</TabsTrigger>
             <TabsTrigger value="kv" className="data-[state=active]:bg-slate-700">KV</TabsTrigger>
@@ -643,35 +572,29 @@ export default function HomePage() {
                   <CardHeader className="pb-3">
                     <div className="flex items-center justify-between">
                       <CardTitle className="text-lg text-white">{account.name}</CardTitle>
-                      <div className="flex items-center gap-1">
-                        {account.isActive ? (
-                          <Badge variant="outline" className="text-green-400 border-green-400">Active</Badge>
-                        ) : (
-                          <Badge variant="outline" className="text-slate-400 border-slate-400">Inactive</Badge>
-                        )}
-                      </div>
+                      <Badge variant="outline" className="text-green-400 border-green-400">Active</Badge>
                     </div>
                     <CardDescription className="text-slate-400">
-                      ID: {account.accountId.slice(0, 8)}...
+                      ID: {account.accountId.slice(0, 12)}...
                     </CardDescription>
                   </CardHeader>
                   <CardContent>
                     <div className="grid grid-cols-2 gap-2 text-sm mb-4">
                       <div className="bg-slate-700/50 rounded p-2">
                         <p className="text-slate-400">Workers</p>
-                        <p className="text-xl font-semibold text-white">{account.stats.workers}</p>
+                        <p className="text-xl font-semibold text-white">{account.workers.length}</p>
                       </div>
                       <div className="bg-slate-700/50 rounded p-2">
                         <p className="text-slate-400">D1</p>
-                        <p className="text-xl font-semibold text-white">{account.stats.d1Databases}</p>
+                        <p className="text-xl font-semibold text-white">{account.databases.length}</p>
                       </div>
                       <div className="bg-slate-700/50 rounded p-2">
                         <p className="text-slate-400">KV</p>
-                        <p className="text-xl font-semibold text-white">{account.stats.kvNamespaces}</p>
+                        <p className="text-xl font-semibold text-white">{account.namespaces.length}</p>
                       </div>
                       <div className="bg-slate-700/50 rounded p-2">
                         <p className="text-slate-400">R2</p>
-                        <p className="text-xl font-semibold text-white">{account.stats.r2Buckets}</p>
+                        <p className="text-xl font-semibold text-white">{account.buckets.length}</p>
                       </div>
                     </div>
                     <div className="flex gap-2">
@@ -723,36 +646,34 @@ export default function HomePage() {
               <CardHeader>
                 <CardTitle className="text-white flex items-center gap-2">
                   <Cloud className="w-5 h-5 text-orange-400" />
-                  All Workers
+                  All Workers ({allWorkers.length})
                 </CardTitle>
                 <CardDescription className="text-slate-400">
                   Workers from all connected accounts
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                {workers.length > 0 ? (
+                {allWorkers.length > 0 ? (
                   <ScrollArea className="h-[400px]">
                     <Table>
                       <TableHeader>
                         <TableRow className="border-slate-700 hover:bg-slate-700/50">
                           <TableHead className="text-slate-300">Name</TableHead>
-                          <TableHead className="text-slate-300">Worker ID</TableHead>
                           <TableHead className="text-slate-300">Account</TableHead>
-                          <TableHead className="text-slate-300">Created</TableHead>
+                          <TableHead className="text-slate-300">Modified</TableHead>
                         </TableRow>
                       </TableHeader>
                       <TableBody>
-                        {workers.map((worker) => (
-                          <TableRow key={worker.id} className="border-slate-700 hover:bg-slate-700/50">
+                        {allWorkers.map((worker, i) => (
+                          <TableRow key={worker.id + i} className="border-slate-700 hover:bg-slate-700/50">
                             <TableCell className="font-medium text-white">{worker.name}</TableCell>
-                            <TableCell className="text-slate-400 font-mono text-sm">{worker.workerId}</TableCell>
                             <TableCell>
                               <Badge variant="outline" className="border-slate-600 text-slate-300">
                                 {worker.accountName}
                               </Badge>
                             </TableCell>
                             <TableCell className="text-slate-400 text-sm">
-                              {new Date(worker.createdAt).toLocaleDateString()}
+                              {worker.modified_on ? new Date(worker.modified_on).toLocaleDateString() : '-'}
                             </TableCell>
                           </TableRow>
                         ))}
@@ -774,30 +695,29 @@ export default function HomePage() {
               <CardHeader>
                 <CardTitle className="text-white flex items-center gap-2">
                   <Database className="w-5 h-5 text-green-400" />
-                  All D1 Databases
+                  All D1 Databases ({allDatabases.length})
                 </CardTitle>
                 <CardDescription className="text-slate-400">
                   D1 databases from all connected accounts
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                {databases.length > 0 ? (
+                {allDatabases.length > 0 ? (
                   <ScrollArea className="h-[400px]">
                     <Table>
                       <TableHeader>
                         <TableRow className="border-slate-700 hover:bg-slate-700/50">
                           <TableHead className="text-slate-300">Name</TableHead>
-                          <TableHead className="text-slate-300">Database ID</TableHead>
+                          <TableHead className="text-slate-300">ID</TableHead>
                           <TableHead className="text-slate-300">Version</TableHead>
                           <TableHead className="text-slate-300">Account</TableHead>
-                          <TableHead className="text-slate-300">Created</TableHead>
                         </TableRow>
                       </TableHeader>
                       <TableBody>
-                        {databases.map((db) => (
-                          <TableRow key={db.id} className="border-slate-700 hover:bg-slate-700/50">
+                        {allDatabases.map((db, i) => (
+                          <TableRow key={db.uuid + i} className="border-slate-700 hover:bg-slate-700/50">
                             <TableCell className="font-medium text-white">{db.name}</TableCell>
-                            <TableCell className="text-slate-400 font-mono text-sm">{db.databaseId}</TableCell>
+                            <TableCell className="text-slate-400 font-mono text-sm">{db.uuid.slice(0, 8)}...</TableCell>
                             <TableCell>
                               {db.version && (
                                 <Badge variant="outline" className="border-green-600/50 text-green-400">
@@ -809,9 +729,6 @@ export default function HomePage() {
                               <Badge variant="outline" className="border-slate-600 text-slate-300">
                                 {db.accountName}
                               </Badge>
-                            </TableCell>
-                            <TableCell className="text-slate-400 text-sm">
-                              {new Date(db.createdAt).toLocaleDateString()}
                             </TableCell>
                           </TableRow>
                         ))}
@@ -833,36 +750,32 @@ export default function HomePage() {
               <CardHeader>
                 <CardTitle className="text-white flex items-center gap-2">
                   <FolderKanban className="w-5 h-5 text-purple-400" />
-                  All KV Namespaces
+                  All KV Namespaces ({allNamespaces.length})
                 </CardTitle>
                 <CardDescription className="text-slate-400">
                   KV namespaces from all connected accounts
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                {namespaces.length > 0 ? (
+                {allNamespaces.length > 0 ? (
                   <ScrollArea className="h-[400px]">
                     <Table>
                       <TableHeader>
                         <TableRow className="border-slate-700 hover:bg-slate-700/50">
                           <TableHead className="text-slate-300">Title</TableHead>
-                          <TableHead className="text-slate-300">Namespace ID</TableHead>
+                          <TableHead className="text-slate-300">ID</TableHead>
                           <TableHead className="text-slate-300">Account</TableHead>
-                          <TableHead className="text-slate-300">Created</TableHead>
                         </TableRow>
                       </TableHeader>
                       <TableBody>
-                        {namespaces.map((ns) => (
-                          <TableRow key={ns.id} className="border-slate-700 hover:bg-slate-700/50">
+                        {allNamespaces.map((ns, i) => (
+                          <TableRow key={ns.id + i} className="border-slate-700 hover:bg-slate-700/50">
                             <TableCell className="font-medium text-white">{ns.title}</TableCell>
-                            <TableCell className="text-slate-400 font-mono text-sm">{ns.namespaceId}</TableCell>
+                            <TableCell className="text-slate-400 font-mono text-sm">{ns.id}</TableCell>
                             <TableCell>
                               <Badge variant="outline" className="border-slate-600 text-slate-300">
                                 {ns.accountName}
                               </Badge>
-                            </TableCell>
-                            <TableCell className="text-slate-400 text-sm">
-                              {new Date(ns.createdAt).toLocaleDateString()}
                             </TableCell>
                           </TableRow>
                         ))}
@@ -884,14 +797,14 @@ export default function HomePage() {
               <CardHeader>
                 <CardTitle className="text-white flex items-center gap-2">
                   <HardDrive className="w-5 h-5 text-cyan-400" />
-                  All R2 Buckets
+                  All R2 Buckets ({allBuckets.length})
                 </CardTitle>
                 <CardDescription className="text-slate-400">
                   R2 buckets from all connected accounts
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                {buckets.length > 0 ? (
+                {allBuckets.length > 0 ? (
                   <ScrollArea className="h-[400px]">
                     <Table>
                       <TableHeader>
@@ -902,16 +815,16 @@ export default function HomePage() {
                         </TableRow>
                       </TableHeader>
                       <TableBody>
-                        {buckets.map((bucket) => (
-                          <TableRow key={bucket.id} className="border-slate-700 hover:bg-slate-700/50">
-                            <TableCell className="font-medium text-white">{bucket.bucketName}</TableCell>
+                        {allBuckets.map((bucket, i) => (
+                          <TableRow key={bucket.name + i} className="border-slate-700 hover:bg-slate-700/50">
+                            <TableCell className="font-medium text-white">{bucket.name}</TableCell>
                             <TableCell>
                               <Badge variant="outline" className="border-slate-600 text-slate-300">
                                 {bucket.accountName}
                               </Badge>
                             </TableCell>
                             <TableCell className="text-slate-400 text-sm">
-                              {bucket.creationDate ? new Date(bucket.creationDate).toLocaleDateString() : '-'}
+                              {bucket.creation_date ? new Date(bucket.creation_date).toLocaleDateString() : '-'}
                             </TableCell>
                           </TableRow>
                         ))}
